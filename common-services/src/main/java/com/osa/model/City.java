@@ -1,14 +1,12 @@
 package com.osa.model;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class City implements Serializable {
     private static final long serialVersionUID = -8301402847341826707L;

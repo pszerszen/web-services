@@ -1,13 +1,11 @@
 package com.osa.model;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class Country implements Serializable {
     private static final long serialVersionUID = 162088827893700838L;
