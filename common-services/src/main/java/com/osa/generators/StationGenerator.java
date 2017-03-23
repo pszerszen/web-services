@@ -25,6 +25,16 @@ public class StationGenerator {
                 .id(RandomUtils.nextLong())
                 .code(RandomStringUtils.randomNumeric(8))
                 .name(randomValuesUtils.randomName())
+                .city(cityGenerator.generateCity())
+                .country(countryGenerator.generateCountry())
+                .build();
+    }
+
+    public Station generateExtendedStation() {
+        return Station.builder()
+                .id(RandomUtils.nextLong())
+                .code(RandomStringUtils.randomNumeric(8))
+                .name(randomValuesUtils.randomName())
                 .address(randomValuesUtils.randomAddress())
                 .coordinates(coordinatesGenerator.generateCoordinates())
                 .city(cityGenerator.generateCity())
