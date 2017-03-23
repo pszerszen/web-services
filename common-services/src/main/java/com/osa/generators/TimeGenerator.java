@@ -26,6 +26,20 @@ public class TimeGenerator {
             .collect(Collectors.toList());
 
 
+    public Time generateFor(LocalDateTime localDateTime) {
+        ZoneId zoneId = getRandomZoneId();
+
+        long timestamp = localDateTime.atZone(zoneId).toEpochSecond();
+        String timezone = AVAILABLE_TIME_ZONES.contains(zoneId.toString()) ?
+                zoneId.toString() :
+                getRandomTimeZone();
+
+        return Time.builder()
+                .timestamp(timestamp)
+                .timezone(timezone)
+                .build();
+    }
+
     public Time generateBetween(LocalDateTime from, LocalDateTime to) {
         ZoneId zoneId = getRandomZoneId();
 
