@@ -15,7 +15,7 @@ public class City implements Serializable {
     private String name;
     private CityClass cityClass;
     private Coordinates coordinates;
-    private List<Integer> stations;
-    private List<Integer> pairs;
+    private List<Long> stations;
+    private List<Long> possibleDestinations;
     private Country country;
 }
