@@ -16,6 +16,11 @@ public class RandomValuesUtils {
         return RandomStringUtils.randomAlphabetic(length);
     }
 
+    public String randomAddress() {
+        int length = RandomUtils.nextInt(15, 35);
+        return RandomStringUtils.randomAlphanumeric(length);
+    }
+
     public List<Long> randomStationsIndexes() {
         int length = RandomUtils.nextInt(1, 11);
         return randomIndexesList(length);
@@ -29,7 +34,6 @@ public class RandomValuesUtils {
     private List<Long> randomIndexesList(int length) {
         return IntStream.range(0, length)
                 .mapToLong(i -> RandomUtils.nextLong())
-                .map(Math::abs)
                 .distinct().boxed()
                 .collect(Collectors.toList());
     }
