@@ -4,8 +4,9 @@ import com.osa.model.Coordinates;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Component;
+
+import static org.apache.commons.lang3.RandomUtils.nextDouble;
 
 @Component
 public class CoordinatesGenerator {
@@ -13,16 +14,16 @@ public class CoordinatesGenerator {
     public Coordinates generateCoordinates() {
         return Coordinates.builder()
                 .latitude(getRandomLatitude())
-                .longtitude(getRandomLongtitude())
+                .longtitude(getRandomLongitude())
                 .build();
     }
 
     private double getRandomLatitude() {
-        return RandomUtils.nextDouble(ExtremalEuropeCoordinates.SOUTH.getValue(), ExtremalEuropeCoordinates.NORTH.getValue());
+        return nextDouble(ExtremalEuropeCoordinates.SOUTH.getValue(), ExtremalEuropeCoordinates.NORTH.getValue());
     }
 
-    private double getRandomLongtitude() {
-        return RandomUtils.nextDouble(ExtremalEuropeCoordinates.WEST.getValue(), ExtremalEuropeCoordinates.EAST.getValue());
+    private double getRandomLongitude() {
+        return nextDouble(ExtremalEuropeCoordinates.WEST.getValue(), ExtremalEuropeCoordinates.EAST.getValue());
     }
 
     @Getter

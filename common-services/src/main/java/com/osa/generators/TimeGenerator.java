@@ -29,10 +29,10 @@ public class TimeGenerator {
     public Time generateBetween(LocalDateTime from, LocalDateTime to) {
         ZoneId zoneId = getRandomZoneId();
 
-        long fromMiliseconds = from.atZone(zoneId).toEpochSecond();
-        long toMiliseconds = to.atZone(zoneId).toEpochSecond();
+        long fromMilliseconds = from.atZone(zoneId).toEpochSecond();
+        long toMilliseconds = to.atZone(zoneId).toEpochSecond();
 
-        long timestamp = RandomUtils.nextLong(fromMiliseconds, toMiliseconds);
+        long timestamp = RandomUtils.nextLong(fromMilliseconds, toMilliseconds);
         String timezone = AVAILABLE_TIME_ZONES.contains(zoneId.toString()) ?
                 zoneId.toString() :
                 getRandomTimeZone();
