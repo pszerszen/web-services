@@ -21,10 +21,9 @@ public class TimeGenerator {
             .filter(zone -> StringUtils.startsWith(zone, PREFIX))
             .collect(Collectors.toList());
 
-    private  static final List<String> AVAILABLE_TIME_ZONES = Stream.of(TimeZone.getAvailableIDs())
+    private static final List<String> AVAILABLE_TIME_ZONES = Stream.of(TimeZone.getAvailableIDs())
             .filter(zone -> StringUtils.startsWith(zone, "Europe"))
             .collect(Collectors.toList());
-
 
     public Time generateFor(LocalDateTime localDateTime) {
         ZoneId zoneId = getRandomZoneId();
