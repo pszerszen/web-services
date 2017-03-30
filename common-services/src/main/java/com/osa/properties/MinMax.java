@@ -6,7 +6,7 @@ import org.apache.commons.lang3.RandomUtils;
 
 @Getter
 @Setter
-public abstract class MinMax {
+public class MinMax {
     private int min;
     private int max;
 

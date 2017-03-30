@@ -11,15 +11,8 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "network")
 public class NetworkProperties {
 
-    private Cities cities;
+    private MinMax cities;
+    private MinMax stations;
+    private MinMax destinationsStations;
 
-    private Stations stations;
-
-    private DestinationsStations destinationsStations;
-
-    public static class Cities extends MinMax {}
-
-    public static class Stations extends MinMax {}
-
-    public static class DestinationsStations extends MinMax {}
 }

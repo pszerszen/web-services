@@ -3,21 +3,32 @@ package com.osa.model;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Data
 @Builder
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TripItem implements Serializable, Comparable<TripItem> {
     private static final long serialVersionUID = -3693649260148803427L;
 
+    @XmlElement
     private Long id;
+    @XmlElement
     private Time departure;
+    @XmlElement
     private Time arrival;
+    @XmlElement
     private double price;
+    @XmlElement
     private List<Transfer> transfers;
+    @XmlElement
     private Status status;
+    @XmlElement
     private List<Link> links;
 
     @Override

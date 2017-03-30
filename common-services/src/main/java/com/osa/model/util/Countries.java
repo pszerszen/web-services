@@ -5,12 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
 import java.util.Locale;
 
-@XmlEnum
-@XmlType
 @RequiredArgsConstructor
 public enum Countries {
 

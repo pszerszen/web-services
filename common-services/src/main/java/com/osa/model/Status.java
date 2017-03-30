@@ -12,7 +12,7 @@ public enum Status {
 
     public static Status getRandom() {
         int index = RandomUtils.nextInt(0, values().length);
-        return values()[index];
+        return values()[ index ];
     }
 }
 
