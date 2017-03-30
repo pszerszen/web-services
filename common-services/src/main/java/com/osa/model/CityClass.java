@@ -3,6 +3,11 @@ package com.osa.model;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomUtils;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlEnum
+@XmlType
 @RequiredArgsConstructor
 public enum CityClass {
     A(0.5),
