@@ -5,8 +5,8 @@ import com.osa.generators.TripItemGenerator;
 import com.osa.model.Trip;
 import com.osa.model.TripItem;
 import com.osa.model.request.TripRequest;
+import com.osa.properties.TripProperties;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,11 @@ public class TripService {
 
     private final TripItemGenerator tripItemGenerator;
 
+    private final TripProperties properties;
+
     public Trip searchTrip(TripRequest request, Integer expectedNumber) {
         int trips = Optional.ofNullable(expectedNumber)
-                .orElseGet(TripService::generateNumberOfTrips);
+                .orElseGet(properties::getRandom);
 
         List<TripItem> items = IntStream.range(0, trips).boxed()
                 .map(i -> tripItemGenerator.generateTripItem(
@@ -46,7 +48,4 @@ public class TripService {
                 .build();
     }
 
-    private static int generateNumberOfTrips() {
-        return RandomUtils.nextInt(0, 35);
-    }
 }
