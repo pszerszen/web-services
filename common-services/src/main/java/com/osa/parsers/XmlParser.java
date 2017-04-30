@@ -1,6 +1,5 @@
 package com.osa.parsers;
 
-import lombok.Cleanup;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.tuple.Pair;
@@ -22,8 +21,11 @@ import java.util.Optional;
 
 import static java.lang.Boolean.TRUE;
 import static java.util.Arrays.stream;
-import static javax.xml.bind.Marshaller.*;
-import static javax.xml.soap.SOAPMessage.*;
+import static java.util.stream.Collectors.toMap;
+import static javax.xml.bind.Marshaller.JAXB_ENCODING;
+import static javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT;
+import static javax.xml.soap.SOAPMessage.CHARACTER_SET_ENCODING;
+import static javax.xml.soap.SOAPMessage.WRITE_XML_DECLARATION;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -35,7 +37,7 @@ public class XmlParser {
     private final JaxbContextProvider contextProvider;
 
     @SneakyThrows
-    public <T> String parseToSoapMessage(T t){
+    public <T> String parseToSoapMessage(T t) {
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         Marshaller marshaller = contextProvider.getJaxbContext(t.getClass()).createMarshaller();
         marshaller.setProperty(JAXB_FORMATTED_OUTPUT, true);
@@ -47,9 +49,10 @@ public class XmlParser {
         message.setProperty(CHARACTER_SET_ENCODING, encoding);
         message.getSOAPBody().addDocument(document);
 
-        @Cleanup ByteArrayOutputStream output = new ByteArrayOutputStream();
-        message.writeTo(output);
-        return output.toString();
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
+            message.writeTo(output);
+            return output.toString();
+        }
     }
 
     @SneakyThrows
@@ -58,8 +61,8 @@ public class XmlParser {
         MimeHeaders mimeHeaders = new MimeHeaders();
         Optional.ofNullable(headers)
                 .ifPresent(pairs -> stream(headers)
-                        .forEach(pair -> mimeHeaders.addHeader(pair.getKey(), pair.getValue())));
-
+                        .collect(toMap(Pair::getKey, Pair::getValue))
+                        .forEach(mimeHeaders::addHeader));
         SOAPMessage message = MessageFactory.newInstance().createMessage(mimeHeaders,
                 new ByteArrayInputStream(xmlContent.getBytes(Charset.defaultCharset())));
 
