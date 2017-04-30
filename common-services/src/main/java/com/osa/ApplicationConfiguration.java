@@ -6,10 +6,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
-import javax.xml.bind.JAXBContext;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
 
 @Configuration
 @ComponentScan(basePackageClasses = ApplicationConfiguration.class)
@@ -17,11 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ApplicationConfiguration {
 
     @Bean
-    public Map<Class<?>, JAXBContext> contextMap() {
-        return new ConcurrentHashMap<>();
-    }
-
-    @Bean
+    @Scope(SCOPE_PROTOTYPE)
     public Gson gson() {
         return new GsonBuilder().setPrettyPrinting().create();
     }
