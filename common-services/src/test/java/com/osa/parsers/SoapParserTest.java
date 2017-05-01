@@ -3,6 +3,7 @@ package com.osa.parsers;
 import com.osa.TestConfig;
 import com.osa.services.NetworkService;
 import com.osa.services.TripService;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
@@ -35,4 +36,7 @@ class SoapParserTest extends AbstractParserTest {
     protected String getMockDestinationStationsFile() {
         return "mockSoapDestinationStations.xml";
     }
+
+    @Test
+    void test() {}
 }
