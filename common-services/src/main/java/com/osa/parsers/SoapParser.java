@@ -29,7 +29,7 @@ import static javax.xml.soap.SOAPMessage.WRITE_XML_DECLARATION;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class XmlParser {
+public class SoapParser {
 
     @Value("${charset}")
     private String encoding;

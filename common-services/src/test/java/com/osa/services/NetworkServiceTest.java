@@ -2,20 +2,19 @@ package com.osa.services;
 
 import com.osa.TestConfig;
 import com.osa.model.Network;
-import com.osa.model.Station;
+import com.osa.model.StationList;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringJUnitJupiterConfig(TestConfig.class)
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 class NetworkServiceTest {
 
-    @Autowired
-    private NetworkService networkService;
+    private final NetworkService networkService;
 
     @Test
     void testGetNetwork() {
@@ -26,14 +25,14 @@ class NetworkServiceTest {
 
     @Test
     void testGetOriginStations() {
-        List<Station> originStations = networkService.getOriginStations();
+        StationList originStations = networkService.getOriginStations();
 
         assertNotNull(originStations);
     }
 
     @Test
-    void testGetDepartureStations() {
-        List<Station> departureStations = networkService.getDepartureStations();
+    void testGetDestinationStations() {
+        StationList departureStations = networkService.getDestinationStations();
 
         assertNotNull(departureStations);
     }

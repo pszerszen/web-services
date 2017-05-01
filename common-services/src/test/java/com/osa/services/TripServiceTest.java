@@ -3,6 +3,7 @@ package com.osa.services;
 import com.osa.TestConfig;
 import com.osa.model.Trip;
 import com.osa.model.request.TripRequest;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringJUnitJupiterConfig(TestConfig.class)
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 class TripServiceTest {
 
     private TripRequest request;
 
-    @Autowired
-    private TripService tripService;
+    private final TripService tripService;
 
     @BeforeEach
     void setUp() throws Exception {

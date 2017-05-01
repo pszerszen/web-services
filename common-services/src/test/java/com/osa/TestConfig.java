@@ -18,9 +18,9 @@ public class TestConfig extends ApplicationConfiguration {
     @Bean
     public NetworkProperties networkProperties() {
         return NetworkProperties.builder()
-                .cities(withValues(3000, 3500))
-                .destinationsStations(withValues(5, 450))
-                .stations(withValues(4200, 5000))
+                .cities(withValues(10, 10))
+                .destinationsStations(withValues(1, 5))
+                .stations(withValues(10, 10))
                 .build();
     }
 

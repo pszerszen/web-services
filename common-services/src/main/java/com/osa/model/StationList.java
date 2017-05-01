@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -18,13 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Trip implements Serializable {
-    private static final long serialVersionUID = 7543478626620070263L;
+public class StationList {
 
-    @XmlElement
-    private Station from;
-    @XmlElement
-    private Station to;
-    @XmlElement(name = "item")
-    private List<TripItem> items;
+    @XmlElement(name = "station")
+    private List<Station> stationList;
 }

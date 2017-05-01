@@ -24,11 +24,11 @@ public class TripItem implements Serializable, Comparable<TripItem> {
     private Time arrival;
     @XmlElement
     private double price;
-    @XmlElement
+    @XmlElement(name = "transfer")
     private List<Transfer> transfers;
     @XmlElement
     private Status status;
-    @XmlElement
+    @XmlElement(name = "link")
     private List<Link> links;
 
     @Override

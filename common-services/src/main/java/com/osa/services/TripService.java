@@ -20,7 +20,6 @@ import java.util.stream.IntStream;
 public class TripService {
 
     private final StationGenerator stationGenerator;
-
     private final TripItemGenerator tripItemGenerator;
 
     private final TripProperties properties;

@@ -1,7 +1,9 @@
 package com.osa.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class City implements Serializable {
@@ -29,10 +33,10 @@ public class City implements Serializable {
     @XmlElement
     private Coordinates coordinates;
 
-    @XmlElement
+    @XmlElement(name = "station")
     private List<Long> stations;
 
-    @XmlElement
+    @XmlElement(name = "possibleDestination")
     private List<Long> possibleDestinations;
 
     @XmlElement
