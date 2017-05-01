@@ -1,7 +1,9 @@
 package com.osa.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,6 +14,8 @@ import java.util.Objects;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TripItem implements Serializable, Comparable<TripItem> {
     private static final long serialVersionUID = -3693649260148803427L;

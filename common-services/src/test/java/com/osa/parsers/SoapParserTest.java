@@ -8,6 +8,7 @@ import com.osa.model.request.TripRequest;
 import com.osa.services.NetworkService;
 import com.osa.services.TripService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
+import static java.util.stream.Collectors.joining;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -47,49 +54,94 @@ class SoapParserTest {
     }
 
     @Nested
-    class ParseToSoapMessage implements Parse {
+    class ParseToSoapMessageTest implements ParseTest {
         @Test
         @Override
         public void testParsingTrip() {
-            String content = parser.parseToSoapMessage(trip);
-
-            assertNotNull(content);
+            test(trip);
         }
 
         @Test
         @Override
         public void testParsingNetwork() {
-            String content = parser.parseToSoapMessage(network);
-
-            assertNotNull(content);
+            test(network);
         }
 
         @Test
         @Override
         public void testParsingOriginStations() {
-            String content = parser.parseToSoapMessage(departures);
-
-            assertNotNull(content);
+            test(departures);
         }
 
         @Test
         @Override
         public void testParsingDestinationStations() {
-            String content = parser.parseToSoapMessage(arrivals);
+            test(arrivals);
+        }
 
+        private <T> void test(T object) {
+            String content = parser.parseToSoapMessage(object);
             assertNotNull(content);
         }
     }
 
-    interface Parse {
+    @Nested
+    class ParseFromSoapMessageTest implements ParseTest {
 
-        void testParsingTrip();
+        @Test
+        @Override
+        public void testParsingTrip() {
+            Trip trip = test("mockTrips.xml", Trip.class);
 
-        void testParsingNetwork();
+            assertAll(
+                    () -> assertNotNull(trip.getFrom()),
+                    () -> assertNotNull(trip.getTo()),
+                    () -> assertNotNull(trip.getItems()),
+                    () -> assertEquals(3, trip.getItems().size()));
+        }
 
-        void testParsingOriginStations();
+        @Test
+        @Override
+        public void testParsingNetwork() {
+            Network network = test("mockNetwork.xml", Network.class);
 
-        void testParsingDestinationStations();
+            assertAll(
+                    () -> assertNotNull(network.getCities()),
+                    () -> assertNotNull(network.getStations()),
+                    () -> assertEquals(10, network.getCities().size()),
+                    () -> assertEquals(10, network.getStations().size()));
+        }
+
+        @Test
+        @Override
+        public void testParsingOriginStations() {
+            StationList stationList = test("mockOriginStations.xml", StationList.class);
+
+            assertAll(
+                    () -> assertNotNull(stationList.getStationList()),
+                    () -> assertEquals(10, stationList.getStationList().size()));
+        }
+
+        @Test
+        @Override
+        public void testParsingDestinationStations() {
+            StationList stationList = test("mockDestinationStations.xml", StationList.class);
+
+            assertAll(
+                    () -> assertNotNull(stationList.getStationList()),
+                    () -> assertEquals(4, stationList.getStationList().size()));
+        }
+
+        @SuppressWarnings("unchecked")
+        @SneakyThrows
+        private <T> T test(String fileName, Class<T> type) {
+            URI uri = getClass().getResource(fileName).toURI();
+            String content = Files.lines(Paths.get(uri)).collect(joining());
+
+            T response = parser.parseFromSoapMessage(content, type);
+            assertNotNull(response);
+
+            return response;
+        }
     }
-
 }
