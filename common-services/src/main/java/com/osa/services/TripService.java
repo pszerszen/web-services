@@ -31,11 +31,11 @@ public class TripService {
 
         List<TripItem> items = IntStream.range(0, trips).boxed()
                 .map(i -> tripItemGenerator.generateTripItem(
-                        request.getDepartureDate()
+                        request.getDepartureDateAsLocalDateTime()
                                 .withHour(0)
                                 .withMinute(0)
                                 .withSecond(0),
-                        request.getDepartureDate()
+                        request.getDepartureDateAsLocalDateTime()
                                 .withHour(23)
                                 .withMinute(59)
                                 .withSecond(59)))

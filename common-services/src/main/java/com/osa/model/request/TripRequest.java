@@ -50,7 +50,7 @@ public class TripRequest implements Serializable {
     @XmlElement
     private String departureDate;
 
-    public LocalDateTime getDepartureDate() {
-        return LocalDateTime.parse(departureDate, DATE_TIME_FORMATTER);
+    public LocalDateTime getDepartureDateAsLocalDateTime() {
+        return LocalDateTime.parse(getDepartureDate(), DATE_TIME_FORMATTER);
     }
 }

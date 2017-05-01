@@ -14,7 +14,7 @@ public class CoordinatesGenerator {
     public Coordinates generateCoordinates() {
         return Coordinates.builder()
                 .latitude(getRandomLatitude())
-                .longtitude(getRandomLongitude())
+                .longitude(getRandomLongitude())
                 .build();
     }
 
@@ -23,7 +23,8 @@ public class CoordinatesGenerator {
     }
 
     private double getRandomLongitude() {
-        return nextDouble(ExtremalEuropeCoordinates.WEST.getValue(), ExtremalEuropeCoordinates.EAST.getValue());
+        return nextDouble() * (ExtremalEuropeCoordinates.EAST.getValue() - ExtremalEuropeCoordinates.WEST.getValue())
+                + ExtremalEuropeCoordinates.WEST.getValue();
     }
 
     @Getter
