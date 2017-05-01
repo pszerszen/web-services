@@ -1,0 +1,234 @@
+{
+  "stationList": [
+    {
+      "id": 7937818707376500736,
+      "code": "60671482",
+      "name": "fYmsx",
+      "address": "UNKH80y4ocNBzWlgNsB2w06uoIDlI",
+      "coordinates": {
+        "latitude": 43.15330309631073,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 4336329260559394816,
+        "name": "XSEzlMz",
+        "cityClass": "A",
+        "country": {
+          "name": "Iran",
+          "code": "IR"
+        }
+      },
+      "country": {
+        "name": "Albania",
+        "code": "AL"
+      }
+    },
+    {
+      "id": 9121396644046471168,
+      "code": "40148118",
+      "name": "BOCoQMgxzy",
+      "address": "rwcrD7RlwPWwwsxTcBeu",
+      "coordinates": {
+        "latitude": 69.66116538665642,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 4821177498948615168,
+        "name": "LOcOGx",
+        "cityClass": "C",
+        "country": {
+          "name": "Croatia",
+          "code": "HR"
+        }
+      },
+      "country": {
+        "name": "Asia Pacific Region",
+        "code": "AP"
+      }
+    },
+    {
+      "id": 2053896257731790848,
+      "code": "94476655",
+      "name": "TcqcXRcipLpNX",
+      "address": "26PegUWL5k6sTcBnlkDgOaK1UHKW",
+      "coordinates": {
+        "latitude": 48.17593248836816,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 9080371311592001536,
+        "name": "HJeCwNgAGpcCt",
+        "cityClass": "A",
+        "country": {
+          "name": "New Zealand",
+          "code": "NZ"
+        }
+      },
+      "country": {
+        "name": "Botswana",
+        "code": "BW"
+      }
+    },
+    {
+      "id": 658290065365144576,
+      "code": "68696852",
+      "name": "vXlktEbkJEqYG",
+      "address": "mgl5FXzAk4imOZF",
+      "coordinates": {
+        "latitude": 42.618448493825866,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 3746648132422132736,
+        "name": "peijOwy",
+        "cityClass": "A",
+        "country": {
+          "name": "Tokelau",
+          "code": "TK"
+        }
+      },
+      "country": {
+        "name": "Seychelles",
+        "code": "SC"
+      }
+    },
+    {
+      "id": 9118330690935075840,
+      "code": "27566742",
+      "name": "vrPQAqcohn",
+      "address": "jHHyORNLbVHQxQZxKFQHfRGRBtsJ6Fpn5",
+      "coordinates": {
+        "latitude": 53.09390211642042,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 9155334211664290816,
+        "name": "zzsOdnaisxZZxHW",
+        "cityClass": "A",
+        "country": {
+          "name": "Venezuela",
+          "code": "YV"
+        }
+      },
+      "country": {
+        "name": "Vatican City State",
+        "code": "VA"
+      }
+    },
+    {
+      "id": 8993412364124524544,
+      "code": "31441455",
+      "name": "UHsxjnbBpF",
+      "address": "eLBSC9BCTUb7mwvudTpQtLU",
+      "coordinates": {
+        "latitude": 42.790334329273634,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 2723704980204243968,
+        "name": "LjRmTlrKNpbO",
+        "cityClass": "B",
+        "country": {
+          "name": "France",
+          "code": "FR"
+        }
+      },
+      "country": {
+        "name": "Maldives",
+        "code": "MV"
+      }
+    },
+    {
+      "id": 8088262253594156032,
+      "code": "80953907",
+      "name": "LfSoIcxsCgb",
+      "address": "oIb299m9t3php5m1aFa0OyUVRmjH1",
+      "coordinates": {
+        "latitude": 65.26183592327719,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 6729455401536031744,
+        "name": "dQejRzDqfJDjTVjh",
+        "cityClass": "B",
+        "country": {
+          "name": "South Africa",
+          "code": "ZA"
+        }
+      },
+      "country": {
+        "name": "Bosnia And Herzegovina",
+        "code": "BA"
+      }
+    },
+    {
+      "id": 4561963938952518656,
+      "code": "29464474",
+      "name": "ieRNiVhkU",
+      "address": "wSWLfuCgxXqzykr49Cte",
+      "coordinates": {
+        "latitude": 66.08837792619424,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 1719208565881526272,
+        "name": "xbgUNnnLHvKtBE",
+        "cityClass": "A",
+        "country": {
+          "name": "Lebanon",
+          "code": "LB"
+        }
+      },
+      "country": {
+        "name": "Poland",
+        "code": "PL"
+      }
+    },
+    {
+      "id": 3478963566211445760,
+      "code": "44885170",
+      "name": "etCPedsPtqTRzJJpmwY",
+      "address": "egDDEEmdQWvKOih1xtxdrMi4U",
+      "coordinates": {
+        "latitude": 63.3768553021824,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 4793816458493968384,
+        "name": "ovABV",
+        "cityClass": "B",
+        "country": {
+          "name": "Mexico",
+          "code": "MX"
+        }
+      },
+      "country": {
+        "name": "Slovakia",
+        "code": "SK"
+      }
+    },
+    {
+      "id": 2414071651381652480,
+      "code": "59696032",
+      "name": "BSOMSciV",
+      "address": "Pc5J4NNA6XuiafPykYSZ0lBk",
+      "coordinates": {
+        "latitude": 39.58209137833436,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 4337755275533014016,
+        "name": "ngmKbRAjsSkYqTcJR",
+        "cityClass": "B",
+        "country": {
+          "name": "Kyrgyzstan",
+          "code": "KG"
+        }
+      },
+      "country": {
+        "name": "Cuba",
+        "code": "CU"
+      }
+    }
+  ]
+}

@@ -18,6 +18,6 @@ public class ApplicationConfiguration {
     @Bean
     @Scope(SCOPE_PROTOTYPE)
     public Gson gson() {
-        return new GsonBuilder().setPrettyPrinting().create();
+        return new GsonBuilder().setPrettyPrinting().serializeSpecialFloatingPointValues().create();
     }
 }

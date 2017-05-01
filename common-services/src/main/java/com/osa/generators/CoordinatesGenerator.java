@@ -24,7 +24,7 @@ public class CoordinatesGenerator {
 
     private double getRandomLongitude() {
         return nextDouble() * (ExtremalEuropeCoordinates.EAST.getValue() - ExtremalEuropeCoordinates.WEST.getValue())
-                + ExtremalEuropeCoordinates.WEST.getValue();
+                - ExtremalEuropeCoordinates.WEST.getValue();
     }
 
     @Getter

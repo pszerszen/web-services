@@ -1,0 +1,210 @@
+{
+  "from": {
+    "id": 7114545108383341568,
+    "code": "40254800",
+    "name": "JffElHcT",
+    "city": {
+      "id": 8439909387640590336,
+      "name": "iKUXLcnIoJxPgCBw",
+      "cityClass": "B",
+      "country": {
+        "name": "Reunion Island",
+        "code": "RE"
+      }
+    },
+    "country": {
+      "name": "Antigua And Barbuda",
+      "code": "AG"
+    }
+  },
+  "to": {
+    "id": 402971574198042624,
+    "code": "19800312",
+    "name": "UHyKXfKoXaA",
+    "city": {
+      "id": 1065697444422700032,
+      "name": "CDEkiwOSdvtWaXTFR",
+      "cityClass": "A",
+      "country": {
+        "name": "Wallis And Futuna Islands",
+        "code": "WF"
+      }
+    },
+    "country": {
+      "name": "Maldives",
+      "code": "MV"
+    }
+  },
+  "items": [
+    {
+      "id": 1598478896988533760,
+      "departure": {
+        "timestamp": 1493676000,
+        "timezone": "Europe/Copenhagen"
+      },
+      "arrival": {
+        "timestamp": 1493758799,
+        "timezone": "Europe/Moscow"
+      },
+      "price": 45.13,
+      "transfers": [
+        {
+          "departure": {
+            "timestamp": 1493676438,
+            "timezone": "Europe/Bratislava"
+          },
+          "arrival": {
+            "timestamp": 1493702192,
+            "timezone": "Europe/Zurich"
+          },
+          "station": {
+            "id": 2534335866920157184,
+            "code": "43881763",
+            "name": "PZOWeIngKIbm",
+            "city": {
+              "id": 4022611655659165696,
+              "name": "SZdlOetqzWiBNJNrrC",
+              "cityClass": "A",
+              "country": {
+                "name": "Burkina Faso",
+                "code": "BF"
+              }
+            },
+            "country": {
+              "name": "Niger",
+              "code": "NE"
+            }
+          }
+        },
+        {
+          "departure": {
+            "timestamp": 1493702861,
+            "timezone": "Europe/Nicosia"
+          },
+          "arrival": {
+            "timestamp": 1493730263,
+            "timezone": "Europe/Ljubljana"
+          },
+          "station": {
+            "id": 1945296612675769344,
+            "code": "72887690",
+            "name": "BUoZRbHK",
+            "city": {
+              "id": 5176071176003255296,
+              "name": "gpIAXq",
+              "cityClass": "A",
+              "country": {
+                "name": "Brunei",
+                "code": "BN"
+              }
+            },
+            "country": {
+              "name": "Ecuador",
+              "code": "EC"
+            }
+          }
+        }
+      ],
+      "status": "available",
+      "links": [
+        {
+          "reference": "UtkkbwE",
+          "url": "SmialjTCoSdfAgL8shXMz5xPyCEo5MIZf5q"
+        },
+        {
+          "reference": "tRNJsRH",
+          "url": "VFjziysagyogOIBq8MPYHHVrgowHB0x31FN"
+        },
+        {
+          "reference": "naYOqcn",
+          "url": "tckDBLz2lDGVHjCuoqeAtCbEryRMkQSjpJx"
+        }
+      ]
+    },
+    {
+      "id": 6932329383121818624,
+      "departure": {
+        "timestamp": 1493676000,
+        "timezone": "Europe/Budapest"
+      },
+      "arrival": {
+        "timestamp": 1493762399,
+        "timezone": "Europe/Vienna"
+      },
+      "price": 57.73,
+      "transfers": [
+        {
+          "departure": {
+            "timestamp": 1493708765,
+            "timezone": "Europe/Luxembourg"
+          },
+          "arrival": {
+            "timestamp": 1493718794,
+            "timezone": "Europe/Volgograd"
+          },
+          "station": {
+            "id": 5724680112305948672,
+            "code": "71441549",
+            "name": "KCEeMJefFMEZhTyTbnx",
+            "city": {
+              "id": 5471388129543362560,
+              "name": "pDJwtnEMZHJVsuH",
+              "cityClass": "B",
+              "country": {
+                "name": "Honduras",
+                "code": "HN"
+              }
+            },
+            "country": {
+              "name": "Palau",
+              "code": "PW"
+            }
+          }
+        }
+      ],
+      "status": "partially",
+      "links": [
+        {
+          "reference": "sPyHOIj",
+          "url": "Qfe0VhLxpjUd6Ie7eWAZoURGRzwkNg3f5Tb"
+        },
+        {
+          "reference": "DWPbuBn",
+          "url": "Wt0tS43edtSzrqQqYQ2fwu5WkfY1P0dhenw"
+        },
+        {
+          "reference": "RaeQCGJ",
+          "url": "OErUp71fHqHrKiiUuLhAHSfOC4wKxwUbv6F"
+        }
+      ]
+    },
+    {
+      "id": 9077992064031540224,
+      "departure": {
+        "timestamp": 1493672400,
+        "timezone": "Europe/Riga"
+      },
+      "arrival": {
+        "timestamp": 1493762399,
+        "timezone": "Europe/Luxembourg"
+      },
+      "price": 20.91,
+      "transfers": [],
+      "status": "partially",
+      "links": [
+        {
+          "reference": "ccWNoJh",
+          "url": "unug4G0fHIycouyeSdEqk1fwrNCWJhwvzV7"
+        },
+        {
+          "reference": "bmlwXHI",
+          "url": "1sKEbg12kVPjXN873iCBALzGhJiPA0a4ibm"
+        },
+        {
+          "reference": "AByYLoG",
+          "url": "MrwhwsovKzpJDfv0xYIHwhqI1Wqlf8wOcbG"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "stationList": [
+    {
+      "id": 1777001662074685440,
+      "code": "43351703",
+      "name": "dJFLJfjdQBZjJiFwYd",
+      "address": "4DkfHw5JZgnwQ4d0MSlZoljWaL",
+      "coordinates": {
+        "latitude": 38.40463513051497,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 7469841541891204096,
+        "name": "mFiBB",
+        "cityClass": "C",
+        "country": {
+          "name": "Senegal",
+          "code": "SN"
+        }
+      },
+      "country": {
+        "name": "Morocco",
+        "code": "MA"
+      }
+    },
+    {
+      "id": 6339207943870747648,
+      "code": "21347964",
+      "name": "QQeAFjmHx",
+      "address": "QuFaJ2tPr7UvXbcBzgyQYuNqSkIvozJ3",
+      "coordinates": {
+        "latitude": 59.38200426305349,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 8533736508444227584,
+        "name": "mIrEPIszPeV",
+        "cityClass": "A",
+        "country": {
+          "name": "Solomon Islands",
+          "code": "SB"
+        }
+      },
+      "country": {
+        "name": "Cape Verde Islands",
+        "code": "CV"
+      }
+    },
+    {
+      "id": 3681090837534731264,
+      "code": "46999594",
+      "name": "SVaQWufVnXZDzBWcatl",
+      "address": "HuHIPxKp1aM74ZqFw",
+      "coordinates": {
+        "latitude": 64.56489924336434,
+        "longitude": 9.11135764531809E307
+      },
+      "city": {
+        "id": 5269389348699614208,
+        "name": "iKXCSagGSKGJXC",
+        "cityClass": "A",
+        "country": {
+          "name": "Micronesia",
+          "code": "FM"
+        }
+      },
+      "country": {
+        "name": "Iran",
+        "code": "IR"
+      }
+    },
+    {
+      "id": 2614155446141552640,
+      "code": "89722016",
+      "name": "EDouuKzT",
+      "address": "u6fgsWeqdqID6kCeP4nE1Va8clZm",
+      "coordinates": {
+        "latitude": 63.7055817961604,
+        "longitude": Infinity
+      },
+      "city": {
+        "id": 4301589308959294464,
+        "name": "FhsfIUXtZSzu",
+        "cityClass": "A",
+        "country": {
+          "name": "Andorra",
+          "code": "AD"
+        }
+      },
+      "country": {
+        "name": "Aruba",
+        "code": "AW"
+      }
+    }
+  ]
+}
