@@ -12,7 +12,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.soap.MessageFactory;
-import javax.xml.soap.MimeHeaders;
 import javax.xml.soap.SOAPMessage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,15 +28,16 @@ import static javax.xml.soap.SOAPMessage.WRITE_XML_DECLARATION;
 
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SoapParser {
+public class SoapParser implements Parser {
 
     @Value("${charset}")
     private String encoding;
 
     private final JaxbContextProvider contextProvider;
 
+    @Override
     @SneakyThrows
-    public <T> String parseToSoapMessage(T t) {
+    public <T> String parseToContent(T t, Pair<String, String>... headers) {
         Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
         Marshaller marshaller = contextProvider.getJaxbContext(t.getClass()).createMarshaller();
         marshaller.setProperty(JAXB_FORMATTED_OUTPUT, true);
@@ -47,6 +47,10 @@ public class SoapParser {
         SOAPMessage message = MessageFactory.newInstance().createMessage();
         message.setProperty(WRITE_XML_DECLARATION, TRUE.toString());
         message.setProperty(CHARACTER_SET_ENCODING, encoding);
+        Optional.ofNullable(headers)
+                .ifPresent(pairs -> stream(headers)
+                        .collect(toMap(Pair::getKey, Pair::getValue))
+                        .forEach(message.getMimeHeaders()::addHeader));
         message.getSOAPBody().addDocument(document);
 
         try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
@@ -55,16 +59,12 @@ public class SoapParser {
         }
     }
 
+    @Override
     @SneakyThrows
     @SuppressWarnings("unchecked")
-    public <T> T parseFromSoapMessage(String xmlContent, Class<T> type, Pair<String, String>... headers) {
-        MimeHeaders mimeHeaders = new MimeHeaders();
-        Optional.ofNullable(headers)
-                .ifPresent(pairs -> stream(headers)
-                        .collect(toMap(Pair::getKey, Pair::getValue))
-                        .forEach(mimeHeaders::addHeader));
-        SOAPMessage message = MessageFactory.newInstance().createMessage(mimeHeaders,
-                new ByteArrayInputStream(xmlContent.getBytes(Charset.defaultCharset())));
+    public <T> T parseFromContent(String content, Class<T> type) {
+        SOAPMessage message = MessageFactory.newInstance().createMessage(null,
+                new ByteArrayInputStream(content.getBytes(Charset.defaultCharset())));
 
         Unmarshaller unmarshaller = contextProvider.getJaxbContext(type).createUnmarshaller();
         return (T) unmarshaller.unmarshal(message.getSOAPBody().extractContentAsDocument());
