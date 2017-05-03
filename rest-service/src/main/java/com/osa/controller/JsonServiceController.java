@@ -1,0 +1,55 @@
+package com.osa.controller;
+
+import com.osa.model.Network;
+import com.osa.model.StationList;
+import com.osa.model.Trip;
+import com.osa.model.request.TripRequest;
+import com.osa.services.NetworkService;
+import com.osa.services.TripService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+@RestController
+@RequestMapping(path = "/rest/json", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class JsonServiceController {
+
+    private final TripService tripService;
+    private final NetworkService networkService;
+
+    @RequestMapping(path = "/", method = GET)
+    public ResponseEntity<Boolean> heartbeat() {
+        return ResponseEntity.ok(Boolean.TRUE);
+    }
+
+    @RequestMapping(path = "/search", method = POST)
+    public ResponseEntity<Trip> search(@RequestBody TripRequest request, @RequestParam(required = false) Integer expectedNumber) {
+        Trip trip = tripService.searchTrip(request, expectedNumber);
+        return ResponseEntity.ok(trip);
+    }
+
+    @RequestMapping(path = "/network", method = GET)
+    public ResponseEntity<Network> getNetwork() {
+        return ResponseEntity.ok(networkService.getNetwork());
+    }
+
+    @RequestMapping(path = "/origins", method = GET)
+    public ResponseEntity<StationList> getOriginStations() {
+        return ResponseEntity.ok(networkService.getOriginStations());
+    }
+
+    @SuppressWarnings("unused")
+    @RequestMapping(path = "destinations", method = GET)
+    public ResponseEntity<StationList> getDestinationStations(@RequestParam String originStation) {
+        return ResponseEntity.ok(networkService.getDestinationStations());
+    }
+}

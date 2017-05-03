@@ -23,6 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
+        <lombok.version>1.16.14</lombok.version>
         <junit.jupiter.version>LATEST</junit.jupiter.version>
         <junit.vintage.version>LATEST</junit.vintage.version>
         <junit.platform.version>LATEST</junit.platform.version>
@@ -64,7 +65,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.16.6</version>
+                <version>${lombok.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
             <dependency>
