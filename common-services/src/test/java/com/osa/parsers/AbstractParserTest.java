@@ -28,14 +28,14 @@ import static org.mockito.Mockito.when;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public abstract class AbstractParserTest {
 
-    protected final NetworkService networkService;
-    protected final TripService tripService;
-    protected final Parser parser;
+    private final NetworkService networkService;
+    private final TripService tripService;
+    private final Parser parser;
 
-    protected Trip trip;
-    protected Network network;
-    protected StationList departures;
-    protected StationList arrivals;
+    private Trip trip;
+    private Network network;
+    private StationList departures;
+    private StationList arrivals;
 
     @BeforeEach
     void setUp() {

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 public class XmlParserTest extends AbstractParserTest {
 
     @Autowired
-    public XmlParserTest(final NetworkService networkService, final TripService tripService, final XmlParser parser) {
+    XmlParserTest(final NetworkService networkService, final TripService tripService, final XmlParser parser) {
         super(networkService, tripService, parser);
     }
 

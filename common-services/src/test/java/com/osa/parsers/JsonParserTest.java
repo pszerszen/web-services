@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 public class JsonParserTest extends AbstractParserTest {
 
     @Autowired
-    public JsonParserTest(final NetworkService networkService, final TripService tripService, final JsonParser parser) {
+    JsonParserTest(final NetworkService networkService, final TripService tripService, final JsonParser parser) {
         super(networkService, tripService, parser);
     }
 

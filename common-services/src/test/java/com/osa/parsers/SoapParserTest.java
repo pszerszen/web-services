@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 class SoapParserTest extends AbstractParserTest {
 
     @Autowired
-    public SoapParserTest(final NetworkService networkService, final TripService tripService, final SoapParser parser) {
+    SoapParserTest(final NetworkService networkService, final TripService tripService, final SoapParser parser) {
         super(networkService, tripService, parser);
     }
 
