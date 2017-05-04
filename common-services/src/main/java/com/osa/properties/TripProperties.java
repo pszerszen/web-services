@@ -13,7 +13,7 @@ public class TripProperties extends MinMax {
 
     public TripProperties(MinMax minMax) {
         super();
-        setMin(minMax.getMin());
-        setMax(minMax.getMax());
+        min = minMax.getMin();
+        max = minMax.getMax();
     }
 }
