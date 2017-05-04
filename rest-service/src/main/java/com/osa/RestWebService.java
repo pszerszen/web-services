@@ -1,14 +1,17 @@
 package com.osa;
 
-import com.osa.config.RestWebServiceConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.PropertySource;
 
+@PropertySource("classpath:common-services.properties")
 @EnableConfigurationProperties
-@Import(RestWebServiceConfig.class)
-@SpringBootApplication(scanBasePackageClasses = RestWebService.class)
+@ComponentScan(basePackageClasses = RestWebService.class)
+@SpringBootApplication(scanBasePackageClasses = RestWebService.class, exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class RestWebService {
 
     public static void main(String... args) throws Exception {

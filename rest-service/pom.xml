@@ -8,7 +8,10 @@
         <version>1.5.2.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.osa</groupId>
     <artifactId>rest-service</artifactId>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
         <searchSystem.version>latest-SNAPSHOT</searchSystem.version>
@@ -37,6 +40,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -44,13 +48,13 @@
             <version>${spring.boot.version}</version>
             <optional>true</optional>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-dependencies</artifactId>
             <version>${spring.boot.version}</version>
             <scope>import</scope>
             <type>pom</type>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -59,7 +63,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <!--<scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
@@ -85,12 +88,4 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
