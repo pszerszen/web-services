@@ -1,19 +1,13 @@
 package com.osa.properties;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
-@Getter
-@Component
-@NoArgsConstructor
-@ConfigurationProperties(prefix = "trip")
+@Data
 public class TripProperties extends MinMax {
 
     public TripProperties(MinMax minMax) {
         super();
-        min = minMax.getMin();
-        max = minMax.getMax();
+        min = minMax.min;
+        max = minMax.max;
     }
 }

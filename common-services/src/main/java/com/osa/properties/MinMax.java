@@ -1,13 +1,11 @@
 package com.osa.properties;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.apache.commons.lang3.RandomUtils;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MinMax {
