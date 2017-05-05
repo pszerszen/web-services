@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController
-@RequestMapping(path = "/rest/json", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-public class JsonServiceController extends AbstractServiceController {
+@RequestMapping(path = "/rest/xml", consumes = APPLICATION_XML_VALUE, produces = APPLICATION_XML_VALUE)
+public class XmlServiceController extends AbstractServiceController {
 
     @Autowired
-    public JsonServiceController(final TripService tripService, final NetworkService networkService) {
+    public XmlServiceController(final TripService tripService, final NetworkService networkService) {
         super(tripService, networkService);
     }
 }
