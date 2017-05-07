@@ -1,5 +1,6 @@
 package com.osa.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -24,11 +25,11 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
     }
 
     @Bean(name = "trips")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema, @Value("${namespace}") String namespace) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("CountriesPort");
+        wsdl11Definition.setPortTypeName("TripsPort");
         wsdl11Definition.setLocationUri("/soap");
-        wsdl11Definition.setTargetNamespace("http://spring.io/guides/gs-producing-web-service");
+        wsdl11Definition.setTargetNamespace(namespace);
         wsdl11Definition.setSchema(schema);
         return wsdl11Definition;
     }
