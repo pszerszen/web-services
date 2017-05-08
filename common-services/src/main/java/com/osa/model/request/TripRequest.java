@@ -52,7 +52,7 @@ public class TripRequest implements Serializable {
     @XmlElement
     private Currency currency;
 
-    @XmlElement
+    @XmlElement(required = true)
     private String departureDate;
 
     public LocalDateTime getDepartureDateAsLocalDateTime() {

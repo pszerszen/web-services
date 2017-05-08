@@ -4,6 +4,13 @@
            xmlns="http://spring.io/guides/gs-producing-web-service"
            elementFormDefault="qualified">
 
+    <xs:element name="simpleRequest" type="simpleRequest"/>
+    <xs:complexType name="simpleRequest">
+        <xs:sequence>
+            <xs:element name="originStation" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:element name="tripRequest" type="tripRequest"/>
     <xs:complexType name="tripRequest">
         <xs:sequence>
@@ -16,7 +23,7 @@
             <xs:element name="children" type="xs:int"/>
             <xs:element name="bikes" type="xs:boolean"/>
             <xs:element name="currency" type="currency" minOccurs="0"/>
-            <xs:element name="departureDate" type="xs:string" minOccurs="0"/>
+            <xs:element name="departureDate" type="xs:string" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 
