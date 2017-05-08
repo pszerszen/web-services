@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service"
+           xmlns="http://spring.io/guides/gs-producing-web-service"
+           elementFormDefault="qualified">
+
+    <xs:element name="tripRequest" type="tripRequest"/>
+    <xs:complexType name="tripRequest">
+        <xs:sequence>
+            <xs:element name="searchBy" type="searchBy" minOccurs="0"/>
+            <xs:element name="fromCityId" type="xs:string" minOccurs="0"/>
+            <xs:element name="toCityId" type="xs:string" minOccurs="0"/>
+            <xs:element name="fromStationId" type="xs:string" minOccurs="0"/>
+            <xs:element name="toStationId" type="xs:string" minOccurs="0"/>
+            <xs:element name="adult" type="xs:int"/>
+            <xs:element name="children" type="xs:int"/>
+            <xs:element name="bikes" type="xs:boolean"/>
+            <xs:element name="currency" type="currency" minOccurs="0"/>
+            <xs:element name="departureDate" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="trip" type="trip"/>
+    <xs:complexType name="trip">
+        <xs:sequence>
+            <xs:element name="from" type="station" minOccurs="0"/>
+            <xs:element name="to" type="station" minOccurs="0"/>
+            <xs:element name="item" type="tripItem" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="stationList" type="stationList"/>
+    <xs:complexType name="stationList">
+        <xs:sequence>
+            <xs:element name="station" type="station" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="network" type="network"/>
+    <xs:complexType name="network">
+        <xs:sequence>
+            <xs:element name="city" type="city" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="station" type="city" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="tripItem">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="departure" type="time" minOccurs="0"/>
+            <xs:element name="arrival" type="time" minOccurs="0"/>
+            <xs:element name="price" type="xs:double"/>
+            <xs:element name="transfer" type="transfer" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="status" type="status" minOccurs="0"/>
+            <xs:element name="link" type="link" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="link">
+        <xs:sequence>
+            <xs:element name="reference" type="xs:string" minOccurs="0"/>
+            <xs:element name="url" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="transfer">
+        <xs:sequence>
+            <xs:element name="departure" type="time" minOccurs="0"/>
+            <xs:element name="arrival" type="time" minOccurs="0"/>
+            <xs:element name="station" type="station" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="available"/>
+            <xs:enumeration value="unavailable"/>
+            <xs:enumeration value="partially"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="time">
+        <xs:sequence>
+            <xs:element name="timestamp" type="xs:long"/>
+            <xs:element name="timezone" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="station">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="code" type="xs:string" minOccurs="0"/>
+            <xs:element name="name" type="xs:string" minOccurs="0"/>
+            <xs:element name="address" type="xs:string" minOccurs="0"/>
+            <xs:element name="coordinates" type="coordinates" minOccurs="0"/>
+            <xs:element name="city" type="city" minOccurs="0"/>
+            <xs:element name="country" type="country" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="city">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long" minOccurs="0"/>
+            <xs:element name="name" type="xs:string" minOccurs="0"/>
+            <xs:element name="cityClass" type="cityClass" minOccurs="0"/>
+            <xs:element name="coordinates" type="coordinates" minOccurs="0"/>
+            <xs:element name="station" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="possibleDestination" type="xs:long" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="country" type="country" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="country">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" minOccurs="0"/>
+            <xs:element name="code" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="coordinates">
+        <xs:sequence>
+            <xs:element name="latitude" type="xs:double" minOccurs="0"/>
+            <xs:element name="longitude" type="xs:double" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="cityClass">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="A"/>
+            <xs:enumeration value="B"/>
+            <xs:enumeration value="C"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="searchBy">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="cities"/>
+            <xs:enumeration value="stations"/>
+            <xs:enumeration value="mixed"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="currency">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="USD"/>
+            <xs:enumeration value="GBP"/>
+            <xs:enumeration value="CHF"/>
+            <xs:enumeration value="PLN"/>
+            <xs:enumeration value="CZK"/>
+            <xs:enumeration value="SEK"/>
+            <xs:enumeration value="CNY"/>
+            <xs:enumeration value="RUB"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
