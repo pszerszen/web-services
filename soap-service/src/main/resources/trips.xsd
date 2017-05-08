@@ -4,7 +4,10 @@
            xmlns="http://spring.io/guides/gs-producing-web-service"
            elementFormDefault="qualified">
 
-    <xs:element name="simpleRequest" type="simpleRequest"/>
+    <xs:element name="heartBeatRequest" type="simpleRequest"/>
+    <xs:element name="networkRequest" type="simpleRequest"/>
+    <xs:element name="originsRequest" type="simpleRequest"/>
+    <xs:element name="destinationsRequest" type="simpleRequest"/>
     <xs:complexType name="simpleRequest">
         <xs:sequence>
             <xs:element name="originStation" type="xs:string" minOccurs="0"/>
@@ -27,6 +30,13 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:element name="heartbeatResponse" type="heartbeatResponse"/>
+    <xs:complexType name="heartbeatResponse">
+        <xs:sequence>
+            <xs:element name="alive" type="xs:boolean" default="true"/>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:element name="trip" type="trip"/>
     <xs:complexType name="trip">
         <xs:sequence>
@@ -36,7 +46,8 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:element name="stationList" type="stationList"/>
+    <xs:element name="originStations" type="stationList"/>
+    <xs:element name="destinationStations" type="stationList"/>
     <xs:complexType name="stationList">
         <xs:sequence>
             <xs:element name="station" type="station" minOccurs="0" maxOccurs="unbounded"/>

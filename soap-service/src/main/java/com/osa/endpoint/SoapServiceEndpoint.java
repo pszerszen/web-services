@@ -4,6 +4,7 @@ import com.osa.model.HeartbeatResponse;
 import com.osa.model.Network;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
+import com.osa.model.request.SimpleRequest;
 import com.osa.model.request.TripRequest;
 import com.osa.services.NetworkService;
 import com.osa.services.TripService;
@@ -23,32 +24,32 @@ public class SoapServiceEndpoint {
     private final NetworkService networkService;
 
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "heartbeat")
-    public HeartbeatResponse heartbeat() {
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "heartBeatRequest")
+    public HeartbeatResponse heartbeat(@RequestPayload SimpleRequest request) {
         return new HeartbeatResponse();
     }
 
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "search")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "tripRequest")
     public Trip search(@RequestPayload TripRequest request) {
         return tripService.searchTrip(request, null);
     }
 
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getNetwork")
-    public Network getNetwork() {
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "networkRequest")
+    public Network getNetwork(@RequestPayload SimpleRequest request) {
         return networkService.getNetwork();
     }
 
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOriginStations")
-    public StationList getOriginStations() {
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "originsRequest")
+    public StationList getOriginStations(@RequestPayload SimpleRequest request) {
         return networkService.getOriginStations();
     }
 
     @ResponsePayload
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getDestinationStations")
-    public StationList getDestinationStations() {
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "destinationsRequest")
+    public StationList getDestinationStations(@RequestPayload SimpleRequest request) {
         return networkService.getDestinationStations();
     }
 }

@@ -21,5 +21,5 @@ public class HeartbeatResponse {
     }
 
     @XmlElement
-    private Boolean alive;
+    private boolean alive;
 }
