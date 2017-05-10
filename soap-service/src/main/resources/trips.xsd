@@ -4,63 +4,83 @@
            xmlns="http://spring.io/guides/gs-producing-web-service"
            elementFormDefault="qualified">
 
-    <xs:element name="heartBeatRequest" type="simpleRequest"/>
-    <xs:element name="networkRequest" type="simpleRequest"/>
-    <xs:element name="originsRequest" type="simpleRequest"/>
-    <xs:element name="destinationsRequest" type="simpleRequest"/>
-    <xs:complexType name="simpleRequest">
-        <xs:sequence>
-            <xs:element name="originStation" type="xs:string" minOccurs="0"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="heartBeatRequest">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:element name="tripRequest" type="tripRequest"/>
-    <xs:complexType name="tripRequest">
-        <xs:sequence>
-            <xs:element name="searchBy" type="searchBy" minOccurs="0"/>
-            <xs:element name="fromCityId" type="xs:string" minOccurs="0"/>
-            <xs:element name="toCityId" type="xs:string" minOccurs="0"/>
-            <xs:element name="fromStationId" type="xs:string" minOccurs="0"/>
-            <xs:element name="toStationId" type="xs:string" minOccurs="0"/>
-            <xs:element name="adult" type="xs:int"/>
-            <xs:element name="children" type="xs:int"/>
-            <xs:element name="bikes" type="xs:boolean"/>
-            <xs:element name="currency" type="currency" minOccurs="0"/>
-            <xs:element name="departureDate" type="xs:string" minOccurs="1"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="networkRequest">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:element name="heartbeatResponse" type="heartbeatResponse"/>
-    <xs:complexType name="heartbeatResponse">
-        <xs:sequence>
-            <xs:element name="alive" type="xs:boolean" default="true"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="destinationsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="originStation" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:element name="trip" type="trip"/>
-    <xs:complexType name="trip">
-        <xs:sequence>
-            <xs:element name="from" type="station" minOccurs="0"/>
-            <xs:element name="to" type="station" minOccurs="0"/>
-            <xs:element name="item" type="tripItem" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="originsRequest">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:element name="originStations" type="stationList"/>
-    <xs:element name="destinationStations" type="stationList"/>
-    <xs:complexType name="stationList">
-        <xs:sequence>
-            <xs:element name="station" type="station" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="tripRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="searchBy" type="searchBy" minOccurs="0"/>
+                <xs:element name="fromCityId" type="xs:string" minOccurs="0"/>
+                <xs:element name="toCityId" type="xs:string" minOccurs="0"/>
+                <xs:element name="fromStationId" type="xs:string" minOccurs="0"/>
+                <xs:element name="toStationId" type="xs:string" minOccurs="0"/>
+                <xs:element name="adult" type="xs:int"/>
+                <xs:element name="children" type="xs:int"/>
+                <xs:element name="bikes" type="xs:boolean"/>
+                <xs:element name="currency" type="currency" minOccurs="0"/>
+                <xs:element name="departureDate" type="xs:string" minOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-    <xs:element name="network" type="network"/>
-    <xs:complexType name="network">
-        <xs:sequence>
-            <xs:element name="city" type="city" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="station" type="city" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="heartBeatResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="alive" type="xs:boolean" default="true"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="trip">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="from" type="station" minOccurs="0"/>
+                <xs:element name="to" type="station" minOccurs="0"/>
+                <xs:element name="item" type="tripItem" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="stationList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="station" type="station" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="network">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="city" type="city" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="station" type="city" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <xs:complexType name="tripItem">
         <xs:sequence>

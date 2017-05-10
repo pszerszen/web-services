@@ -2,7 +2,7 @@ package com.osa.services;
 
 import com.osa.TestConfig;
 import com.osa.model.Trip;
-import com.osa.model.request.TripRequest;
+import com.osa.model.TripRequest;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

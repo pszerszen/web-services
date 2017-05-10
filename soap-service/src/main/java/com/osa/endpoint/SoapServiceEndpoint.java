@@ -1,11 +1,14 @@
 package com.osa.endpoint;
 
-import com.osa.model.HeartbeatResponse;
+import com.osa.model.DestinationsRequest;
+import com.osa.model.HeartBeatRequest;
+import com.osa.model.HeartBeatResponse;
 import com.osa.model.Network;
+import com.osa.model.NetworkRequest;
+import com.osa.model.OriginsRequest;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
-import com.osa.model.request.SimpleRequest;
-import com.osa.model.request.TripRequest;
+import com.osa.model.TripRequest;
 import com.osa.services.NetworkService;
 import com.osa.services.TripService;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +26,10 @@ public class SoapServiceEndpoint {
     private final TripService tripService;
     private final NetworkService networkService;
 
-    @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "heartBeatRequest")
-    public HeartbeatResponse heartbeat(@RequestPayload SimpleRequest request) {
-        return new HeartbeatResponse();
+    @ResponsePayload
+    public HeartBeatResponse heartbeat(@RequestPayload HeartBeatRequest request) {
+        return new HeartBeatResponse();
     }
 
     @ResponsePayload
@@ -37,19 +40,19 @@ public class SoapServiceEndpoint {
 
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "networkRequest")
-    public Network getNetwork(@RequestPayload SimpleRequest request) {
+    public Network getNetwork(@RequestPayload NetworkRequest request) {
         return networkService.getNetwork();
     }
 
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "originsRequest")
-    public StationList getOriginStations(@RequestPayload SimpleRequest request) {
+    public StationList getOriginStations(@RequestPayload OriginsRequest request) {
         return networkService.getOriginStations();
     }
 
     @ResponsePayload
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "destinationsRequest")
-    public StationList getDestinationStations(@RequestPayload SimpleRequest request) {
+    public StationList getDestinationStations(@RequestPayload DestinationsRequest request) {
         return networkService.getDestinationStations();
     }
 }

@@ -3,7 +3,7 @@ package com.osa.parsers;
 import com.osa.model.Network;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
-import com.osa.model.request.TripRequest;
+import com.osa.model.TripRequest;
 import com.osa.services.NetworkService;
 import com.osa.services.TripService;
 import lombok.RequiredArgsConstructor;

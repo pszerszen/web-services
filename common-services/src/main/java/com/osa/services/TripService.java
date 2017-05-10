@@ -4,7 +4,7 @@ import com.osa.generators.StationGenerator;
 import com.osa.generators.TripItemGenerator;
 import com.osa.model.Trip;
 import com.osa.model.TripItem;
-import com.osa.model.request.TripRequest;
+import com.osa.model.TripRequest;
 import com.osa.properties.TripProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

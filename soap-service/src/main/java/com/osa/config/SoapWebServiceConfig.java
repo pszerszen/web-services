@@ -16,12 +16,18 @@ import org.springframework.xml.xsd.XsdSchema;
 @EnableWs
 @Configuration
 public class SoapWebServiceConfig extends WsConfigurerAdapter {
+
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean(servlet, "/soap/*");
+    }
+
+    @Bean
+    public XsdSchema tripsSchema() {
+        return new SimpleXsdSchema(new ClassPathResource("trips.xsd"));
     }
 
     @Bean(name = "trips")
@@ -34,8 +40,4 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
         return wsdl11Definition;
     }
 
-    @Bean
-    public XsdSchema tripsSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("trips.xsd"));
-    }
 }
