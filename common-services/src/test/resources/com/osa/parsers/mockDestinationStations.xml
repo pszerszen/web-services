@@ -1,95 +1,95 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<stationList>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<stationList xmlns="http://spring.io/guides/gs-producing-web-service">
     <station>
-        <id>4843803670102684672</id>
-        <code>48800550</code>
-        <name>pBXEI</name>
-        <address>jcMFn8hdIzdQ6mYgiLudpV</address>
+        <id>1396769246225287168</id>
+        <code>91637521</code>
+        <name>SttwhW</name>
+        <address>eDQ9fXGOCpUUhSej2Ddh5DZZnzOH0r</address>
         <coordinates>
-            <latitude>39.52901937414364</latitude>
+            <latitude>69.49035110892046</latitude>
             <longitude>INF</longitude>
         </coordinates>
         <city>
-            <id>7085133997668190208</id>
-            <name>hGEgpUPNqKR</name>
+            <id>7810941206310345728</id>
+            <name>FnzVoqaMtbW</name>
             <cityClass>A</cityClass>
             <country>
-                <name>Singapore</name>
-                <code>SG</code>
+                <name>Bulgaria</name>
+                <code>BG</code>
             </country>
         </city>
         <country>
-            <name>Iran</name>
-            <code>IR</code>
+            <name>Croatia</name>
+            <code>HR</code>
         </country>
     </station>
     <station>
-        <id>8017999920377868288</id>
-        <code>94245253</code>
-        <name>zRlldIYD</name>
-        <address>qELGZP28IpkMLexiHVuAdPJulXFx</address>
+        <id>7708841209748088832</id>
+        <code>73282188</code>
+        <name>wSSXpNE</name>
+        <address>I0FDipIbUcznmRKMod</address>
         <coordinates>
-            <latitude>52.19191503600071</latitude>
+            <latitude>57.84751394189849</latitude>
             <longitude>INF</longitude>
         </coordinates>
         <city>
-            <id>534694446298618880</id>
-            <name>YMpQUkuZkR</name>
+            <id>2580511470392385536</id>
+            <name>UtytDdCqFCEpaLz</name>
             <cityClass>A</cityClass>
             <country>
-                <name>Peru</name>
-                <code>PE</code>
+                <name>Iraq</name>
+                <code>IQ</code>
             </country>
         </city>
         <country>
-            <name>Sri Lanka</name>
-            <code>LK</code>
+            <name>Marshall Islands</name>
+            <code>MH</code>
         </country>
     </station>
     <station>
-        <id>6127364685623915520</id>
-        <code>34932503</code>
-        <name>bUVIoaJk</name>
-        <address>THHWH4AaLIB6KXa8gXpC</address>
+        <id>1932162989446245376</id>
+        <code>49174979</code>
+        <name>mTaYZPsQLKqjp</name>
+        <address>qxBRnXO373i9jGKMOOj5</address>
         <coordinates>
-            <latitude>36.75155713683941</latitude>
+            <latitude>47.24128623569943</latitude>
             <longitude>INF</longitude>
         </coordinates>
         <city>
-            <id>7766452109477081088</id>
-            <name>gKngSFUWZyqcYTDvmVv</name>
+            <id>5541767198149892096</id>
+            <name>uxVwMCGxODgiltl</name>
             <cityClass>C</cityClass>
             <country>
-                <name>Reunion Island</name>
-                <code>RE</code>
+                <name>Nauru</name>
+                <code>NR</code>
             </country>
         </city>
         <country>
-            <name>Spain</name>
-            <code>ES</code>
+            <name>Romania</name>
+            <code>RO</code>
         </country>
     </station>
     <station>
-        <id>2722558306868590592</id>
-        <code>33929977</code>
-        <name>ZqwZoVFW</name>
-        <address>hncDtbBFD1JEkcUhDLz2gtdB6y3A0rdTZK</address>
+        <id>6980158336180005888</id>
+        <code>98095099</code>
+        <name>GhreSneINKTtVkIc</name>
+        <address>EwXzcPW9T2uXhHFFjjqy6dH</address>
         <coordinates>
-            <latitude>64.72818872803141</latitude>
+            <latitude>70.72290833711446</latitude>
             <longitude>INF</longitude>
         </coordinates>
         <city>
-            <id>4197031575827257344</id>
-            <name>uzDBnHCdPIKsFPGdUzr</name>
-            <cityClass>B</cityClass>
+            <id>6200733894160070656</id>
+            <name>zNonGV</name>
+            <cityClass>A</cityClass>
             <country>
-                <name>Burundi</name>
-                <code>BI</code>
+                <name>New Zealand</name>
+                <code>NZ</code>
             </country>
         </city>
         <country>
-            <name>Guadeloupe</name>
-            <code>GP</code>
+            <name>Cyprus</name>
+            <code>CY</code>
         </country>
     </station>
 </stationList>

@@ -2,172 +2,172 @@
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
-        <trip>
+        <trip xmlns="http://spring.io/guides/gs-producing-web-service">
             <from>
-                <id>8485776153085887488</id>
-                <code>80814028</code>
-                <name>pzZQrQEdBomFlZYaDWk</name>
+                <id>5029718297239237632</id>
+                <code>32598600</code>
+                <name>XqtTcgFLH</name>
                 <city>
-                    <id>7378006017754421248</id>
-                    <name>atbxAkfDOXIXONoIeB</name>
-                    <cityClass>B</cityClass>
+                    <id>272527305390657536</id>
+                    <name>GTfrqNfxujaZM</name>
+                    <cityClass>A</cityClass>
                     <country>
-                        <name>Mali</name>
-                        <code>ML</code>
+                        <name>Ethiopia</name>
+                        <code>ET</code>
                     </country>
                 </city>
                 <country>
-                    <name>Denmark</name>
-                    <code>DK</code>
+                    <name>Uzbekistan</name>
+                    <code>UZ</code>
                 </country>
             </from>
             <to>
-                <id>6525575366638788608</id>
-                <code>81055993</code>
-                <name>nGgwlD</name>
+                <id>9071534896823238656</id>
+                <code>06679104</code>
+                <name>YdcpiSikkcWSjFc</name>
                 <city>
-                    <id>9202707176901259264</id>
-                    <name>azNAbxJeHppRpdoPz</name>
-                    <cityClass>B</cityClass>
+                    <id>8011814846167048192</id>
+                    <name>gPmuKmzaEND</name>
+                    <cityClass>A</cityClass>
                     <country>
-                        <name>Saudi Arabia</name>
-                        <code>SA</code>
+                        <name>British Indian Ocean Territory</name>
+                        <code>IO</code>
                     </country>
                 </city>
                 <country>
-                    <name>Qatar</name>
-                    <code>QA</code>
+                    <name>Marshall Islands</name>
+                    <code>MH</code>
                 </country>
             </to>
             <item>
-                <id>8959993982297857024</id>
+                <id>6395794085701040128</id>
                 <departure>
-                    <timestamp>1493676000</timestamp>
-                    <timezone>Europe/Budapest</timezone>
+                    <timestamp>1494626400</timestamp>
+                    <timezone>Europe/Tirane</timezone>
                 </departure>
                 <arrival>
-                    <timestamp>1493762399</timestamp>
-                    <timezone>Europe/Stockholm</timezone>
+                    <timestamp>1494709199</timestamp>
+                    <timezone>Europe/Athens</timezone>
                 </arrival>
-                <price>67.61</price>
-                <status>available</status>
-                <link>
-                    <reference>BvAhULI</reference>
-                    <url>21FnDKNRGSThlDe0IyfxvJMl1hWVw8gJtNi</url>
-                </link>
-                <link>
-                    <reference>wplYBhj</reference>
-                    <url>Tg7bDzxqlcfBfXYdbZ1ZkPgfW1Z9G5Zmykl</url>
-                </link>
-                <link>
-                    <reference>PyCMOAS</reference>
-                    <url>6z2vvaksk89nUpBGmTMgZg5rAxztfNFKpXZ</url>
-                </link>
-            </item>
-            <item>
-                <id>2501240569607483392</id>
-                <departure>
-                    <timestamp>1493676000</timestamp>
-                    <timezone>Europe/Zagreb</timezone>
-                </departure>
-                <arrival>
-                    <timestamp>1493762399</timestamp>
-                    <timezone>Europe/Luxembourg</timezone>
-                </arrival>
-                <price>19.3</price>
+                <price>99.97</price>
                 <transfer>
                     <departure>
-                        <timestamp>1493678376</timestamp>
-                        <timezone>Europe/Brussels</timezone>
-                    </departure>
-                    <arrival>
-                        <timestamp>1493678858</timestamp>
-                        <timezone>Europe/San_Marino</timezone>
-                    </arrival>
-                    <station>
-                        <id>8914033527974552576</id>
-                        <code>20793846</code>
-                        <name>jJuKxBjVF</name>
-                        <city>
-                            <id>9001970763818298368</id>
-                            <name>gTNwzRQLDBLfqjQzm</name>
-                            <cityClass>A</cityClass>
-                            <country>
-                                <name>Honduras</name>
-                                <code>HN</code>
-                            </country>
-                        </city>
-                        <country>
-                            <name>Ireland</name>
-                            <code>IE</code>
-                        </country>
-                    </station>
-                </transfer>
-                <status>partially</status>
-                <link>
-                    <reference>NOXkLqb</reference>
-                    <url>PHJgur5EFhRVL95Gy1KVS7BF8pFpkMBgI4x</url>
-                </link>
-                <link>
-                    <reference>lqxPAid</reference>
-                    <url>etP02EzVym2rDECM10dgFv2puBqFSjuJwfy</url>
-                </link>
-                <link>
-                    <reference>QfGrwdz</reference>
-                    <url>v2KDP6aEZDMvWiHhe0OwFy1wzWFJZchBNSU</url>
-                </link>
-            </item>
-            <item>
-                <id>2310505388186546176</id>
-                <departure>
-                    <timestamp>1493672400</timestamp>
-                    <timezone>Europe/Volgograd</timezone>
-                </departure>
-                <arrival>
-                    <timestamp>1493762399</timestamp>
-                    <timezone>Europe/Ljubljana</timezone>
-                </arrival>
-                <price>88.73</price>
-                <transfer>
-                    <departure>
-                        <timestamp>1493682385</timestamp>
+                        <timestamp>1494641454</timestamp>
                         <timezone>Europe/Busingen</timezone>
                     </departure>
                     <arrival>
-                        <timestamp>1493709368</timestamp>
-                        <timezone>Europe/Mariehamn</timezone>
+                        <timestamp>1494660385</timestamp>
+                        <timezone>Europe/Monaco</timezone>
                     </arrival>
                     <station>
-                        <id>1818155478551900160</id>
-                        <code>24268996</code>
-                        <name>lzCoiD</name>
+                        <id>730848414536402944</id>
+                        <code>50232443</code>
+                        <name>DpWBNEMNJuMjtLF</name>
                         <city>
-                            <id>2641921374969967616</id>
-                            <name>wWQkZBHvIBT</name>
+                            <id>3059012232361638912</id>
+                            <name>fMgpfWKF</name>
                             <cityClass>A</cityClass>
                             <country>
-                                <name>Qatar</name>
-                                <code>QA</code>
+                                <name>Central African Republic</name>
+                                <code>CF</code>
                             </country>
                         </city>
                         <country>
-                            <name>Mali</name>
-                            <code>ML</code>
+                            <name>Poland</name>
+                            <code>PL</code>
                         </country>
                     </station>
                 </transfer>
+                <transfer>
+                    <departure>
+                        <timestamp>1494661342</timestamp>
+                        <timezone>Europe/Madrid</timezone>
+                    </departure>
+                    <arrival>
+                        <timestamp>1494665155</timestamp>
+                        <timezone>Europe/Sarajevo</timezone>
+                    </arrival>
+                    <station>
+                        <id>2981323536326087680</id>
+                        <code>35909535</code>
+                        <name>EhuKmmeuMkdIA</name>
+                        <city>
+                            <id>7565485411041085440</id>
+                            <name>HLrrZHezUyABC</name>
+                            <cityClass>A</cityClass>
+                            <country>
+                                <name>Denmark</name>
+                                <code>DK</code>
+                            </country>
+                        </city>
+                        <country>
+                            <name>France</name>
+                            <code>FR</code>
+                        </country>
+                    </station>
+                </transfer>
+                <status>available</status>
+                <link>
+                    <reference>VLXoNhl</reference>
+                    <url>WOeyK4bQEm7dQDd9NjacMvjN3wttgrHSrdg</url>
+                </link>
+                <link>
+                    <reference>miUlnZk</reference>
+                    <url>9x1Mv7zZNRlvIvcKvRtuQvCZ3WWkYFM9KdV</url>
+                </link>
+                <link>
+                    <reference>txuAXYs</reference>
+                    <url>Wrd00Wu8GEgDfQZgDEl3BT3xIWRbrgesscV</url>
+                </link>
+            </item>
+            <item>
+                <id>623674296300036096</id>
+                <departure>
+                    <timestamp>1494626400</timestamp>
+                    <timezone>Europe/Malta</timezone>
+                </departure>
+                <arrival>
+                    <timestamp>1494709199</timestamp>
+                    <timezone>Europe/Sofia</timezone>
+                </arrival>
+                <price>85.45</price>
                 <status>partially</status>
                 <link>
-                    <reference>emsLEuB</reference>
-                    <url>DG17UJjPs8pPeuNJyXQ2fHJYCZjl0sd0Yhp</url>
+                    <reference>HtzHYVP</reference>
+                    <url>SeDOXOodbIEfvlLKoFQztqyb8w9ve455SMW</url>
                 </link>
                 <link>
-                    <reference>APkMmXg</reference>
-                    <url>Xzq1Khge3i9u40VvyjgPa010p3jUhx0NLYW</url>
+                    <reference>fWIMHKQ</reference>
+                    <url>KydF8VhR8soBO21DYR3OYpX7oLY8RjmDN7d</url>
                 </link>
                 <link>
-                    <reference>ijHmiJK</reference>
-                    <url>Xsa4SQClIsyjVD1KFUaEAo5W3WnXJD3Wwlz</url>
+                    <reference>TKrxjXE</reference>
+                    <url>7LmUfMCMMPjlSQiQ8ruZJHXiB6menshUChb</url>
+                </link>
+            </item>
+            <item>
+                <id>2095023711774647296</id>
+                <departure>
+                    <timestamp>1494626400</timestamp>
+                    <timezone>Europe/Gibraltar</timezone>
+                </departure>
+                <arrival>
+                    <timestamp>1494709199</timestamp>
+                    <timezone>Europe/Volgograd</timezone>
+                </arrival>
+                <price>35.89</price>
+                <status>available</status>
+                <link>
+                    <reference>ZnHwmgC</reference>
+                    <url>PpjwJsBwKVVFlpxqZzFVPi4m2bhZ3WoAG5o</url>
+                </link>
+                <link>
+                    <reference>jyvAGHK</reference>
+                    <url>gbQreE0No3VI0FxTiPZ0iexuoLWz2iBUAdR</url>
+                </link>
+                <link>
+                    <reference>OvdAtfC</reference>
+                    <url>GajVXCMwAhd8I6xlEsG2ceAaFL6LjAyFoPr</url>
                 </link>
             </item>
         </trip>

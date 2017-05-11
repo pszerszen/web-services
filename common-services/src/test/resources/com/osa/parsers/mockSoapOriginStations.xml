@@ -2,235 +2,235 @@
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
-        <stationList>
+        <stationList xmlns="http://spring.io/guides/gs-producing-web-service">
             <station>
-                <id>8442548599738550272</id>
-                <code>87154576</code>
-                <name>zHqtjxePuujWHcNBpVl</name>
-                <address>eGchFqnFOudnGDVE8ouHAIT17lyjpa3v1j</address>
+                <id>3577284194159073280</id>
+                <code>06642127</code>
+                <name>cGjDBRL</name>
+                <address>AJhEJuLGLPcqrxdBq8NGB7PbpH23lhWM</address>
                 <coordinates>
-                    <latitude>66.614377878833</latitude>
+                    <latitude>63.58710087009719</latitude>
                     <longitude>INF</longitude>
                 </coordinates>
                 <city>
-                    <id>1462915717351649280</id>
-                    <name>OfIWl</name>
+                    <id>5520686919769670656</id>
+                    <name>KnpnpgVOmcAOorxH</name>
                     <cityClass>A</cityClass>
                     <country>
-                        <name>Maldives</name>
-                        <code>MV</code>
+                        <name>Bermuda</name>
+                        <code>BM</code>
                     </country>
                 </city>
                 <country>
-                    <name>French Southern Territories</name>
-                    <code>TF</code>
+                    <name>St Pierre And Miquelon</name>
+                    <code>PM</code>
                 </country>
             </station>
             <station>
-                <id>8343138414468201472</id>
-                <code>82035992</code>
-                <name>ndcwfEVvK</name>
-                <address>owvfyNt7pQrjnrH</address>
+                <id>7048806087079653376</id>
+                <code>40377286</code>
+                <name>exHbYyFsTAxiqEgZqB</name>
+                <address>ZEOY149jw9c92REALVah88VIiN</address>
                 <coordinates>
-                    <latitude>66.2608625629583</latitude>
+                    <latitude>62.52870384661577</latitude>
                     <longitude>INF</longitude>
                 </coordinates>
                 <city>
-                    <id>2635596287489507328</id>
-                    <name>CNWiDHfR</name>
-                    <cityClass>B</cityClass>
-                    <country>
-                        <name>Usa</name>
-                        <code>US</code>
-                    </country>
-                </city>
-                <country>
-                    <name>Faroe Islands</name>
-                    <code>FO</code>
-                </country>
-            </station>
-            <station>
-                <id>938387524083909632</id>
-                <code>38882379</code>
-                <name>PzSmPepvDao</name>
-                <address>RUDWGC0B1fEHq43hpjdjB</address>
-                <coordinates>
-                    <latitude>62.779790668771</latitude>
-                    <longitude>INF</longitude>
-                </coordinates>
-                <city>
-                    <id>8226168745597535232</id>
-                    <name>RfyyQuODMmAVdAlpwe</name>
-                    <cityClass>B</cityClass>
-                    <country>
-                        <name>French Guiana</name>
-                        <code>GF</code>
-                    </country>
-                </city>
-                <country>
-                    <name>Madagascar</name>
-                    <code>MG</code>
-                </country>
-            </station>
-            <station>
-                <id>5128051629583491072</id>
-                <code>80426462</code>
-                <name>TfcrpKtYOLZjtWOj</name>
-                <address>03XIbHeGYkKZ0A1</address>
-                <coordinates>
-                    <latitude>46.944175331489305</latitude>
-                    <longitude>INF</longitude>
-                </coordinates>
-                <city>
-                    <id>6703398806061991936</id>
-                    <name>kYkRpD</name>
+                    <id>4613160863739529216</id>
+                    <name>RXTalyupXjGhMAAndD</name>
                     <cityClass>A</cityClass>
                     <country>
-                        <name>Switzerland</name>
-                        <code>CH</code>
+                        <name>Ukraine</name>
+                        <code>UA</code>
                     </country>
                 </city>
                 <country>
-                    <name>Kyrgyzstan</name>
-                    <code>KG</code>
+                    <name>Sint Maarten</name>
+                    <code>SX</code>
                 </country>
             </station>
             <station>
-                <id>1812205562105331712</id>
-                <code>33784529</code>
-                <name>namoinWWWq</name>
-                <address>N4bpKn6UPwr1IyRbGU8kdxJKe2</address>
+                <id>6006205986402219008</id>
+                <code>82471841</code>
+                <name>TAwdFkbGxdhVdpOPh</name>
+                <address>UydABURQcrny87ZnsDZRnOKx6b1hM8</address>
                 <coordinates>
-                    <latitude>70.85433010660385</latitude>
+                    <latitude>59.81375776304216</latitude>
                     <longitude>INF</longitude>
                 </coordinates>
                 <city>
-                    <id>4042287451056317440</id>
-                    <name>fXmTUqkOYWxfLETXnGE</name>
-                    <cityClass>B</cityClass>
-                    <country>
-                        <name>Wallis And Futuna Islands</name>
-                        <code>WF</code>
-                    </country>
-                </city>
-                <country>
-                    <name>Great Britain</name>
-                    <code>GB</code>
-                </country>
-            </station>
-            <station>
-                <id>2679267830894018560</id>
-                <code>92532521</code>
-                <name>bViRJnTgPpVibR</name>
-                <address>u6DQeaaK0FkwqOq</address>
-                <coordinates>
-                    <latitude>68.65092250601086</latitude>
-                    <longitude>INF</longitude>
-                </coordinates>
-                <city>
-                    <id>5435812105997584384</id>
-                    <name>oeyqrZBnaH</name>
+                    <id>4000285372888003584</id>
+                    <name>Fefmmz</name>
                     <cityClass>A</cityClass>
                     <country>
-                        <name>Cuba</name>
-                        <code>CU</code>
+                        <name>Germany</name>
+                        <code>DE</code>
                     </country>
                 </city>
                 <country>
-                    <name>Aruba</name>
-                    <code>AW</code>
+                    <name>Spain</name>
+                    <code>ES</code>
                 </country>
             </station>
             <station>
-                <id>16791102238278656</id>
-                <code>40307672</code>
-                <name>nKxihpOXazg</name>
-                <address>0Bog3vc8LT0huwE2UgKTycnngcVIL3eDb3</address>
+                <id>3247450743729300480</id>
+                <code>39132606</code>
+                <name>cwDNTZLrIoHMUvVMAUz</name>
+                <address>fGB3yiOpnfDuo5rWp5KBV5f</address>
                 <coordinates>
-                    <latitude>54.67041136235649</latitude>
+                    <latitude>57.61587700939037</latitude>
                     <longitude>INF</longitude>
                 </coordinates>
                 <city>
-                    <id>3071832688514527232</id>
-                    <name>wqSLPmZxbx</name>
+                    <id>5758306247997919232</id>
+                    <name>ygHPyilGxpWGkoKZID</name>
                     <cityClass>B</cityClass>
                     <country>
-                        <name>Burkina Faso</name>
-                        <code>BF</code>
+                        <name>Myanmar</name>
+                        <code>MM</code>
                     </country>
                 </city>
                 <country>
-                    <name>Christmas Islands</name>
-                    <code>CX</code>
+                    <name>Tanzania</name>
+                    <code>TZ</code>
                 </country>
             </station>
             <station>
-                <id>7476067924886686720</id>
-                <code>11095624</code>
-                <name>BZCDCsGoRhb</name>
-                <address>GDDkzwyTuoDLVg0WvtJwR33kmxq2bvaOf</address>
+                <id>6076874926936469504</id>
+                <code>90998999</code>
+                <name>IKTXjjr</name>
+                <address>nd10gxMrXW4tMN5VQX</address>
                 <coordinates>
-                    <latitude>65.07328791003644</latitude>
+                    <latitude>43.48606970036311</latitude>
                     <longitude>INF</longitude>
                 </coordinates>
                 <city>
-                    <id>8825953540166095872</id>
-                    <name>rMtGaTtVQzYUeW</name>
-                    <cityClass>B</cityClass>
-                    <country>
-                        <name>Moldova</name>
-                        <code>MD</code>
-                    </country>
-                </city>
-                <country>
-                    <name>Madagascar</name>
-                    <code>MG</code>
-                </country>
-            </station>
-            <station>
-                <id>8211542081376521216</id>
-                <code>43498751</code>
-                <name>ngdMThtZrYwkoQXK</name>
-                <address>QHhIfNR5Q7T2S5FpAbd3HcPT</address>
-                <coordinates>
-                    <latitude>47.391754530095135</latitude>
-                    <longitude>INF</longitude>
-                </coordinates>
-                <city>
-                    <id>3181554720654603264</id>
-                    <name>ghauUwmJYk</name>
+                    <id>2601468979490920448</id>
+                    <name>OZfCz</name>
                     <cityClass>A</cityClass>
                     <country>
-                        <name>Wake Midway Islands</name>
-                        <code>UM</code>
+                        <name>British Indian Ocean Territory</name>
+                        <code>IO</code>
                     </country>
                 </city>
                 <country>
-                    <name>Poland</name>
-                    <code>PL</code>
+                    <name>St Vincent And Grenadines</name>
+                    <code>VC</code>
                 </country>
             </station>
             <station>
-                <id>6721061740488132608</id>
-                <code>15112454</code>
-                <name>miJwuDqdwXIUzQ</name>
-                <address>N9yDgOPwk8HLHKWeoCcVu</address>
+                <id>7265887706807702528</id>
+                <code>43298796</code>
+                <name>ZjWCanlv</name>
+                <address>8z6rMiQtgrlmcpEBLe33ct</address>
                 <coordinates>
-                    <latitude>60.730043399708926</latitude>
+                    <latitude>60.90258469377913</latitude>
                     <longitude>INF</longitude>
                 </coordinates>
                 <city>
-                    <id>9084032486267835392</id>
-                    <name>nIUcbHQP</name>
-                    <cityClass>C</cityClass>
+                    <id>2584015505506984960</id>
+                    <name>CkLryRpsKsmoJU</name>
+                    <cityClass>B</cityClass>
                     <country>
-                        <name>St Lucia</name>
-                        <code>LC</code>
+                        <name>Suriname</name>
+                        <code>SR</code>
                     </country>
                 </city>
                 <country>
-                    <name>Sweden</name>
-                    <code>SE</code>
+                    <name>Antarctica</name>
+                    <code>AQ</code>
+                </country>
+            </station>
+            <station>
+                <id>4389482904226183168</id>
+                <code>68234630</code>
+                <name>VuJmoYUUVeyDjn</name>
+                <address>WhBSA5Pj9u2LmHClnWji0CPHFUfytJzR</address>
+                <coordinates>
+                    <latitude>63.76317563210987</latitude>
+                    <longitude>1.0809625631293107E308</longitude>
+                </coordinates>
+                <city>
+                    <id>4139907369975324672</id>
+                    <name>yCoCk</name>
+                    <cityClass>A</cityClass>
+                    <country>
+                        <name>Latvia</name>
+                        <code>LV</code>
+                    </country>
+                </city>
+                <country>
+                    <name>Ascension Islands</name>
+                    <code>AC</code>
+                </country>
+            </station>
+            <station>
+                <id>3257182085858428928</id>
+                <code>68199534</code>
+                <name>GnzkgehhCWTUIN</name>
+                <address>saM8l5B9tcSK1nkWYHHYauAZe52sf</address>
+                <coordinates>
+                    <latitude>57.73825868289709</latitude>
+                    <longitude>INF</longitude>
+                </coordinates>
+                <city>
+                    <id>1805320417275757568</id>
+                    <name>wmDQj</name>
+                    <cityClass>B</cityClass>
+                    <country>
+                        <name>Bahrain</name>
+                        <code>BH</code>
+                    </country>
+                </city>
+                <country>
+                    <name>New Zealand</name>
+                    <code>NZ</code>
+                </country>
+            </station>
+            <station>
+                <id>2661378908664672256</id>
+                <code>51977078</code>
+                <name>lFHtyCoL</name>
+                <address>Pv3k8GHo6huKDSklja</address>
+                <coordinates>
+                    <latitude>37.45654909963828</latitude>
+                    <longitude>INF</longitude>
+                </coordinates>
+                <city>
+                    <id>8499664405896083456</id>
+                    <name>keXhOuJGpq</name>
+                    <cityClass>A</cityClass>
+                    <country>
+                        <name>Angola</name>
+                        <code>AO</code>
+                    </country>
+                </city>
+                <country>
+                    <name>Iceland</name>
+                    <code>IS</code>
+                </country>
+            </station>
+            <station>
+                <id>3618695131974742016</id>
+                <code>00162330</code>
+                <name>NvhJyBGUIAyfj</name>
+                <address>E2FCR5r1tlsy2WqvvM</address>
+                <coordinates>
+                    <latitude>47.728384705144485</latitude>
+                    <longitude>INF</longitude>
+                </coordinates>
+                <city>
+                    <id>1358735658947512320</id>
+                    <name>ywqQpagwfMYEAAP</name>
+                    <cityClass>B</cityClass>
+                    <country>
+                        <name>Guadeloupe</name>
+                        <code>GP</code>
+                    </country>
+                </city>
+                <country>
+                    <name>Solomon Islands</name>
+                    <code>SB</code>
                 </country>
             </station>
         </stationList>
