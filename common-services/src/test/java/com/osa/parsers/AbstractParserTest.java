@@ -136,8 +136,8 @@ public abstract class AbstractParserTest {
             StationList stationList = testParseFrom(getMockOriginStationsFile(), StationList.class);
 
             assertAll(
-                    () -> assertNotNull(stationList.getStationList()),
-                    () -> assertEquals(10, stationList.getStationList().size()));
+                    () -> assertNotNull(stationList.getStations()),
+                    () -> assertEquals(10, stationList.getStations().size()));
         }
 
         @Test
@@ -146,8 +146,8 @@ public abstract class AbstractParserTest {
             StationList stationList = testParseFrom(getMockDestinationStationsFile(), StationList.class);
 
             assertAll(
-                    () -> assertNotNull(stationList.getStationList()),
-                    () -> assertEquals(4, stationList.getStationList().size()));
+                    () -> assertNotNull(stationList.getStations()),
+                    () -> assertEquals(4, stationList.getStations().size()));
         }
     }
 }

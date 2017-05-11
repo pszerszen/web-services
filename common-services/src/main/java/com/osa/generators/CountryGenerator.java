@@ -1,7 +1,7 @@
 package com.osa.generators;
 
 import com.osa.model.Country;
-import com.osa.model.util.Countries;
+import com.osa.util.Countries;
 import org.springframework.stereotype.Component;
 
 @Component

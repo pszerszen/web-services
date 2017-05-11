@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,12 +16,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "time", propOrder = {
+        "timestamp",
+        "timezone"
+})
 public class Time implements Serializable, Comparable<Time> {
     private static final long serialVersionUID = 4295105571293533233L;
 
-    @XmlElement
     private long timestamp;
-    @XmlElement
     private String timezone;
 
     @Override

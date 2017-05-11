@@ -1,4 +1,4 @@
-package com.osa.model.util;
+package com.osa.util;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

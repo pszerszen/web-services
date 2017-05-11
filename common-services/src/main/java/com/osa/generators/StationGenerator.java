@@ -1,7 +1,7 @@
 package com.osa.generators;
 
 import com.osa.model.Station;
-import com.osa.model.util.RandomValuesUtils;
+import com.osa.util.RandomValuesUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;

@@ -39,6 +39,6 @@ public class NetworkService {
         List<Station> stations = IntStream.range(0, rangeClose).boxed()
                 .map(i -> stationGenerator.generateExtendedStation())
                 .collect(Collectors.toList());
-        return StationList.builder().stationList(stations).build();
+        return StationList.builder().stations(stations).build();
     }
 }

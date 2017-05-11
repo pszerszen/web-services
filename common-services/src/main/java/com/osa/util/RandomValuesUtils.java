@@ -1,4 +1,4 @@
-package com.osa.model.util;
+package com.osa.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;

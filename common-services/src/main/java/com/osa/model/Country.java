@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
 @Data
@@ -15,11 +15,13 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "country", propOrder = {
+        "name",
+        "code"
+})
 public class Country implements Serializable {
     private static final long serialVersionUID = 162088827893700838L;
 
-    @XmlElement
     private String name;
-    @XmlElement
     private String code;
 }

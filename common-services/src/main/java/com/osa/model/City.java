@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,27 +17,25 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "city", propOrder = {
+        "id",
+        "name",
+        "cityClass",
+        "coordinates",
+        "stations",
+        "possibleDestinations",
+        "country"
+})
 public class City implements Serializable {
     private static final long serialVersionUID = -8301402847341826707L;
 
-    @XmlElement
     private Long id;
-
-    @XmlElement
     private String name;
-
-    @XmlElement
     private CityClass cityClass;
-
-    @XmlElement
     private Coordinates coordinates;
-
-    @XmlElement(name = "station")
+    @XmlElement(name = "stations", type = Long.class)
     private List<Long> stations;
-
-    @XmlElement(name = "possibleDestination")
+    @XmlElement(name = "possibleDestination", type = Long.class)
     private List<Long> possibleDestinations;
-
-    @XmlElement
     private Country country;
 }

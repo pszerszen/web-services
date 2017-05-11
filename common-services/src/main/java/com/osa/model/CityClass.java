@@ -6,8 +6,8 @@ import org.apache.commons.lang3.RandomUtils;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+@XmlType(name = "cityClass")
 @XmlEnum
-@XmlType
 @RequiredArgsConstructor
 public enum CityClass {
     A(0.5),
@@ -26,5 +26,13 @@ public enum CityClass {
         } else {
             return C;
         }
+    }
+
+    public String value() {
+        return name();
+    }
+
+    public static CityClass fromValue(String v) {
+        return valueOf(v);
     }
 }

@@ -2,7 +2,7 @@ package com.osa.generators;
 
 import com.osa.model.City;
 import com.osa.model.CityClass;
-import com.osa.model.util.RandomValuesUtils;
+import com.osa.util.RandomValuesUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,23 +19,41 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "tripItem", propOrder = {
+        "id",
+        "departure",
+        "arrival",
+        "price",
+        "transfers",
+        "status",
+        "links"
+})
 public class TripItem implements Serializable, Comparable<TripItem> {
     private static final long serialVersionUID = -3693649260148803427L;
 
-    @XmlElement
     private Long id;
-    @XmlElement
     private Time departure;
-    @XmlElement
     private Time arrival;
-    @XmlElement
     private double price;
     @XmlElement(name = "transfer")
     private List<Transfer> transfers;
-    @XmlElement
     private Status status;
     @XmlElement(name = "link")
     private List<Link> links;
+
+    public List<Transfer> getTransfers() {
+        if (transfers == null) {
+            transfers = new ArrayList<>();
+        }
+        return this.transfers;
+    }
+
+    public List<Link> getLinks() {
+        if (links == null) {
+            links = new ArrayList<>();
+        }
+        return this.links;
+    }
 
     @Override
     public int compareTo(final TripItem o) {
