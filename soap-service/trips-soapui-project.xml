@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="3bce99e5-2b8d-4588-93fd-6a181664082a" activeEnvironment="Default" name="trips" resourceRoot="" soapui-version="5.3.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="00576b48-1bec-4849-a8b3-2a01408f3c39" wsaVersion="NONE" name="TripsPortSoap11" type="wsdl" bindingName="{http://spring.io/guides/gs-producing-web-service}TripsPortSoap11" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/soap/trips.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/soap/trips.wsdl"><con:part><con:url>http://localhost:8080/soap/trips.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://spring.io/guides/gs-producing-web-service" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://spring.io/guides/gs-producing-web-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://spring.io/guides/gs-producing-web-service">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://spring.io/guides/gs-producing-web-service" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="destinationsRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="originStation" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="heartBeatRequest">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="heartBeatResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element default="true" name="alive" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="network">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="cities" type="tns:city"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="stations" type="tns:station"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="networkRequest">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="originsRequest">
+        <xs:complexType>
+          <xs:sequence/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="stationList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="station" type="tns:station"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="trip">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="from" type="tns:station"/>
+            <xs:element minOccurs="0" name="to" type="tns:station"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:tripItem"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="tripRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="searchBy" type="tns:searchBy"/>
+            <xs:element minOccurs="0" name="fromCityId" type="xs:string"/>
+            <xs:element minOccurs="0" name="toCityId" type="xs:string"/>
+            <xs:element minOccurs="0" name="fromStationId" type="xs:string"/>
+            <xs:element minOccurs="0" name="toStationId" type="xs:string"/>
+            <xs:element name="adult" type="xs:int"/>
+            <xs:element name="children" type="xs:int"/>
+            <xs:element name="bikes" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="currency" type="tns:currency"/>
+            <xs:element name="departureDate" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="city">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="cityClass" type="tns:cityClass"/>
+          <xs:element minOccurs="0" name="coordinates" type="tns:coordinates"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="stations" type="xs:long"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="possibleDestination" type="xs:long"/>
+          <xs:element minOccurs="0" name="country" type="tns:country"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="coordinates">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="latitude" type="xs:double"/>
+          <xs:element minOccurs="0" name="longitude" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="country">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="link">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="reference" type="xs:string"/>
+          <xs:element minOccurs="0" name="url" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="station">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="address" type="xs:string"/>
+          <xs:element minOccurs="0" name="coordinates" type="tns:coordinates"/>
+          <xs:element minOccurs="0" name="city" type="tns:city"/>
+          <xs:element minOccurs="0" name="country" type="tns:country"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="time">
+        <xs:sequence>
+          <xs:element name="timestamp" type="xs:long"/>
+          <xs:element minOccurs="0" name="timezone" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="transfer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="departure" type="tns:time"/>
+          <xs:element minOccurs="0" name="arrival" type="tns:time"/>
+          <xs:element minOccurs="0" name="station" type="tns:station"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="tripItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:long"/>
+          <xs:element minOccurs="0" name="departure" type="tns:time"/>
+          <xs:element minOccurs="0" name="arrival" type="tns:time"/>
+          <xs:element name="price" type="xs:double"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="transfer" type="tns:transfer"/>
+          <xs:element minOccurs="0" name="status" type="tns:status"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="link" type="tns:link"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="cityClass">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="C"/>
+          <xs:enumeration value="A"/>
+          <xs:enumeration value="B"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="status">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="available"/>
+          <xs:enumeration value="partially"/>
+          <xs:enumeration value="unavailable"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="searchBy">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="cities"/>
+          <xs:enumeration value="stations"/>
+          <xs:enumeration value="mixed"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="currency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SEK"/>
+          <xs:enumeration value="CZK"/>
+          <xs:enumeration value="GBP"/>
+          <xs:enumeration value="RUB"/>
+          <xs:enumeration value="EUR"/>
+          <xs:enumeration value="USD"/>
+          <xs:enumeration value="CHF"/>
+          <xs:enumeration value="PLN"/>
+          <xs:enumeration value="CNY"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="heartBeatResponse">
+    <wsdl:part element="tns:heartBeatResponse" name="heartBeatResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="originsRequest">
+    <wsdl:part element="tns:originsRequest" name="originsRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="tripRequest">
+    <wsdl:part element="tns:tripRequest" name="tripRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="destinationsRequest">
+    <wsdl:part element="tns:destinationsRequest" name="destinationsRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="heartBeatRequest">
+    <wsdl:part element="tns:heartBeatRequest" name="heartBeatRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="networkRequest">
+    <wsdl:part element="tns:networkRequest" name="networkRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TripsPort">
+    <wsdl:operation name="heartBeat">
+      <wsdl:input message="tns:heartBeatRequest" name="heartBeatRequest"></wsdl:input>
+      <wsdl:output message="tns:heartBeatResponse" name="heartBeatResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="origins">
+      <wsdl:input message="tns:originsRequest" name="originsRequest"></wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="trip">
+      <wsdl:input message="tns:tripRequest" name="tripRequest"></wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="destinations">
+      <wsdl:input message="tns:destinationsRequest" name="destinationsRequest"></wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="network">
+      <wsdl:input message="tns:networkRequest" name="networkRequest"></wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TripsPortSoap11" type="tns:TripsPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="heartBeat">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="heartBeatRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="heartBeatResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="origins">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="originsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="trip">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="tripRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="destinations">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="destinationsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="network">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="networkRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TripsPortService">
+    <wsdl:port binding="tns:TripsPortSoap11" name="TripsPortSoap11">
+      <soap:address location="http://localhost:8080/soap"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/soap</con:endpoint></con:endpoints><con:operation id="5f68f4e2-0bb0-4b8b-ad10-268120fa6c82" isOneWay="false" action="" name="destinations" bindingOperationName="destinations" type="One-Way" inputName="destinationsRequest" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2c4e462f-753e-43f9-bf28-38bc36357fce" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/soap</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://spring.io/guides/gs-producing-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gs:destinationsRequest>\r
+         <!--Optional:-->\r
+         <gs:originStation>dupa</gs:originStation>\r
+      </gs:destinationsRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://spring.io/guides/gs-producing-web-service/TripsPort/destinationsRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="5ff187ac-06ad-40a1-86f3-2ee202d6a9e7" isOneWay="false" action="" name="heartBeat" bindingOperationName="heartBeat" type="Request-Response" outputName="heartBeatResponse" inputName="heartBeatRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="3f3d72df-4fad-4d8c-b9c3-2414c72aeea0" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/soap</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://spring.io/guides/gs-producing-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gs:heartBeatRequest/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://spring.io/guides/gs-producing-web-service/TripsPort/heartBeatRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="0bafc7ea-f8c1-4d8f-a30f-933e97ab3041" isOneWay="false" action="" name="network" bindingOperationName="network" type="One-Way" inputName="networkRequest" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5c446733-da01-40fc-b0f8-8921b5e169f4" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/soap</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://spring.io/guides/gs-producing-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gs:networkRequest/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://spring.io/guides/gs-producing-web-service/TripsPort/networkRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="f78e1bcd-f826-4fd1-b581-89c527725011" isOneWay="false" action="" name="origins" bindingOperationName="origins" type="One-Way" inputName="originsRequest" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1ace361a-7b94-4a33-adbc-9d48d24332c7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/soap</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://spring.io/guides/gs-producing-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gs:originsRequest/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://spring.io/guides/gs-producing-web-service/TripsPort/originsRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="38192e19-9979-4672-a617-d582abacdcff" isOneWay="false" action="" name="trip" bindingOperationName="trip" type="One-Way" inputName="tripRequest" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6688eafb-7018-41a8-ac3b-93a587e9e9f9" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/soap</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="http://spring.io/guides/gs-producing-web-service">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <gs:tripRequest>\r
+         <!--Optional:-->\r
+         <gs:searchBy>?</gs:searchBy>\r
+         <!--Optional:-->\r
+         <gs:fromCityId>?</gs:fromCityId>\r
+         <!--Optional:-->\r
+         <gs:toCityId>?</gs:toCityId>\r
+         <!--Optional:-->\r
+         <gs:fromStationId>?</gs:fromStationId>\r
+         <!--Optional:-->\r
+         <gs:toStationId>?</gs:toStationId>\r
+         <gs:adult>?</gs:adult>\r
+         <gs:children>?</gs:children>\r
+         <gs:bikes>?</gs:bikes>\r
+         <!--Optional:-->\r
+         <gs:currency>?</gs:currency>\r
+         <gs:departureDate>02.08.2017</gs:departureDate>\r
+      </gs:tripRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://spring.io/guides/gs-producing-web-service/TripsPort/tripRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
