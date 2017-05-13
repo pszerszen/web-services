@@ -6,7 +6,6 @@ import com.osa.model.Trip;
 import com.osa.model.TripRequest;
 import com.osa.services.NetworkService;
 import com.osa.services.TripService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,11 +17,16 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AbstractServiceController {
 
     private final TripService tripService;
     private final NetworkService networkService;
+
+    @Autowired
+    public AbstractServiceController(TripService tripService, NetworkService networkService) {
+        this.tripService = tripService;
+        this.networkService = networkService;
+    }
 
     @RequestMapping(path = "/", method = GET)
     public ResponseEntity<Boolean> heartbeat() {

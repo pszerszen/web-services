@@ -4,13 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.ws.context.MessageContext;
+import org.springframework.ws.server.EndpointInterceptor;
+import org.springframework.ws.server.endpoint.MethodEndpoint;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Component
-public class ResponseTimeInterceptor extends HandlerInterceptorAdapter {
+public class ResponseTimeInterceptor extends HandlerInterceptorAdapter implements EndpointInterceptor {
 
     private static final String START_TIME = "startTime";
 
@@ -40,6 +43,43 @@ public class ResponseTimeInterceptor extends HandlerInterceptorAdapter {
                 getCalledMethod((HandlerMethod) handler),
                 request.getMethod(),
                 request.getRequestURL().toString(),
+                executeTime);
+    }
+
+    @Override
+    public boolean handleRequest(MessageContext messageContext, Object endpoint) throws Exception {
+        MethodEndpoint methodEndpoint = (MethodEndpoint) endpoint;
+
+        log.debug("Calling {} soap method.", methodEndpoint.getMethod().getName());
+
+        long startTime = System.currentTimeMillis();
+        messageContext.setProperty(START_TIME, startTime);
+
+        return true;
+    }
+
+    @Override
+    public boolean handleResponse(MessageContext messageContext, Object endpoint) throws Exception {
+        return true;
+    }
+
+    @Override
+    public boolean handleFault(MessageContext messageContext, Object endpoint) throws Exception {
+        return false;
+    }
+
+    @Override
+    public void afterCompletion(MessageContext messageContext, Object endpoint, Exception ex) throws Exception {
+        MethodEndpoint methodEndpoint = (MethodEndpoint) endpoint;
+
+        long startTime = (Long) messageContext.getProperty(START_TIME);
+        long endTime = System.currentTimeMillis();
+
+        long executeTime = endTime - startTime;
+
+        //log it
+        log.debug("Completed {} method with execution time: {} ms",
+                methodEndpoint.getMethod().getName(),
                 executeTime);
     }
 
