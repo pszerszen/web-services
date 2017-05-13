@@ -5,17 +5,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
-@PropertySource("classpath:common-services.properties")
+@PropertySource({"classpath:common-services.properties","classpath:security.properties"})
 @EnableConfigurationProperties
-@ComponentScan(basePackageClasses = RestWebService.class)
-@SpringBootApplication(scanBasePackageClasses = RestWebService.class,
+@EnableResourceServer
+@SpringBootApplication(scanBasePackageClasses = SecureRestWebService.class,
         exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-public class RestWebService {
+public class SecureRestWebService {
 
     public static void main(String... args) throws Exception {
-        SpringApplication.run(RestWebService.class, args);
+        SpringApplication.run(SecureRestWebService.class, args);
     }
 }

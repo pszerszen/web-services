@@ -17,8 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
-@RequestMapping("/oauth2")
-public class AbstractServiceController {
+public abstract class AbstractServiceController {
 
     private final TripService tripService;
     private final NetworkService networkService;
