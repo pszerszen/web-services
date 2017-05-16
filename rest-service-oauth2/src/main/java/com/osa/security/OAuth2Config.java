@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 @Configuration
 @EnableAuthorizationServer
@@ -25,18 +26,21 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
+    private final TokenStore tokenStore;
 
     @Autowired
-    public OAuth2Config(final UserDetailsService userDetailsService, final AuthenticationManager authenticationManager) {
+    public OAuth2Config(final UserDetailsService userDetailsService, final AuthenticationManager authenticationManager, final TokenStore tokenStore) {
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
+        this.tokenStore = tokenStore;
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer configurer) throws Exception {
         configurer
                 .authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService);
+                .userDetailsService(userDetailsService)
+                .tokenStore(tokenStore);
     }
 
     @Override

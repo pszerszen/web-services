@@ -1,6 +1,7 @@
 package com.osa.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,6 +33,8 @@ public class AuthenticationService implements UserDetailsService, Authentication
     @Override
     public UserDetails loadUserDetails(final PreAuthenticatedAuthenticationToken token) throws UsernameNotFoundException {
         OAuth2Authentication oAuth2Authentication = tokenStore.readAuthentication((String) token.getPrincipal());
-        return null;
+        UsernamePasswordAuthenticationToken authenticationToken = (UsernamePasswordAuthenticationToken) oAuth2Authentication.getUserAuthentication();
+
+        return authenticationToken.isAuthenticated() ? (UserDetails) authenticationToken.getPrincipal() : null;
     }
 }
