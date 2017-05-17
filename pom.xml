@@ -35,6 +35,7 @@
         <module>soap-service</module>
         <module>rest-service</module>
         <module>rest-service-oauth2</module>
+        <module>soap-service-secure</module>
     </modules>
 
     <scm>
