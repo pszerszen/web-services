@@ -5,7 +5,6 @@
 // Generated on: 2017.05.11 at 09:58:36 PM CEST
 //
 
-
 package com.osa.model;
 
 import lombok.Data;
@@ -19,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "alive"
+        "alive"
 })
 @XmlRootElement(name = "heartBeatResponse")
 public class HeartBeatResponse {

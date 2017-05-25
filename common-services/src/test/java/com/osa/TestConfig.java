@@ -12,7 +12,7 @@ public class TestConfig extends ApplicationConfiguration {
 
     @Bean
     public TripProperties tripProperties() {
-        return new TripProperties(withValues(0,35));
+        return new TripProperties(withValues(0, 35));
     }
 
     @Bean

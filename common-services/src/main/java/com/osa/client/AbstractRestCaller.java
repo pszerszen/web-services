@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 @Slf4j
@@ -32,24 +33,25 @@ import java.nio.charset.Charset;
 public abstract class AbstractRestCaller implements ServiceCaller {
 
     @Value("${charset}")
-    private String charset;
+    protected String charset;
 
-    private final HttpClient httpClient;
+    protected final HttpClient httpClient;
     private final Parser parser;
+    private final String endpointUrl;
 
-    protected AbstractRestCaller(final Parser parser) {
+    protected AbstractRestCaller(final Parser parser, final String endpointUrl) {
         this.parser = parser;
+        this.endpointUrl = endpointUrl;
         this.httpClient = HttpClientBuilder.create().build();
     }
 
-    protected abstract void prepareRequest(HttpRequest request);
+    protected abstract void prepareRequest(HttpRequest request) throws UnsupportedEncodingException;
 
     protected abstract String getRequestContentType();
-    protected abstract String getEndpointUrl();
 
     @Override
     public boolean getHeartBeat() {
-        HttpGet request = new HttpGet(RestEndpointUri.heartbeat.getUrl(getEndpointUrl()));
+        HttpGet request = new HttpGet(RestEndpointUri.heartbeat.getUrl(endpointUrl));
         prepareRequest(request);
         HttpEntity entity = null;
         try {
@@ -67,14 +69,14 @@ public abstract class AbstractRestCaller implements ServiceCaller {
 
     @Override
     public Network getNetwork() {
-        HttpGet request = new HttpGet(RestEndpointUri.network.getUrl(getEndpointUrl()));
+        HttpGet request = new HttpGet(RestEndpointUri.network.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, Network.class);
     }
 
     @Override
     public StationList getOrigins() {
-        HttpGet request = new HttpGet(RestEndpointUri.origins.getUrl(getEndpointUrl()));
+        HttpGet request = new HttpGet(RestEndpointUri.origins.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, StationList.class);
     }
@@ -82,7 +84,7 @@ public abstract class AbstractRestCaller implements ServiceCaller {
     @Override
     @SneakyThrows
     public StationList getDestinations(final String originStation) {
-        String url = new URIBuilder(RestEndpointUri.origins.getUrl(getEndpointUrl()))
+        String url = new URIBuilder(RestEndpointUri.origins.getUrl(endpointUrl))
                 .addParameter("originStation", originStation)
                 .build().toString();
         HttpGet request = new HttpGet(url);
@@ -93,7 +95,7 @@ public abstract class AbstractRestCaller implements ServiceCaller {
     @SuppressWarnings("unchecked")
     @Override
     public Trip getTrip(final TripRequest tripRequest) {
-        HttpPost request = new HttpPost(RestEndpointUri.search.getUrl(getEndpointUrl()));
+        HttpPost request = new HttpPost(RestEndpointUri.search.getUrl(endpointUrl));
         prepareRequest(request);
         byte[] content = parser.parseToContent(tripRequest).getBytes(Charset.forName(charset));
         BasicHttpEntity postEntity = new BasicHttpEntity();

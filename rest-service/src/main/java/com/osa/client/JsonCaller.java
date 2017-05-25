@@ -10,7 +10,7 @@ public class JsonCaller extends AbstractRestCaller {
     private static final String ENDPOINT_URL = "http://localhost:8080/rest/json";
 
     protected JsonCaller(final JsonParser parser) {
-        super(parser);
+        super(parser, ENDPOINT_URL);
     }
 
     @Override
@@ -23,8 +23,4 @@ public class JsonCaller extends AbstractRestCaller {
         return "application/json";
     }
 
-    @Override
-    protected String getEndpointUrl() {
-        return ENDPOINT_URL;
-    }
 }

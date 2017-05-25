@@ -10,7 +10,7 @@ public class XmlCaller extends AbstractRestCaller {
     private static final String ENDPOINT_URL = "http://localhost:8080/rest/xml";
 
     protected XmlCaller(final XmlParser parser) {
-        super(parser);
+        super(parser, ENDPOINT_URL);
     }
 
     @Override
@@ -23,8 +23,4 @@ public class XmlCaller extends AbstractRestCaller {
         return "application/xml";
     }
 
-    @Override
-    protected String getEndpointUrl() {
-        return ENDPOINT_URL;
-    }
 }

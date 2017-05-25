@@ -66,7 +66,8 @@ public abstract class AbstractParserTest {
     }
 
     @Test
-    void test() {}
+    void test() {
+    }
 
     @Nested
     protected class ParseToTest implements ParseTest {

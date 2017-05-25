@@ -15,7 +15,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableAuthorizationServer
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
-    @Value("${user.username}")
+    @Value("${oauth.clientId}")
     private String username;
 
     @Value("${oauth.secret}")

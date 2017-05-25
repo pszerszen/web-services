@@ -8,8 +8,12 @@ import com.osa.model.TripRequest;
 public interface ServiceCaller {
 
     boolean getHeartBeat();
+
     Network getNetwork();
+
     StationList getOrigins();
+
     StationList getDestinations(String originStation);
+
     Trip getTrip(TripRequest request);
 }

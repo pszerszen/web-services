@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "originStation"
+        "originStation"
 })
 @XmlRootElement(name = "destinationsRequest")
 public class DestinationsRequest {

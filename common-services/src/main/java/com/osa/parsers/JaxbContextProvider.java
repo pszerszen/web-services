@@ -15,7 +15,7 @@ public class JaxbContextProvider {
     @SneakyThrows
     JAXBContext getJaxbContext(Class<?> type) {
         JAXBContext jaxbContext = context.get(type);
-        if(jaxbContext == null) {
+        if (jaxbContext == null) {
             jaxbContext = JAXBContext.newInstance(type);
             context.put(type, jaxbContext);
         }

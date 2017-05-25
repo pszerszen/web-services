@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource({"classpath:common-services.properties", "classpath:security.properties"})
+@PropertySource({ "classpath:common-services.properties", "classpath:security.properties" })
 @EnableConfigurationProperties
 @SpringBootApplication(scanBasePackageClasses = SecureSoapWebService.class,
-        exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+        exclude = { DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class })
 public class SecureSoapWebService {
 
     public static void main(String... args) {

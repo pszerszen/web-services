@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:common-services.properties")
 @EnableConfigurationProperties
 @SpringBootApplication(scanBasePackageClasses = RestWebService.class,
-        exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
+        exclude = { DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class })
 public class RestWebService {
 
     public static void main(String... args) throws Exception {
