@@ -1,4 +1,4 @@
-package com.osa.client;
+package com.osa.client.rest;
 
 import com.osa.model.Network;
 import com.osa.model.StationList;
@@ -7,7 +7,7 @@ import com.osa.model.TripRequest;
 
 import java.io.UnsupportedEncodingException;
 
-public interface ServiceCaller {
+public interface RestServiceCaller {
 
     boolean getHeartBeat() throws UnsupportedEncodingException;
 

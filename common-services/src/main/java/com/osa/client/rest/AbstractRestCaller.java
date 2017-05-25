@@ -1,6 +1,5 @@
 package com.osa.client.rest;
 
-import com.osa.client.ServiceCaller;
 import com.osa.model.Network;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
@@ -31,7 +30,7 @@ import java.nio.charset.Charset;
 
 @Slf4j
 @Component
-public abstract class AbstractRestCaller implements ServiceCaller {
+public abstract class AbstractRestCaller implements RestServiceCaller {
 
     @Value("${charset}")
     protected String charset;

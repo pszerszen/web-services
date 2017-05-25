@@ -1,12 +1,12 @@
 package com.osa.client;
 
-import com.osa.client.rest.AbstractRestCaller;
+import com.osa.client.rest.RestServiceCaller;
 import com.osa.parsers.JsonParser;
 import org.apache.http.HttpRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JsonCaller extends AbstractRestCaller {
+public class JsonCaller extends RestServiceCaller {
 
     private static final String ENDPOINT_URL = "http://localhost:8080/rest/json";
 
