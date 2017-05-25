@@ -25,7 +25,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 @Slf4j
@@ -45,12 +44,12 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
         this.httpClient = HttpClientBuilder.create().build();
     }
 
-    protected abstract void prepareRequest(HttpRequest request) throws UnsupportedEncodingException;
+    protected abstract void prepareRequest(HttpRequest request);
 
     protected abstract String getRequestContentType();
 
     @Override
-    public boolean getHeartBeat() throws UnsupportedEncodingException {
+    public boolean getHeartBeat() {
         HttpGet request = new HttpGet(RestEndpointUri.heartbeat.getUrl(endpointUrl));
         prepareRequest(request);
         HttpEntity entity = null;
@@ -68,14 +67,14 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
     }
 
     @Override
-    public Network getNetwork() throws UnsupportedEncodingException {
+    public Network getNetwork() {
         HttpGet request = new HttpGet(RestEndpointUri.network.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, Network.class);
     }
 
     @Override
-    public StationList getOrigins() throws UnsupportedEncodingException {
+    public StationList getOrigins() {
         HttpGet request = new HttpGet(RestEndpointUri.origins.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, StationList.class);
@@ -84,7 +83,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
     @Override
     @SneakyThrows
     public StationList getDestinations(final String originStation) {
-        String url = new URIBuilder(RestEndpointUri.origins.getUrl(endpointUrl))
+        String url = new URIBuilder(RestEndpointUri.destinations.getUrl(endpointUrl))
                 .addParameter("originStation", originStation)
                 .build().toString();
         HttpGet request = new HttpGet(url);
@@ -94,7 +93,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Trip getTrip(final TripRequest tripRequest) throws UnsupportedEncodingException {
+    public Trip getTrip(final TripRequest tripRequest) {
         HttpPost request = new HttpPost(RestEndpointUri.search.getUrl(endpointUrl));
         prepareRequest(request);
         byte[] content = parser.parseToContent(tripRequest).getBytes(Charset.forName(charset));

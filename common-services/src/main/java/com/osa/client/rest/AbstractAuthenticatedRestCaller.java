@@ -3,6 +3,7 @@ package com.osa.client.rest;
 import com.osa.client.rest.model.OAuth2Response;
 import com.osa.parsers.JsonParser;
 import com.osa.parsers.Parser;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -18,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Base64;
@@ -54,11 +54,11 @@ public abstract class AbstractAuthenticatedRestCaller extends AbstractRestCaller
     }
 
     @Override
-    protected void prepareRequest(HttpRequest request) throws UnsupportedEncodingException {
+    protected void prepareRequest(HttpRequest request) {
         request.addHeader("Authorization", join(SPACE, "Bearer", callForOAuth2Token()));
     }
 
-    private String callForOAuth2Token() throws UnsupportedEncodingException {
+    private String callForOAuth2Token() {
         HttpPost request = getAuthenticationRequest();
         HttpEntity entity = null;
         OAuth2Response responseBody = null;
@@ -81,7 +81,8 @@ public abstract class AbstractAuthenticatedRestCaller extends AbstractRestCaller
         return null;
     }
 
-    private HttpPost getAuthenticationRequest() throws UnsupportedEncodingException {
+    @SneakyThrows
+    private HttpPost getAuthenticationRequest() {
         HttpPost request = new HttpPost(authenticationTokenUrl);
         String credentials = join(":", clientId, secret);
         String authenticationHeader = Base64.getEncoder().encodeToString(credentials.getBytes());

@@ -19,7 +19,7 @@ public class JsonCaller extends AbstractAuthenticatedRestCaller {
 
     @Override
     protected void prepareRequest(final HttpRequest request) {
-        request.addHeader("ContentType", getRequestContentType());
+        request.addHeader("Content-Type", getRequestContentType());
     }
 
     @Override

@@ -1,22 +1,21 @@
 package com.osa.client;
 
-import com.osa.client.rest.RestServiceCaller;
+import com.osa.client.rest.AbstractRestCaller;
 import com.osa.parsers.JsonParser;
 import org.apache.http.HttpRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JsonCaller extends RestServiceCaller {
+public class JsonCaller extends AbstractRestCaller {
 
-    private static final String ENDPOINT_URL = "http://localhost:8080/rest/json";
-
-    protected JsonCaller(final JsonParser parser) {
-        super(parser, ENDPOINT_URL);
+    protected JsonCaller(final JsonParser parser, @Value("${endpoint.url.json}") String endpointUrl) {
+        super(parser, endpointUrl);
     }
 
     @Override
     protected void prepareRequest(final HttpRequest request) {
-        request.addHeader("ContentType", getRequestContentType());
+        request.addHeader("Content-Type", getRequestContentType());
     }
 
     @Override
