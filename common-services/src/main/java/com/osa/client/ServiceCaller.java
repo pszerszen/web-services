@@ -5,15 +5,17 @@ import com.osa.model.StationList;
 import com.osa.model.Trip;
 import com.osa.model.TripRequest;
 
+import java.io.UnsupportedEncodingException;
+
 public interface ServiceCaller {
 
-    boolean getHeartBeat();
+    boolean getHeartBeat() throws UnsupportedEncodingException;
 
-    Network getNetwork();
+    Network getNetwork() throws UnsupportedEncodingException;
 
-    StationList getOrigins();
+    StationList getOrigins() throws UnsupportedEncodingException;
 
-    StationList getDestinations(String originStation);
+    StationList getDestinations(String originStation) throws UnsupportedEncodingException;
 
-    Trip getTrip(TripRequest request);
+    Trip getTrip(TripRequest request) throws UnsupportedEncodingException;
 }

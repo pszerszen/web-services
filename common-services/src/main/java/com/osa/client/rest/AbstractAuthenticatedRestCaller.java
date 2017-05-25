@@ -1,12 +1,14 @@
-package com.osa.client;
+package com.osa.client.rest;
 
-import com.osa.client.model.OAuth2Response;
+import com.osa.client.rest.model.OAuth2Response;
 import com.osa.parsers.JsonParser;
 import com.osa.parsers.Parser;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
+import org.apache.http.auth.AuthenticationException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
@@ -59,14 +61,20 @@ public abstract class AbstractAuthenticatedRestCaller extends AbstractRestCaller
     private String callForOAuth2Token() throws UnsupportedEncodingException {
         HttpPost request = getAuthenticationRequest();
         HttpEntity entity = null;
+        OAuth2Response responseBody = null;
         try {
             HttpResponse response = httpClient.execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
-            OAuth2Response responseBody = oAuth2Parser.parseFromContent(content, OAuth2Response.class);
+            responseBody = oAuth2Parser.parseFromContent(content, OAuth2Response.class);
+            if (StringUtils.isBlank(responseBody.getAccessToken())) {
+                throw new AuthenticationException();
+            }
             return responseBody.getAccessToken();
         } catch (IOException e) {
             log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());
+        } catch (AuthenticationException e) {
+            log.error("Error while retrieving OAuth2 token: {}", responseBody.getErrorDescription());
         } finally {
             EntityUtils.consumeQuietly(entity);
         }

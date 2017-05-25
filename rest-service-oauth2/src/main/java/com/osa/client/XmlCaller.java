@@ -1,5 +1,6 @@
 package com.osa.client;
 
+import com.osa.client.rest.AbstractAuthenticatedRestCaller;
 import com.osa.parsers.XmlParser;
 import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;

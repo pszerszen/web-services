@@ -1,5 +1,6 @@
-package com.osa.client;
+package com.osa.client.rest;
 
+import com.osa.client.ServiceCaller;
 import com.osa.model.Network;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
@@ -50,7 +51,7 @@ public abstract class AbstractRestCaller implements ServiceCaller {
     protected abstract String getRequestContentType();
 
     @Override
-    public boolean getHeartBeat() {
+    public boolean getHeartBeat() throws UnsupportedEncodingException {
         HttpGet request = new HttpGet(RestEndpointUri.heartbeat.getUrl(endpointUrl));
         prepareRequest(request);
         HttpEntity entity = null;
@@ -68,14 +69,14 @@ public abstract class AbstractRestCaller implements ServiceCaller {
     }
 
     @Override
-    public Network getNetwork() {
+    public Network getNetwork() throws UnsupportedEncodingException {
         HttpGet request = new HttpGet(RestEndpointUri.network.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, Network.class);
     }
 
     @Override
-    public StationList getOrigins() {
+    public StationList getOrigins() throws UnsupportedEncodingException {
         HttpGet request = new HttpGet(RestEndpointUri.origins.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, StationList.class);
@@ -94,7 +95,7 @@ public abstract class AbstractRestCaller implements ServiceCaller {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Trip getTrip(final TripRequest tripRequest) {
+    public Trip getTrip(final TripRequest tripRequest) throws UnsupportedEncodingException {
         HttpPost request = new HttpPost(RestEndpointUri.search.getUrl(endpointUrl));
         prepareRequest(request);
         byte[] content = parser.parseToContent(tripRequest).getBytes(Charset.forName(charset));
