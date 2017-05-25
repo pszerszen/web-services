@@ -29,7 +29,7 @@ import static org.apache.commons.lang3.StringUtils.SPACE;
 
 @Slf4j
 @Component
-public abstract class AbstractAuthenticatedRestCaller extends RestServiceCaller {
+public abstract class AbstractAuthenticatedRestCaller extends AbstractRestCaller {
 
     private final String authenticationTokenUrl;
 
