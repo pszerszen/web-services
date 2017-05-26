@@ -1,6 +1,7 @@
 package com.osa.client;
 
 import com.osa.TestConfig;
+import com.osa.client.ws.SoapClient;
 import com.osa.model.Currency;
 import com.osa.model.DestinationsRequest;
 import com.osa.model.HeartBeatRequest;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringJUnitJupiterConfig(TestConfig.class)
-class WebServiceCallerTest {
+class WebCallerTest {
 
     @Value("${network.cities.min}")
     private int cityMin;
@@ -42,7 +43,7 @@ class WebServiceCallerTest {
     private int tripMax;
 
     @Autowired
-    private WebServiceCaller serviceCaller;
+    private SoapClient serviceCaller;
 
     @Test
     void testGetHeartBeat() {

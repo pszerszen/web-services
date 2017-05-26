@@ -1,6 +1,7 @@
 package com.osa.config;
 
 import com.osa.ApplicationConfiguration;
+import com.osa.client.ws.SoapClient;
 import com.osa.services.ResponseTimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,11 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
 
     @Autowired
     private ResponseTimeInterceptor responseTimeInterceptor;
+
+    @Bean
+    public SoapClient soapClient(@Value("${endpoint.url.soap}") String endpointUrl) {
+        return new SoapClient(endpointUrl);
+    }
 
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
