@@ -8,7 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 
 @Tag("integration-test")
 @SpringJUnitJupiterConfig(TestConfig.class)
-@DisplayName("Calling xml rest API")
+@DisplayName("Calling authenticated xml rest API")
 class XmlCallerTest extends AbstractAuthenticatedRestCallerTest {
 
     @Autowired

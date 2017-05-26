@@ -8,7 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 
 @Tag("integration-test")
 @SpringJUnitJupiterConfig(TestConfig.class)
-@DisplayName("Calling json rest API")
+@DisplayName("Calling authenticated json rest API")
 class JsonCallerTest extends AbstractAuthenticatedRestCallerTest {
 
     @Autowired
