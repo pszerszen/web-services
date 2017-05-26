@@ -11,8 +11,10 @@ import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 public class AuthenticatedWebServiceCaller extends SoapClient {
 
     @Autowired
-    public AuthenticatedWebServiceCaller(@Value("${user.username}") String username, @Value("${user.password}") String password) {
-        super(securityInterceptor(username, password));
+    public AuthenticatedWebServiceCaller(@Value("${endpoint.url.soap}") String endpointUrl,
+                                         @Value("${user.username}") String username,
+                                         @Value("${user.password}") String password) {
+        super(endpointUrl, securityInterceptor(username, password));
     }
 
     private static ClientInterceptor securityInterceptor(String username, String password) {

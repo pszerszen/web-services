@@ -7,7 +7,9 @@
 
 package com.osa.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,6 +23,8 @@ import javax.xml.bind.annotation.XmlType;
         "alive"
 })
 @XmlRootElement(name = "heartBeatResponse")
+@NoArgsConstructor
+@AllArgsConstructor
 public class HeartBeatResponse {
 
     @XmlElement(defaultValue = "true")

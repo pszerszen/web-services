@@ -1,5 +1,6 @@
 package com.osa.config;
 
+import com.osa.ApplicationConfiguration;
 import com.osa.services.ResponseTimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,6 +8,7 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
@@ -19,6 +21,7 @@ import org.springframework.xml.xsd.XsdSchema;
 import java.util.List;
 
 @EnableWs
+@Import(ApplicationConfiguration.class)
 @Configuration
 public class SoapWebServiceConfig extends WsConfigurerAdapter {
 
@@ -38,6 +41,7 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
         return new SimpleXsdSchema(new ClassPathResource("trips.xsd"));
     }
 
+    @SuppressWarnings("Duplicates")
     @Bean(name = "trips")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema, @Value("${namespace}") String namespace) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
