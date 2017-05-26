@@ -15,10 +15,8 @@ import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 public class SoapClient extends WebServiceGatewaySupport {
 
-    public SoapClient(String endpointUrl, ClientInterceptor... interceptors) {
+    public SoapClient(String endpointUrl, Jaxb2Marshaller marshaller, ClientInterceptor... interceptors) {
         super();
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("com.osa.model");
         setMarshaller(marshaller);
         setUnmarshaller(marshaller);
         setDefaultUri(endpointUrl);

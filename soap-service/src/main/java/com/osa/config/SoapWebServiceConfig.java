@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
@@ -30,8 +31,15 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
     private ResponseTimeInterceptor responseTimeInterceptor;
 
     @Bean
-    public SoapClient soapClient(@Value("${endpoint.url.soap}") String endpointUrl) {
-        return new SoapClient(endpointUrl);
+    public SoapClient soapClient(@Value("${endpoint.url.soap}") String endpointUrl, Jaxb2Marshaller marshaller) {
+        return new SoapClient(endpointUrl, marshaller);
+    }
+
+    @Bean
+    public Jaxb2Marshaller jaxb2Marshaller() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.osa.model");
+        return marshaller;
     }
 
     @Bean

@@ -26,11 +26,21 @@ public class SoapSecurityConfig {
         return callbackHandler;
     }
 
-    @Bean
-    public Wss4jSecurityInterceptor securityInterceptor(SimplePasswordValidationCallbackHandler securityCallbackHandler) {
+    @Bean("serverSecurityInterceptor")
+    public Wss4jSecurityInterceptor serverSecurityInterceptor(SimplePasswordValidationCallbackHandler securityCallbackHandler) {
         Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
         securityInterceptor.setValidationActions("Timestamp UsernameToken");
         securityInterceptor.setValidationCallbackHandler(securityCallbackHandler);
         return securityInterceptor;
+    }
+
+    @Bean("clientSecurityInterceptor")
+    public Wss4jSecurityInterceptor clientSecurityInterceptor(@Value("${user.username}") String username, @Value("${user.password}") String password) {
+        Wss4jSecurityInterceptor wss4jSecurityInterceptor = new Wss4jSecurityInterceptor();
+        wss4jSecurityInterceptor.setValidationActions("Timestamp NoSecurity");
+        wss4jSecurityInterceptor.setSecurementActions("Timestamp UsernameToken");
+        wss4jSecurityInterceptor.setSecurementUsername(username);
+        wss4jSecurityInterceptor.setSecurementPassword(password);
+        return wss4jSecurityInterceptor;
     }
 }
