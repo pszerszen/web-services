@@ -27,6 +27,10 @@ public class ResponseWrapper<T> {
         return new BasicHeader("responseSize", Long.toString(responseSize));
     }
 
+    public void addRequestSize(long size) {
+        requestSize += size;
+    }
+
     public void addMetrics(ResponseWrapper<?> other) {
         this.executionTimeInMillis += other.executionTimeInMillis;
         this.requestSize += other.requestSize;

@@ -47,14 +47,14 @@ class WebCallerTest {
 
     @Test
     void testGetHeartBeat() {
-        HeartBeatResponse heartBeat = serviceCaller.getHeartBeat(new HeartBeatRequest());
+        HeartBeatResponse heartBeat = serviceCaller.getHeartBeat(new HeartBeatRequest()).getResponse();
 
         assertTrue(heartBeat.isAlive(), "Expected to have true.");
     }
 
     @Test
     void testGetNetwork() {
-        Network network = serviceCaller.getNetwork(new NetworkRequest());
+        Network network = serviceCaller.getNetwork(new NetworkRequest()).getResponse();
         assertAll(() -> assertNotNull(network),
                 () -> assertNotNull(network.getCities()),
                 () -> assertNotNull(network.getStations()),
@@ -64,7 +64,7 @@ class WebCallerTest {
 
     @Test
     void testGetOrigins() {
-        StationList origins = serviceCaller.getOrigins(new OriginsRequest());
+        StationList origins = serviceCaller.getOrigins(new OriginsRequest()).getResponse();
         assertAll(
                 () -> assertNotNull(origins.getStations()),
                 () -> assertInRange(stationsMin, stationsMax, origins.getStations().size()));
@@ -72,7 +72,7 @@ class WebCallerTest {
 
     @Test
     void testGetDestinations() {
-        StationList destinations = serviceCaller.getDestinations(new DestinationsRequest("ORIGIN STATION"));
+        StationList destinations = serviceCaller.getDestinations(new DestinationsRequest("ORIGIN STATION")).getResponse();
         assertAll(
                 () -> assertNotNull(destinations.getStations()),
                 () -> assertInRange(destinationStationMin, destinationStationMax, destinations.getStations().size()));
@@ -89,7 +89,7 @@ class WebCallerTest {
                 .children(1)
                 .currency(Currency.PLN)
                 .build();
-        Trip trip = serviceCaller.getTrip(request);
+        Trip trip = serviceCaller.getTrip(request).getResponse();
         assertAll(
                 () -> assertNotNull(trip.getFrom()),
                 () -> assertNotNull(trip.getTo()),
