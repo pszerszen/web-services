@@ -37,8 +37,8 @@ public class SoapSecurityConfig {
     @Bean("clientSecurityInterceptor")
     public Wss4jSecurityInterceptor clientSecurityInterceptor(@Value("${user.username}") String username, @Value("${user.password}") String password) {
         Wss4jSecurityInterceptor wss4jSecurityInterceptor = new Wss4jSecurityInterceptor();
-        wss4jSecurityInterceptor.setValidationActions("Timestamp NoSecurity");
         wss4jSecurityInterceptor.setSecurementActions("Timestamp UsernameToken");
+        wss4jSecurityInterceptor.setValidateResponse(false);
         wss4jSecurityInterceptor.setSecurementUsername(username);
         wss4jSecurityInterceptor.setSecurementPassword(password);
         return wss4jSecurityInterceptor;
