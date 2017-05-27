@@ -1,13 +1,18 @@
 package com.osa.config;
 
+import com.osa.ApplicationConfiguration;
+import com.osa.client.ws.SoapClient;
 import com.osa.services.ResponseTimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
@@ -21,16 +26,29 @@ import java.util.List;
 
 @SuppressWarnings("Duplicates")
 @EnableWs
+@Import(ApplicationConfiguration.class)
 @Configuration
 public class SoapWebServiceConfig extends WsConfigurerAdapter {
 
-    private final ResponseTimeInterceptor responseTimeInterceptor;
-    private final Wss4jSecurityInterceptor securityInterceptor;
-
     @Autowired
-    public SoapWebServiceConfig(final ResponseTimeInterceptor responseTimeInterceptor, final Wss4jSecurityInterceptor securityInterceptor) {
-        this.responseTimeInterceptor = responseTimeInterceptor;
-        this.securityInterceptor = securityInterceptor;
+    private ResponseTimeInterceptor responseTimeInterceptor;
+    @Autowired
+    @Qualifier("serverSecurityInterceptor")
+    private Wss4jSecurityInterceptor securityInterceptor;
+
+    @Bean
+    public SoapClient soapClient(@Value("${endpoint.url.soap}") String endpointUrl,
+                                 Jaxb2Marshaller marshaller,
+                                 @Qualifier("clientSecurityInterceptor") Wss4jSecurityInterceptor securityInterceptor) {
+        return new SoapClient(endpointUrl, marshaller, securityInterceptor);
+    }
+
+    @Bean
+    public Jaxb2Marshaller jaxb2Marshaller() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setContextPath("com.osa.model");
+//        marshaller.setSchema(new ClassPathResource("trips.xsd"));
+        return marshaller;
     }
 
     @Bean

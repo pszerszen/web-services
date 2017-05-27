@@ -33,7 +33,7 @@ public class SoapServiceEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "heartBeatRequest")
     @ResponsePayload
     public HeartBeatResponse heartbeat(@RequestPayload HeartBeatRequest request) {
-        return new HeartBeatResponse();
+        return new HeartBeatResponse(true);
     }
 
     @ResponsePayload
