@@ -74,6 +74,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
             responseWrapper.setExecutionTimeInMillis(stopwatch.elapsed(MILLISECONDS));
         }
 
+        responseWrapper.addMetrics(ResponseWrapper.fromRequest(request));
         return responseWrapper;
     }
 
@@ -133,6 +134,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
             EntityUtils.consumeQuietly(entity);
             responseWrapper.setExecutionTimeInMillis(stopwatch.elapsed(MILLISECONDS));
         }
+        responseWrapper.addMetrics(ResponseWrapper.fromRequest(request));
         return responseWrapper;
     }
 

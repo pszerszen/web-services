@@ -1,8 +1,11 @@
 package com.osa.client.rest;
 
+import com.google.common.base.Stopwatch;
+import com.osa.client.ResponseWrapper;
 import com.osa.client.rest.model.OAuth2Response;
 import com.osa.parsers.JsonParser;
 import com.osa.parsers.Parser;
+import com.osa.util.MetricUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -23,8 +26,11 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 import static java.lang.String.join;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 
 @Slf4j
@@ -55,30 +61,42 @@ public abstract class AbstractAuthenticatedRestCaller extends AbstractRestCaller
 
     @Override
     protected void prepareRequest(HttpRequest request) {
-        request.addHeader("Authorization", join(SPACE, "Bearer", callForOAuth2Token()));
+        ResponseWrapper<OAuth2Response> responseWrapper = callForOAuth2Token();
+        request.addHeader(responseWrapper.getExecutionTimeInMillisHeader());
+        request.addHeader(responseWrapper.getRequestSizeHeader());
+        request.addHeader(responseWrapper.getresponseSizeHeader());
+        request.addHeader("Authorization", join(SPACE, "Bearer",
+                Optional.ofNullable(responseWrapper.getResponse())
+                        .map(OAuth2Response::getAccessToken)
+                        .orElse(EMPTY)));
     }
 
-    private String callForOAuth2Token() {
+    private ResponseWrapper<OAuth2Response> callForOAuth2Token() {
+        ResponseWrapper<OAuth2Response> responseWrapper = new ResponseWrapper<>();
         HttpPost request = getAuthenticationRequest();
+        responseWrapper.setRequestSize(MetricUtils.counterSizeOfRequest(request));
         HttpEntity entity = null;
         OAuth2Response responseBody = null;
+        Stopwatch stopwatch = Stopwatch.createStarted();
         try {
             HttpResponse response = httpClient.execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
             responseBody = oAuth2Parser.parseFromContent(content, OAuth2Response.class);
+            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response));
+            responseWrapper.setResponse(responseBody);
             if (StringUtils.isBlank(responseBody.getAccessToken())) {
                 throw new AuthenticationException();
             }
-            return responseBody.getAccessToken();
         } catch (IOException e) {
             log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());
         } catch (AuthenticationException e) {
             log.error("Error while retrieving OAuth2 token: {}", responseBody.getErrorDescription());
         } finally {
             EntityUtils.consumeQuietly(entity);
+            responseWrapper.setExecutionTimeInMillis(stopwatch.elapsed(MILLISECONDS));
         }
-        return null;
+        return responseWrapper;
     }
 
     @SneakyThrows
