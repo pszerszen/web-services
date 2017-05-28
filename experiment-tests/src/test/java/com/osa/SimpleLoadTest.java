@@ -13,7 +13,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -21,11 +20,6 @@ import java.util.stream.IntStream;
 public abstract class SimpleLoadTest {
 
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-    private static final String FILES_DIR = new StringBuilder(System.getProperty("user.home"))
-            .append(System.getProperty("file.separator"))
-            .append("web-services experiments results")
-            .append(System.getProperty("file.separator"))
-            .toString();
 
     protected final ResponseWrapperSupplier serviceCall;
     private final String name;
@@ -35,11 +29,23 @@ public abstract class SimpleLoadTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        FileUtils.touch(new File(FILES_DIR));
-        String currentFilename = String.format("simple-%s-%scalls-%s", name, numberOfCalls, System.currentTimeMillis());
-        writer = Files.newBufferedWriter(Paths.get(FILES_DIR + currentFilename));
+        writer = Files.newBufferedWriter(createOutputFile().toPath());
         writer.append("requestSize,responseSize,executionTime")
                 .append(LINE_SEPARATOR);
+    }
+
+    @SneakyThrows(IOException.class)
+    private File createOutputFile() {
+        String currentFilename = new StringBuilder(System.getProperty("user.home"))
+                .append(System.getProperty("file.separator"))
+                .append("web-services")
+                .append(System.getProperty("file.separator"))
+                .append(String.format("simple-%s-%scalls-%s.csv", name, numberOfCalls, System.currentTimeMillis()))
+                .toString();
+        File file = new File(currentFilename);
+        FileUtils.touch(file);
+
+        return file;
     }
 
     @AfterEach
