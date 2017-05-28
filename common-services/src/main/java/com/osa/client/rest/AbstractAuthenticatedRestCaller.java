@@ -83,7 +83,7 @@ public abstract class AbstractAuthenticatedRestCaller extends AbstractRestCaller
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
             responseBody = oAuth2Parser.parseFromContent(content, OAuth2Response.class);
-            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response));
+            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
             responseWrapper.setResponse(responseBody);
             if (StringUtils.isBlank(responseBody.getAccessToken())) {
                 throw new AuthenticationException();

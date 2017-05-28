@@ -65,7 +65,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
             HttpResponse response = httpClient.execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
-            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response));
+            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
             responseWrapper.setResponse(Boolean.parseBoolean(content));
         } catch (IOException e) {
             log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());
@@ -126,7 +126,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
             HttpResponse response = httpClient.execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
-            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response));
+            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
             responseWrapper.setResponse(parser.parseFromContent(content, responseType));
         } catch (IOException e) {
             log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());

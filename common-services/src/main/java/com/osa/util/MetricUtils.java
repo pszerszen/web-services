@@ -1,5 +1,6 @@
 package com.osa.util;
 
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -30,9 +31,10 @@ public class MetricUtils {
         return size;
     }
 
-    public long counterSizeOfResponse(HttpResponse response) {
+    @SneakyThrows
+    public long counterSizeOfResponse(HttpResponse response, String content) {
         return stringifyHeaders(response.getAllHeaders()).getBytes().length +
-                response.getEntity().getContentLength();
+                content.getBytes().length;
     }
 
     private String stringifyHeaders(Header... headers) {
