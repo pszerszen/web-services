@@ -4,11 +4,13 @@ import com.osa.client.ResponseWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,6 +35,7 @@ public abstract class SimpleLoadTest {
 
     @BeforeEach
     void setUp() throws IOException {
+        FileUtils.touch(new File(FILES_DIR));
         String currentFilename = String.format("simple-%s-%scalls-%s", name, numberOfCalls, System.currentTimeMillis());
         writer = Files.newBufferedWriter(Paths.get(FILES_DIR + currentFilename));
         writer.append("requestSize,responseSize,executionTime")

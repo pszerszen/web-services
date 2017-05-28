@@ -1,9 +1,12 @@
 package com.osa.rest;
 
 import com.osa.SimpleLoadTest;
+import com.osa.client.ResponseWrapper;
 import com.osa.client.rest.RestServiceCaller;
 import com.osa.model.Currency;
 import com.osa.model.SearchBy;
+import com.osa.model.StationList;
+import com.osa.model.Trip;
 import com.osa.model.TripRequest;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Nested;
@@ -29,29 +32,30 @@ public abstract class RestSimpleLoadTest {
         type = substringBeforeLast(serviceCaller.getClass().getSimpleName(), "Caller");
     }
 
-    private static TripRequest randomRequest() {
-        return TripRequest.builder()
+    private ResponseWrapper<Trip> tripCall() {
+        return serviceCaller.getTrip(TripRequest.builder()
                 .searchBy(SearchBy.STATIONS)
                 .fromStationId(random(10))
                 .toStationId(random(10))
-                .departureDate(randomDate())
+                .departureDate(LocalDate.now().plusDays(RandomUtils.nextLong(1, 366)).format(DATE_TIME_FORMATTER))
                 .adult(nextInt(1, 6))
                 .children(nextInt(0, 6))
                 .currency(Currency.getRandom())
-                .build();
+                .build());
     }
 
-    private static String randomDate() {
-        return LocalDate.now().plusDays(RandomUtils.nextLong(1, 366)).format(DATE_TIME_FORMATTER);
+    private ResponseWrapper<StationList> destinationsCall() {
+        return serviceCaller.getDestinations(random(6));
     }
 
     @Test
-    void ignore() {}
+    void ignore() {
+    }
 
     @Nested
-    class HearbeatTest extends SimpleLoadTest {
+    class HeartbeatTest extends SimpleLoadTest {
 
-        HearbeatTest() {
+        HeartbeatTest() {
             super(serviceCaller::getHeartBeat, type + "::getHeartBeat", NUMBER_OF_CALLS);
         }
     }
@@ -76,7 +80,7 @@ public abstract class RestSimpleLoadTest {
     class GetDestinationsStationsTest extends SimpleLoadTest {
 
         GetDestinationsStationsTest() {
-            super(() -> serviceCaller.getDestinations(random(6)), type + "::getDestinations", NUMBER_OF_CALLS);
+            super(RestSimpleLoadTest.this::destinationsCall, type + "::getDestinations", NUMBER_OF_CALLS);
         }
     }
 
@@ -84,7 +88,7 @@ public abstract class RestSimpleLoadTest {
     class GetTripsTest extends SimpleLoadTest {
 
         GetTripsTest() {
-            super(() -> serviceCaller.getTrip(randomRequest()), type + "::getTrip", NUMBER_OF_CALLS);
+            super(RestSimpleLoadTest.this::tripCall, type + "::getTrip", NUMBER_OF_CALLS);
         }
     }
 }

@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 
 @Configuration
+@PropertySource("classpath:application-test.properties")
 @Import({ ApplicationConfiguration.class })
 public class TestConfig {
 
