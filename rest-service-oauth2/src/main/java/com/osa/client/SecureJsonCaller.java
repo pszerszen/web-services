@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JsonCaller extends AbstractAuthenticatedRestCaller {
+public class SecureJsonCaller extends AbstractAuthenticatedRestCaller {
 
     @Autowired
-    protected JsonCaller(final JsonParser parser,
-                         @Value("${endpoint.url.json}") String endpointUrl,
-                         @Value("${endpoint.url.auth}") String authenticationEndpointUrl) {
+    public SecureJsonCaller(final JsonParser parser,
+                            @Value("${endpoint.url.json}") String endpointUrl,
+                            @Value("${endpoint.url.auth}") String authenticationEndpointUrl) {
         super(parser, endpointUrl, authenticationEndpointUrl);
     }
 

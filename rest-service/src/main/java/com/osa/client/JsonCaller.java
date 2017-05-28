@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JsonCaller extends AbstractRestCaller {
 
-    protected JsonCaller(final JsonParser parser, @Value("${endpoint.url.json}") String endpointUrl) {
+    public JsonCaller(final JsonParser parser, @Value("${endpoint.url.json}") String endpointUrl) {
         super(parser, endpointUrl);
     }
 

@@ -37,6 +37,13 @@ public class ResponseWrapper<T> {
         this.responseSize += other.responseSize;
     }
 
+    public String toCsvRow() {
+        return String.join(",",
+                Long.toString(requestSize),
+                Long.toString(responseSize),
+                Long.toString(executionTimeInMillis));
+    }
+
     public static ResponseWrapper<OAuth2Response> fromRequest(HttpUriRequest request) {
         ResponseWrapper<OAuth2Response> wrapper = new ResponseWrapper<>();
         wrapper.setExecutionTimeInMillis(Optional.ofNullable(request.getFirstHeader("executionTimeInMillis"))
