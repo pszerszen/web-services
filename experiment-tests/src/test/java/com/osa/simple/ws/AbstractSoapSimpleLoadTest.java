@@ -1,6 +1,6 @@
-package com.osa.ws;
+package com.osa.simple.ws;
 
-import com.osa.SimpleLoadTest;
+import com.osa.simple.SimpleLoadTest;
 import com.osa.client.ResponseWrapper;
 import com.osa.client.ws.SoapClient;
 import com.osa.model.Currency;

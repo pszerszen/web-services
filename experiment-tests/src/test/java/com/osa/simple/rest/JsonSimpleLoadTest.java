@@ -1,4 +1,4 @@
-package com.osa.rest;
+package com.osa.simple.rest;
 
 import com.osa.TestConfig;
 import com.osa.client.JsonCaller;

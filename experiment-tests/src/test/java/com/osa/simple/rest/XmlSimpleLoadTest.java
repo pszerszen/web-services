@@ -1,15 +1,15 @@
-package com.osa.rest;
+package com.osa.simple.rest;
 
 import com.osa.TestConfig;
-import com.osa.client.SecureXmlCaller;
+import com.osa.client.XmlCaller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitJupiterConfig;
 
 @SpringJUnitJupiterConfig(TestConfig.class)
-public class SecureXmlSimpleLoadTest extends RestSimpleLoadTest {
+public class XmlSimpleLoadTest extends RestSimpleLoadTest {
 
     @Autowired
-    SecureXmlSimpleLoadTest(final SecureXmlCaller serviceCaller) {
+    XmlSimpleLoadTest(final XmlCaller serviceCaller) {
         super(serviceCaller);
     }
 }

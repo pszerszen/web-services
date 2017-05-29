@@ -1,6 +1,6 @@
-package com.osa.rest;
+package com.osa.simple.rest;
 
-import com.osa.SimpleLoadTest;
+import com.osa.simple.SimpleLoadTest;
 import com.osa.client.ResponseWrapper;
 import com.osa.client.rest.RestServiceCaller;
 import com.osa.model.Currency;

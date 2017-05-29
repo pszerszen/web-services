@@ -1,5 +1,6 @@
-package com.osa;
+package com.osa.simple;
 
+import com.osa.ResponseWrapperSupplier;
 import com.osa.client.ResponseWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
