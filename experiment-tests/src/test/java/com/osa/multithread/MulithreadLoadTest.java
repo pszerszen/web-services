@@ -15,14 +15,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
+
+import static com.osa.Constansts.FILE_SEPARATOR;
+import static com.osa.Constansts.LINE_SEPARATOR;
+import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Slf4j
 @RequiredArgsConstructor
 public abstract class MulithreadLoadTest {
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
-    private static final String FILE_SEPARATOR = System.getProperty("file.separator");
 
     private final ResponseWrapperSupplier serviceCall;
     private final String name;
@@ -67,7 +68,7 @@ public abstract class MulithreadLoadTest {
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
         IntStream.range(0, numberOfCalls).forEach(i ->
                 executorService.submit(this::callAndSaveMetrics));
-        executorService.awaitTermination(30, TimeUnit.MINUTES);
+        executorService.awaitTermination(30, MINUTES);
     }
 
     @SneakyThrows

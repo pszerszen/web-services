@@ -13,13 +13,12 @@ import com.osa.natural.NaturalLoadTest;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+import static com.osa.Constansts.DATE_TIME_FORMATTER;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
 public abstract class AbstractSoapNaturalLoadTest extends NaturalLoadTest {
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private final SoapClient serviceCaller;
 

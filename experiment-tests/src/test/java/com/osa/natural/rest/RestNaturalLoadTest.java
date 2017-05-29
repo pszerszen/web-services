@@ -10,15 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+import static com.osa.Constansts.DATE_TIME_FORMATTER;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
 
 @Slf4j
 public abstract class RestNaturalLoadTest extends NaturalLoadTest {
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private final RestServiceCaller serviceCaller;
 

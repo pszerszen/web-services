@@ -1,6 +1,5 @@
 package com.osa.simple.ws;
 
-import com.osa.simple.SimpleLoadTest;
 import com.osa.client.ResponseWrapper;
 import com.osa.client.ws.SoapClient;
 import com.osa.model.Currency;
@@ -14,20 +13,19 @@ import com.osa.model.SearchBy;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
 import com.osa.model.TripRequest;
+import com.osa.simple.SimpleLoadTest;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
+import static com.osa.Constansts.DATE_TIME_FORMATTER;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
 public abstract class AbstractSoapSimpleLoadTest {
-
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     private final SoapClient serviceCaller;
     private final String type;

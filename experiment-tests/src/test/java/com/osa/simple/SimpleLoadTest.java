@@ -16,11 +16,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.stream.IntStream;
 
+import static com.osa.Constansts.FILE_SEPARATOR;
+import static com.osa.Constansts.LINE_SEPARATOR;
+
 @Slf4j
 @RequiredArgsConstructor
 public abstract class SimpleLoadTest {
-
-    private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     private final ResponseWrapperSupplier serviceCall;
     private final String name;
@@ -38,9 +39,9 @@ public abstract class SimpleLoadTest {
     @SneakyThrows(IOException.class)
     private File createOutputFile() {
         String currentFilename = new StringBuilder(System.getProperty("user.home"))
-                .append(System.getProperty("file.separator"))
+                .append(FILE_SEPARATOR)
                 .append("web-services")
-                .append(System.getProperty("file.separator"))
+                .append(FILE_SEPARATOR)
                 .append(String.format("simple-%s-%scalls-%s.csv", name, numberOfCalls, System.currentTimeMillis()))
                 .toString();
         File file = new File(currentFilename);
