@@ -26,9 +26,8 @@ public abstract class MulithreadLoadTest {
 
     private final ResponseWrapperSupplier serviceCall;
     private final String name;
-    private final int numberOfRounds;
+    private final int numberOfCalls;
     private final int numberOfThreads;
-    private final int callsPerRound;
 
     private BufferedWriter writer;
 
@@ -45,11 +44,10 @@ public abstract class MulithreadLoadTest {
                 .append(FILE_SEPARATOR)
                 .append("web-services")
                 .append(FILE_SEPARATOR)
-                .append(String.format("multithreaded-%s-%srounds-%sthreads-%scallsperthread-%s.csv",
+                .append(String.format("multithreaded-%s-%scalls-%sthreads-%s.csv",
                         name,
-                        numberOfRounds,
+                        numberOfCalls,
                         numberOfThreads,
-                        callsPerRound,
                         System.currentTimeMillis()))
                 .toString();
         File file = new File(currentFilename);
@@ -66,18 +64,10 @@ public abstract class MulithreadLoadTest {
     @Test
     @SneakyThrows
     void multiThredTest() {
-        runRound(numberOfRounds);
-    }
-
-    private void runRound(int roundsToRun) throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
-        IntStream.range(0, callsPerRound).forEach(i ->
+        IntStream.range(0, numberOfCalls).forEach(i ->
                 executorService.submit(this::callAndSaveMetrics));
-        executorService.awaitTermination(2, TimeUnit.SECONDS);
-
-        if (roundsToRun > 0) {
-            runRound(roundsToRun - 1);
-        }
+        executorService.awaitTermination(30, TimeUnit.MINUTES);
     }
 
     @SneakyThrows
