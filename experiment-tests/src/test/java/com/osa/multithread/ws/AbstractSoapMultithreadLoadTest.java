@@ -1,6 +1,5 @@
-package com.osa.simple.ws;
+package com.osa.multithread.ws;
 
-import com.osa.simple.SimpleLoadTest;
 import com.osa.client.ResponseWrapper;
 import com.osa.client.ws.SoapClient;
 import com.osa.model.Currency;
@@ -14,6 +13,7 @@ import com.osa.model.SearchBy;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
 import com.osa.model.TripRequest;
+import com.osa.multithread.MulithreadLoadTest;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -25,17 +25,20 @@ import java.time.format.DateTimeFormatter;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
-public abstract class AbstractSoapSimpleLoadTest {
+public abstract class AbstractSoapMultithreadLoadTest {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static final int NUMBER_OF_CALLS = 1_000;
 
     private final SoapClient serviceCaller;
     private final String type;
 
-    @Value("${simple.calls}")
+    @Value("${multithread.calls}")
     private int numberOfCalls;
+    @Value("${multithread.threads}")
+    private int numberOfThreads;
 
-    public AbstractSoapSimpleLoadTest(final SoapClient serviceCaller, final String type) {
+    public AbstractSoapMultithreadLoadTest(final SoapClient serviceCaller, final String type) {
         this.serviceCaller = serviceCaller;
         this.type = type;
     }
@@ -73,42 +76,42 @@ public abstract class AbstractSoapSimpleLoadTest {
     }
 
     @Nested
-    class HeartbeatTest extends SimpleLoadTest {
+    class HeartbeatTest extends MulithreadLoadTest {
 
         HeartbeatTest() {
-            super(AbstractSoapSimpleLoadTest.this::heartBeat, type + "-getHeartBeat", numberOfCalls);
+            super(AbstractSoapMultithreadLoadTest.this::heartBeat, type + "-getHeartBeat", numberOfCalls, numberOfThreads);
         }
     }
 
     @Nested
-    class GetNetworkTest extends SimpleLoadTest {
+    class GetNetworkTest extends MulithreadLoadTest {
 
         GetNetworkTest() {
-            super(AbstractSoapSimpleLoadTest.this::network, type + "-getNetwork", numberOfCalls);
+            super(AbstractSoapMultithreadLoadTest.this::network, type + "-getNetwork", numberOfCalls, numberOfThreads);
         }
     }
 
     @Nested
-    class GetOriginStationsTest extends SimpleLoadTest {
+    class GetOriginStationsTest extends MulithreadLoadTest {
 
         GetOriginStationsTest() {
-            super(AbstractSoapSimpleLoadTest.this::origins, type + "-getOrigins", numberOfCalls);
+            super(AbstractSoapMultithreadLoadTest.this::origins, type + "-getOrigins", numberOfCalls, numberOfThreads);
         }
     }
 
     @Nested
-    class GetDestinationsStationsTest extends SimpleLoadTest {
+    class GetDestinationsStationsTest extends MulithreadLoadTest {
 
         GetDestinationsStationsTest() {
-            super(AbstractSoapSimpleLoadTest.this::destinations, type + "-getDestinations", numberOfCalls);
+            super(AbstractSoapMultithreadLoadTest.this::destinations, type + "-getDestinations", numberOfCalls, numberOfThreads);
         }
     }
 
     @Nested
-    class GetTripsTest extends SimpleLoadTest {
+    class GetTripsTest extends MulithreadLoadTest {
 
         GetTripsTest() {
-            super(AbstractSoapSimpleLoadTest.this::trips, type + "-getTrip", numberOfCalls);
+            super(AbstractSoapMultithreadLoadTest.this::trips, type + "-getTrip", numberOfCalls, numberOfThreads);
         }
     }
 }
