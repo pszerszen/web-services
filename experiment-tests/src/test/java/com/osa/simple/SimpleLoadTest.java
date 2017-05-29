@@ -22,7 +22,7 @@ public abstract class SimpleLoadTest {
 
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
-    protected final ResponseWrapperSupplier serviceCall;
+    private final ResponseWrapperSupplier serviceCall;
     private final String name;
     private final int numberOfCalls;
 

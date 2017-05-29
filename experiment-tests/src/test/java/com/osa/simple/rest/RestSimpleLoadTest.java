@@ -27,7 +27,7 @@ public abstract class RestSimpleLoadTest {
     private final RestServiceCaller serviceCaller;
     private final String type;
 
-    RestSimpleLoadTest(final RestServiceCaller serviceCaller) {
+    protected RestSimpleLoadTest(final RestServiceCaller serviceCaller) {
         this.serviceCaller = serviceCaller;
         type = substringBeforeLast(serviceCaller.getClass().getSimpleName(), "Caller");
     }
