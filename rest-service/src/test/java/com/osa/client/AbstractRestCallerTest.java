@@ -43,14 +43,14 @@ abstract class AbstractRestCallerTest {
     @Test
     @DisplayName("Is Heartbeat working")
     protected void testHeartBeat() {
-        boolean heartBeat = restCaller.getHeartBeat();
+        boolean heartBeat = restCaller.getHeartBeat().getResponse();
         assertTrue(heartBeat, "Expected to have true.");
     }
 
     @Test
     @DisplayName("Can download Network")
     protected void testGetNetwork() {
-        Network network = restCaller.getNetwork();
+        Network network = restCaller.getNetwork().getResponse();
         assertAll(() -> assertNotNull(network),
                 () -> assertNotNull(network.getCities()),
                 () -> assertNotNull(network.getStations()),
@@ -61,7 +61,7 @@ abstract class AbstractRestCallerTest {
     @Test
     @DisplayName("Can download origin stations")
     protected void testGetOrigins() {
-        StationList origins = restCaller.getOrigins();
+        StationList origins = restCaller.getOrigins().getResponse();
         assertAll(
                 () -> assertNotNull(origins.getStations()),
                 () -> assertInRange(stationsMin, stationsMax, origins.getStations().size()));
@@ -70,7 +70,7 @@ abstract class AbstractRestCallerTest {
     @Test
     @DisplayName("Can download destinations stations")
     protected void testGetDestinations() {
-        StationList destinations = restCaller.getDestinations("DESTINATION");
+        StationList destinations = restCaller.getDestinations("DESTINATION").getResponse();
         assertAll(
                 () -> assertNotNull(destinations.getStations()),
                 () -> assertInRange(destinationStationMin, destinationStationMax, destinations.getStations().size()));
@@ -88,7 +88,7 @@ abstract class AbstractRestCallerTest {
                 .children(1)
                 .currency(Currency.PLN)
                 .build();
-        Trip trip = restCaller.getTrip(request);
+        Trip trip = restCaller.getTrip(request).getResponse();
         assertAll(
                 () -> assertNotNull(trip.getFrom()),
                 () -> assertNotNull(trip.getTo()),

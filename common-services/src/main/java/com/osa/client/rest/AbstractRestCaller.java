@@ -1,10 +1,13 @@
 package com.osa.client.rest;
 
+import com.google.common.base.Stopwatch;
+import com.osa.client.ResponseWrapper;
 import com.osa.model.Network;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
 import com.osa.model.TripRequest;
 import com.osa.parsers.Parser;
+import com.osa.util.MetricUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -26,6 +29,8 @@ import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 @Slf4j
 @Component
@@ -49,32 +54,39 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
     protected abstract String getRequestContentType();
 
     @Override
-    public boolean getHeartBeat() {
+    public ResponseWrapper<Boolean> getHeartBeat() {
+        ResponseWrapper<Boolean> responseWrapper = new ResponseWrapper<>();
+        HttpEntity entity = null;
         HttpGet request = new HttpGet(RestEndpointUri.heartbeat.getUrl(endpointUrl));
         prepareRequest(request);
-        HttpEntity entity = null;
+        responseWrapper.setRequestSize(MetricUtils.counterSizeOfRequest(request));
+        Stopwatch stopwatch = Stopwatch.createStarted();
         try {
             HttpResponse response = httpClient.execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
-            return Boolean.parseBoolean(content);
+            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
+            responseWrapper.setResponse(Boolean.parseBoolean(content));
         } catch (IOException e) {
             log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());
         } finally {
             EntityUtils.consumeQuietly(entity);
+            responseWrapper.setExecutionTimeInMillis(stopwatch.elapsed(MILLISECONDS));
         }
-        return false;
+
+        responseWrapper.addMetrics(ResponseWrapper.fromRequest(request));
+        return responseWrapper;
     }
 
     @Override
-    public Network getNetwork() {
+    public ResponseWrapper<Network> getNetwork() {
         HttpGet request = new HttpGet(RestEndpointUri.network.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, Network.class);
     }
 
     @Override
-    public StationList getOrigins() {
+    public ResponseWrapper<StationList> getOrigins() {
         HttpGet request = new HttpGet(RestEndpointUri.origins.getUrl(endpointUrl));
         prepareRequest(request);
         return executeRequest(request, StationList.class);
@@ -82,7 +94,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
 
     @Override
     @SneakyThrows
-    public StationList getDestinations(final String originStation) {
+    public ResponseWrapper<StationList> getDestinations(final String originStation) {
         String url = new URIBuilder(RestEndpointUri.destinations.getUrl(endpointUrl))
                 .addParameter("originStation", originStation)
                 .build().toString();
@@ -93,7 +105,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Trip getTrip(final TripRequest tripRequest) {
+    public ResponseWrapper<Trip> getTrip(final TripRequest tripRequest) {
         HttpPost request = new HttpPost(RestEndpointUri.search.getUrl(endpointUrl));
         prepareRequest(request);
         byte[] content = parser.parseToContent(tripRequest).getBytes(Charset.forName(charset));
@@ -105,19 +117,25 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
         return executeRequest(request, Trip.class);
     }
 
-    private <T> T executeRequest(HttpUriRequest request, Class<T> responseType) {
+    private <T> ResponseWrapper<T> executeRequest(HttpUriRequest request, Class<T> responseType) {
+        ResponseWrapper<T> responseWrapper = new ResponseWrapper<>();
+        responseWrapper.setRequestSize(MetricUtils.counterSizeOfRequest(request));
         HttpEntity entity = null;
+        Stopwatch stopwatch = Stopwatch.createStarted();
         try {
             HttpResponse response = httpClient.execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
-            return parser.parseFromContent(content, responseType);
+            responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
+            responseWrapper.setResponse(parser.parseFromContent(content, responseType));
         } catch (IOException e) {
             log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());
         } finally {
             EntityUtils.consumeQuietly(entity);
+            responseWrapper.setExecutionTimeInMillis(stopwatch.elapsed(MILLISECONDS));
         }
-        return null;
+        responseWrapper.addMetrics(ResponseWrapper.fromRequest(request));
+        return responseWrapper;
     }
 
     @RequiredArgsConstructor(access = AccessLevel.PRIVATE)

@@ -36,6 +36,7 @@
         <module>rest-service</module>
         <module>rest-service-oauth2</module>
         <module>soap-service-secure</module>
+        <module>experiment-tests</module>
     </modules>
 
     <scm>

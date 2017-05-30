@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class XmlCaller extends AbstractRestCaller {
 
-    protected XmlCaller(final XmlParser parser, @Value("${endpoint.url.xml}") String endpointUrl) {
+    public XmlCaller(final XmlParser parser, @Value("${endpoint.url.xml}") String endpointUrl) {
         super(parser, endpointUrl);
     }
 

@@ -47,7 +47,6 @@ public class SoapWebServiceConfig extends WsConfigurerAdapter {
     public Jaxb2Marshaller jaxb2Marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setContextPath("com.osa.model");
-//        marshaller.setSchema(new ClassPathResource("trips.xsd"));
         return marshaller;
     }
 

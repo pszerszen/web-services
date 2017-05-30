@@ -1,5 +1,7 @@
 package com.osa.model;
 
+import org.apache.commons.lang3.RandomUtils;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -25,4 +27,8 @@ public enum Currency {
         return valueOf(v);
     }
 
+    public static Currency getRandom() {
+        int index = RandomUtils.nextInt(0, values().length);
+        return values()[ index ];
+    }
 }
