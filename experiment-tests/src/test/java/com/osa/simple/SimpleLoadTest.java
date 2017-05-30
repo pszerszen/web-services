@@ -57,7 +57,7 @@ public abstract class SimpleLoadTest {
 
     @Test
     void simpleTest() {
-        IntStream.range(0, numberOfCalls).forEach(this::callAndSaveMetrics);
+        IntStream.rangeClosed(1, numberOfCalls).forEach(this::callAndSaveMetrics);
     }
 
     @SneakyThrows

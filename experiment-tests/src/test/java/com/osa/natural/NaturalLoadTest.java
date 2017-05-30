@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public abstract class NaturalLoadTest {
     private int numberOfThreads;
 
     private BufferedWriter writer;
-    private SecureRandom random = new SecureRandom();
+    private SecureRandom random = new SecureRandom(RandomStringUtils.random(100_000).getBytes());
 
     protected abstract ResponseWrapperSupplier heartBeat();
 
@@ -95,8 +96,8 @@ public abstract class NaturalLoadTest {
     @SneakyThrows
     void testNatural() {
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
-        IntStream.range(0, numberOfCalls).forEach(i ->
-                executorService.submit(this::callAndSaveMetrics));
+        IntStream.rangeClosed(1, numberOfCalls).forEach(i -> executorService.submit(this::callAndSaveMetrics));
+        executorService.shutdown();
         executorService.awaitTermination(30, MINUTES);
     }
 

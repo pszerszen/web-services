@@ -66,8 +66,8 @@ public abstract class MulithreadLoadTest {
     @SneakyThrows
     void multiThredTest() {
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
-        IntStream.range(0, numberOfCalls).forEach(i ->
-                executorService.submit(this::callAndSaveMetrics));
+        IntStream.rangeClosed(1, numberOfCalls).forEach(i -> executorService.submit(this::callAndSaveMetrics));
+        executorService.shutdown();
         executorService.awaitTermination(30, MINUTES);
     }
 

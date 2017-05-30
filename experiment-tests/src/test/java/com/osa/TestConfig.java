@@ -44,7 +44,7 @@ public class TestConfig {
 
     @Bean
     public SecureXmlCaller secureXmlCaller(XmlParser parser,
-                                           @Value("${endpoint.url.json.secured}") String endpointUrl,
+                                           @Value("${endpoint.url.xml.secured}") String endpointUrl,
                                            @Value("${endpoint.url.auth}") String authEndpoint) {
         return new SecureXmlCaller(parser, endpointUrl, authEndpoint);
     }
@@ -75,7 +75,7 @@ public class TestConfig {
     }
 
     @Bean("securedSoapClient")
-    public SoapClient securedSoapClient(@Value("${endpoint.url.soap}") String endpointUrl,
+    public SoapClient securedSoapClient(@Value("${endpoint.url.soap.secured}") String endpointUrl,
                                         Jaxb2Marshaller marshaller,
                                         @Qualifier("clientSecurityInterceptor") Wss4jSecurityInterceptor securityInterceptor) {
         return new SoapClient(endpointUrl, marshaller, securityInterceptor);
