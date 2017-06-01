@@ -16,10 +16,12 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.config.SocketConfig;
 import org.apache.http.entity.BasicHttpEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -39,14 +41,12 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
     @Value("${charset}")
     protected String charset;
 
-    protected final HttpClient httpClient;
     private final Parser parser;
     private final String endpointUrl;
 
     protected AbstractRestCaller(final Parser parser, final String endpointUrl) {
         this.parser = parser;
         this.endpointUrl = endpointUrl;
-        this.httpClient = HttpClientBuilder.create().build();
     }
 
     protected abstract void prepareRequest(HttpRequest request);
@@ -62,7 +62,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
         responseWrapper.setRequestSize(MetricUtils.counterSizeOfRequest(request));
         Stopwatch stopwatch = Stopwatch.createStarted();
         try {
-            HttpResponse response = httpClient.execute(request);
+            HttpResponse response = httpClient().execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
             responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
@@ -123,7 +123,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
         HttpEntity entity = null;
         Stopwatch stopwatch = Stopwatch.createStarted();
         try {
-            HttpResponse response = httpClient.execute(request);
+            HttpResponse response = httpClient().execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
             responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
@@ -136,6 +136,27 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
         }
         responseWrapper.addMetrics(ResponseWrapper.fromRequest(request));
         return responseWrapper;
+    }
+
+    protected static HttpClient httpClient() {
+        return HttpClientBuilder.create()
+                .setDefaultRequestConfig(getRequestConfig(3 * 1000))
+                .setDefaultSocketConfig(getSocketConfig(3 * 1000))
+                .build();
+    }
+
+    private static RequestConfig getRequestConfig(int timeoutMillis) {
+        return RequestConfig.custom()
+                .setConnectionRequestTimeout(timeoutMillis)
+                .setConnectTimeout(timeoutMillis)
+                .setSocketTimeout(timeoutMillis)
+                .build();
+    }
+
+    private static SocketConfig getSocketConfig(int timeoutMillis) {
+        return SocketConfig.custom()
+                .setSoTimeout(timeoutMillis)
+                .build();
     }
 
     @RequiredArgsConstructor(access = AccessLevel.PRIVATE)

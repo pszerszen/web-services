@@ -79,7 +79,7 @@ public abstract class AbstractAuthenticatedRestCaller extends AbstractRestCaller
         OAuth2Response responseBody = null;
         Stopwatch stopwatch = Stopwatch.createStarted();
         try {
-            HttpResponse response = httpClient.execute(request);
+            HttpResponse response = httpClient().execute(request);
             entity = response.getEntity();
             String content = EntityUtils.toString(entity, Charset.forName(charset));
             responseBody = oAuth2Parser.parseFromContent(content, OAuth2Response.class);
