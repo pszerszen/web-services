@@ -104,9 +104,9 @@ public class TestConfig {
     }
 
     @Bean
-    public Map<TestClass, Map<Method, TestMethodProperties>> testProperties() throws URISyntaxException, IOException {
+    public Map<TestClass, Map<Method, TestMethodProperties>> testProperties(@Value("${charset}") String charset) throws URISyntaxException, IOException {
         URI uri = getClass().getResource("test-parameters.json").toURI();
-        String jsonContent = IOUtils.toString(uri, "UTF-8");
+        String jsonContent = IOUtils.toString(uri, charset);
         Type type = new TypeToken<Map<TestClass, Map<Method, TestMethodProperties>>>() {
         }.getType();
 
