@@ -92,18 +92,20 @@ public abstract class NaturalLoadTest {
     @SneakyThrows
     void testNatural() {
         ExecutorService executorService = Executors.newFixedThreadPool(properties.getThreads());
-        IntStream.rangeClosed(1, properties.getCalls()).forEach(i -> executorService.submit(this::callAndSaveMetrics));
+        IntStream.rangeClosed(1, properties.getCalls()).forEach(i -> executorService.submit(() -> callAndSaveMetrics(i)));
         executorService.shutdown();
         executorService.awaitTermination(30, MINUTES);
     }
 
     @SneakyThrows
-    private void callAndSaveMetrics() {
+    private void callAndSaveMetrics(int i) {
         try {
             append(randomCall().get().toCsvRow());
         } catch (Exception e) {
             log.error("Exception while calling API", e);
             append("0,0,0");
+        } finally {
+            System.out.println("Call nr: " + i);
         }
     }
 
