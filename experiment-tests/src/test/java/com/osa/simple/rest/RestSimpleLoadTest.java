@@ -7,15 +7,22 @@ import com.osa.model.SearchBy;
 import com.osa.model.StationList;
 import com.osa.model.Trip;
 import com.osa.model.TripRequest;
+import com.osa.properties.Method;
+import com.osa.properties.TestMethodProperties;
 import com.osa.simple.SimpleLoadTest;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import static com.osa.Constansts.DATE_TIME_FORMATTER;
+import static com.osa.properties.Method.getDestinations;
+import static com.osa.properties.Method.getNetwork;
+import static com.osa.properties.Method.getOrigins;
+import static com.osa.properties.Method.heartbeat;
+import static com.osa.properties.Method.searchTrip;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
@@ -25,12 +32,12 @@ public abstract class RestSimpleLoadTest {
     private final RestServiceCaller serviceCaller;
     private final String type;
 
-    @Value("${simple.calls}")
-    private int numberOfCalls;
+    private final Map<Method, TestMethodProperties> properties;
 
-    protected RestSimpleLoadTest(final RestServiceCaller serviceCaller) {
+    protected RestSimpleLoadTest(final RestServiceCaller serviceCaller, final Map<Method, TestMethodProperties> properties) {
         this.serviceCaller = serviceCaller;
         type = substringBeforeLast(serviceCaller.getClass().getSimpleName(), "Caller");
+        this.properties = properties;
     }
 
     private ResponseWrapper<Trip> tripCall() {
@@ -49,6 +56,10 @@ public abstract class RestSimpleLoadTest {
         return serviceCaller.getDestinations(random(6));
     }
 
+    private int numberOfCallsForMethod(Method method) {
+        return properties.get(method).getCalls();
+    }
+
     @Test
     void ignore() {
     }
@@ -57,7 +68,7 @@ public abstract class RestSimpleLoadTest {
     class HeartbeatTest extends SimpleLoadTest {
 
         HeartbeatTest() {
-            super(serviceCaller::getHeartBeat, type + "-getHeartBeat", numberOfCalls);
+            super(serviceCaller::getHeartBeat, type + "-getHeartBeat", numberOfCallsForMethod(heartbeat));
         }
     }
 
@@ -65,7 +76,7 @@ public abstract class RestSimpleLoadTest {
     class GetNetworkTest extends SimpleLoadTest {
 
         GetNetworkTest() {
-            super(serviceCaller::getNetwork, type + "-getNetwork", numberOfCalls);
+            super(serviceCaller::getNetwork, type + "-getNetwork", numberOfCallsForMethod(getNetwork));
         }
     }
 
@@ -73,7 +84,7 @@ public abstract class RestSimpleLoadTest {
     class GetOriginStationsTest extends SimpleLoadTest {
 
         GetOriginStationsTest() {
-            super(serviceCaller::getOrigins, type + "-getOrigins", numberOfCalls);
+            super(serviceCaller::getOrigins, type + "-getOrigins", numberOfCallsForMethod(getOrigins));
         }
     }
 
@@ -81,7 +92,7 @@ public abstract class RestSimpleLoadTest {
     class GetDestinationsStationsTest extends SimpleLoadTest {
 
         GetDestinationsStationsTest() {
-            super(RestSimpleLoadTest.this::destinationsCall, type + "-getDestinations", numberOfCalls);
+            super(RestSimpleLoadTest.this::destinationsCall, type + "-getDestinations", numberOfCallsForMethod(getDestinations));
         }
     }
 
@@ -89,7 +100,7 @@ public abstract class RestSimpleLoadTest {
     class GetTripsTest extends SimpleLoadTest {
 
         GetTripsTest() {
-            super(RestSimpleLoadTest.this::tripCall, type + "-getTrip", numberOfCalls);
+            super(RestSimpleLoadTest.this::tripCall, type + "-getTrip", numberOfCallsForMethod(searchTrip));
         }
     }
 }
