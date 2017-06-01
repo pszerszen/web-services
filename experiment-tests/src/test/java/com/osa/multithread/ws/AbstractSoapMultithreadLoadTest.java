@@ -14,14 +14,17 @@ import com.osa.model.StationList;
 import com.osa.model.Trip;
 import com.osa.model.TripRequest;
 import com.osa.multithread.MulithreadLoadTest;
+import com.osa.properties.Method;
+import com.osa.properties.TestMethodProperties;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import static com.osa.Constansts.DATE_TIME_FORMATTER;
+import static com.osa.properties.Method.*;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
@@ -29,15 +32,12 @@ public abstract class AbstractSoapMultithreadLoadTest {
 
     private final SoapClient serviceCaller;
     private final String type;
+    private final Map<Method, TestMethodProperties> properties;
 
-    @Value("${multithread.calls}")
-    private int numberOfCalls;
-    @Value("${multithread.threads}")
-    private int numberOfThreads;
-
-    public AbstractSoapMultithreadLoadTest(final SoapClient serviceCaller, final String type) {
+    public AbstractSoapMultithreadLoadTest(final SoapClient serviceCaller, final String type, final Map<Method, TestMethodProperties> properties) {
         this.serviceCaller = serviceCaller;
         this.type = type;
+        this.properties = properties;
     }
 
     private ResponseWrapper<HeartBeatResponse> heartBeat() {
@@ -76,7 +76,7 @@ public abstract class AbstractSoapMultithreadLoadTest {
     class HeartbeatTest extends MulithreadLoadTest {
 
         HeartbeatTest() {
-            super(AbstractSoapMultithreadLoadTest.this::heartBeat, type + "-getHeartBeat", numberOfCalls, numberOfThreads);
+            super(AbstractSoapMultithreadLoadTest.this::heartBeat, type + "-getHeartBeat", properties.get(heartbeat));
         }
     }
 
@@ -84,7 +84,7 @@ public abstract class AbstractSoapMultithreadLoadTest {
     class GetNetworkTest extends MulithreadLoadTest {
 
         GetNetworkTest() {
-            super(AbstractSoapMultithreadLoadTest.this::network, type + "-getNetwork", numberOfCalls, numberOfThreads);
+            super(AbstractSoapMultithreadLoadTest.this::network, type + "-getNetwork", properties.get(getNetwork));
         }
     }
 
@@ -92,7 +92,7 @@ public abstract class AbstractSoapMultithreadLoadTest {
     class GetOriginStationsTest extends MulithreadLoadTest {
 
         GetOriginStationsTest() {
-            super(AbstractSoapMultithreadLoadTest.this::origins, type + "-getOrigins", numberOfCalls, numberOfThreads);
+            super(AbstractSoapMultithreadLoadTest.this::origins, type + "-getOrigins", properties.get(getOrigins));
         }
     }
 
@@ -100,7 +100,7 @@ public abstract class AbstractSoapMultithreadLoadTest {
     class GetDestinationsStationsTest extends MulithreadLoadTest {
 
         GetDestinationsStationsTest() {
-            super(AbstractSoapMultithreadLoadTest.this::destinations, type + "-getDestinations", numberOfCalls, numberOfThreads);
+            super(AbstractSoapMultithreadLoadTest.this::destinations, type + "-getDestinations", properties.get(getDestinations));
         }
     }
 
@@ -108,7 +108,7 @@ public abstract class AbstractSoapMultithreadLoadTest {
     class GetTripsTest extends MulithreadLoadTest {
 
         GetTripsTest() {
-            super(AbstractSoapMultithreadLoadTest.this::trips, type + "-getTrip", numberOfCalls, numberOfThreads);
+            super(AbstractSoapMultithreadLoadTest.this::trips, type + "-getTrip", properties.get(searchTrip));
         }
     }
 }

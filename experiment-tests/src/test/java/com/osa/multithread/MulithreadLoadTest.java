@@ -1,6 +1,7 @@
 package com.osa.multithread;
 
 import com.osa.ResponseWrapperSupplier;
+import com.osa.properties.TestMethodProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +28,7 @@ public abstract class MulithreadLoadTest {
 
     private final ResponseWrapperSupplier serviceCall;
     private final String name;
-    private final int numberOfCalls;
-    private final int numberOfThreads;
+    private final TestMethodProperties properties;
 
     private BufferedWriter writer;
 
@@ -47,8 +47,8 @@ public abstract class MulithreadLoadTest {
                 .append(FILE_SEPARATOR)
                 .append(String.format("multithreaded-%s-%scalls-%sthreads-%s.csv",
                         name,
-                        numberOfCalls,
-                        numberOfThreads,
+                        properties.getCalls(),
+                        properties.getThreads(),
                         System.currentTimeMillis()))
                 .toString();
         File file = new File(currentFilename);
@@ -65,8 +65,8 @@ public abstract class MulithreadLoadTest {
     @Test
     @SneakyThrows
     void multiThredTest() {
-        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
-        IntStream.rangeClosed(1, numberOfCalls).forEach(i -> executorService.submit(this::callAndSaveMetrics));
+        ExecutorService executorService = Executors.newFixedThreadPool(properties.getThreads());
+        IntStream.rangeClosed(1, properties.getCalls()).forEach(i -> executorService.submit(this::callAndSaveMetrics));
         executorService.shutdown();
         executorService.awaitTermination(30, MINUTES);
     }
