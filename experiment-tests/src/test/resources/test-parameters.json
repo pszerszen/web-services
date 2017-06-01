@@ -1,0 +1,47 @@
+{
+  "simple": {
+    "heartbeat": {
+      "calls": 2000
+    },
+    "searchTrip": {
+      "calls": 2000
+    },
+    "getOrigins": {
+      "calls": 200
+    },
+    "getDestinations": {
+      "calls": 2000
+    },
+    "getNetwork": {
+      "calls": 100
+    }
+  },
+  "multithread": {
+    "heartbeat": {
+      "calls": 2000,
+      "threads": 10
+    },
+    "searchTrip": {
+      "calls": 2000,
+      "threads": 10
+    },
+    "getOrigins": {
+      "calls": 200,
+      "threads": 10
+    },
+    "getDestinations": {
+      "calls": 2000,
+      "threads": 10
+    },
+    "getNetwork": {
+      "calls": 100,
+      "threads": 10
+    }
+  },
+  "natural": {
+    "any": {
+      "calls": 10000,
+      "threads": 10
+    }
+  }
+}

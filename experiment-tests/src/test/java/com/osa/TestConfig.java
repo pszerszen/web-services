@@ -1,5 +1,7 @@
 package com.osa;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.osa.client.JsonCaller;
 import com.osa.client.SecureJsonCaller;
 import com.osa.client.SecureXmlCaller;
@@ -7,6 +9,10 @@ import com.osa.client.XmlCaller;
 import com.osa.client.ws.SoapClient;
 import com.osa.parsers.JsonParser;
 import com.osa.parsers.XmlParser;
+import com.osa.properties.Method;
+import com.osa.properties.TestClass;
+import com.osa.properties.TestMethodProperties;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +25,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Map;
 
 @Configuration
 @PropertySource("classpath:application-test.properties")
@@ -89,6 +101,16 @@ public class TestConfig {
     @Bean
     public TokenStore tokenStore() {
         return new InMemoryTokenStore();
+    }
+
+    @Bean
+    public Map<TestClass, Map<Method, TestMethodProperties>> testProperties() throws URISyntaxException, IOException {
+        URI uri = getClass().getResource("test-parameters.json").toURI();
+        String jsonContent = IOUtils.toString(uri, "UTF-8");
+        Type type = new TypeToken<Map<TestClass, Map<Method, TestMethodProperties>>>() {
+        }.getType();
+
+        return new Gson().fromJson(jsonContent, type);
     }
 
 }
