@@ -10,11 +10,15 @@ import com.osa.model.OriginsRequest;
 import com.osa.model.SearchBy;
 import com.osa.model.TripRequest;
 import com.osa.natural.NaturalLoadTest;
+import com.osa.properties.Method;
+import com.osa.properties.TestMethodProperties;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import static com.osa.Constansts.DATE_TIME_FORMATTER;
+import static com.osa.properties.Method.any;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 
@@ -22,8 +26,8 @@ public abstract class AbstractSoapNaturalLoadTest extends NaturalLoadTest {
 
     private final SoapClient serviceCaller;
 
-    public AbstractSoapNaturalLoadTest(final SoapClient serviceCaller, final String name) {
-        super(name);
+    public AbstractSoapNaturalLoadTest(final SoapClient serviceCaller, final String name, final Map<Method, TestMethodProperties> properties) {
+        super(name, properties.get(any));
         this.serviceCaller = serviceCaller;
     }
 

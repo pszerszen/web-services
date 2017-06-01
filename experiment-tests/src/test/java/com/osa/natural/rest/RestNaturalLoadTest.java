@@ -6,12 +6,16 @@ import com.osa.model.Currency;
 import com.osa.model.SearchBy;
 import com.osa.model.TripRequest;
 import com.osa.natural.NaturalLoadTest;
+import com.osa.properties.Method;
+import com.osa.properties.TestMethodProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import static com.osa.Constansts.DATE_TIME_FORMATTER;
+import static com.osa.properties.Method.any;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.apache.commons.lang3.StringUtils.substringBeforeLast;
@@ -21,8 +25,8 @@ public abstract class RestNaturalLoadTest extends NaturalLoadTest {
 
     private final RestServiceCaller serviceCaller;
 
-    public RestNaturalLoadTest(final RestServiceCaller serviceCaller) {
-        super(substringBeforeLast(serviceCaller.getClass().getSimpleName(), "Caller"));
+    public RestNaturalLoadTest(final RestServiceCaller serviceCaller, final Map<Method, TestMethodProperties> properties) {
+        super(substringBeforeLast(serviceCaller.getClass().getSimpleName(), "Caller"), properties.get(any));
         this.serviceCaller = serviceCaller;
     }
 

@@ -1,6 +1,7 @@
 package com.osa.natural;
 
 import com.osa.ResponseWrapperSupplier;
+import com.osa.properties.TestMethodProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +10,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -28,11 +28,7 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 @RequiredArgsConstructor
 public abstract class NaturalLoadTest {
     private final String name;
-
-    @Value("${natural.calls}")
-    private int numberOfCalls;
-    @Value("${natural.threads}")
-    private int numberOfThreads;
+    private final TestMethodProperties properties;
 
     private BufferedWriter writer;
     private SecureRandom random = new SecureRandom(RandomStringUtils.random(100_000).getBytes());
@@ -77,8 +73,8 @@ public abstract class NaturalLoadTest {
                 .append(FILE_SEPARATOR)
                 .append(String.format("natural-%s-%scalls-%sthreads-%s.csv",
                         name,
-                        numberOfCalls,
-                        numberOfThreads,
+                        properties.getCalls(),
+                        properties.getThreads(),
                         System.currentTimeMillis()))
                 .toString();
         File file = new File(currentFilename);
@@ -95,8 +91,8 @@ public abstract class NaturalLoadTest {
     @Test
     @SneakyThrows
     void testNatural() {
-        ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
-        IntStream.rangeClosed(1, numberOfCalls).forEach(i -> executorService.submit(this::callAndSaveMetrics));
+        ExecutorService executorService = Executors.newFixedThreadPool(properties.getThreads());
+        IntStream.rangeClosed(1, properties.getCalls()).forEach(i -> executorService.submit(this::callAndSaveMetrics));
         executorService.shutdown();
         executorService.awaitTermination(30, MINUTES);
     }
