@@ -1,27 +1,30 @@
 package com.osa.multithread;
 
 import com.osa.ResponseWrapperSupplier;
+import com.osa.client.ResponseWrapper;
 import com.osa.properties.TestMethodProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.http.conn.HttpHostConnectException;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static com.osa.Constansts.FILE_SEPARATOR;
-import static com.osa.Constansts.LINE_SEPARATOR;
-
+import static com.osa.utils.XlsxUtils.addAverageValuesAndExport;
+import static com.osa.utils.XlsxUtils.initSheet;
+import static com.osa.utils.XlsxUtils.insertRow;
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Slf4j
@@ -32,13 +35,20 @@ public abstract class MulithreadLoadTest {
     private final String name;
     private final TestMethodProperties properties;
 
-    private BufferedWriter writer;
+    private XSSFWorkbook workbook;
+    private XSSFSheet sheet;
+    private String sheetName;
 
     @BeforeEach
     void setUp() throws IOException {
-        writer = Files.newBufferedWriter(createOutputFile().toPath());
-        writer.append("requestSize,responseSize,executionTime")
-                .append(LINE_SEPARATOR);
+        sheetName = String.format("multithreaded-%s-%scalls-%sthreads-%s.xlsx",
+                name,
+                properties.getCalls(),
+                properties.getThreads(),
+                System.currentTimeMillis());
+        workbook = new XSSFWorkbook();
+        sheet = workbook.createSheet(sheetName);
+        initSheet(sheet);
     }
 
     @SneakyThrows(IOException.class)
@@ -47,11 +57,7 @@ public abstract class MulithreadLoadTest {
                 .append(FILE_SEPARATOR)
                 .append("web-services")
                 .append(FILE_SEPARATOR)
-                .append(String.format("multithreaded-%s-%scalls-%sthreads-%s.csv",
-                        name,
-                        properties.getCalls(),
-                        properties.getThreads(),
-                        System.currentTimeMillis()))
+                .append(sheetName)
                 .toString();
         File file = new File(currentFilename);
         FileUtils.touch(file);
@@ -61,7 +67,7 @@ public abstract class MulithreadLoadTest {
 
     @AfterEach
     void tearDown() throws IOException {
-        writer.close();
+        addAverageValuesAndExport(workbook, sheet, properties.getCalls(), this::createOutputFile);
     }
 
     @Test
@@ -76,22 +82,23 @@ public abstract class MulithreadLoadTest {
     @SneakyThrows
     private void callAndSaveMetrics(int i) {
         try {
-            append(serviceCall.get().toCsvRow());
+            append(serviceCall.get(), i);
         } catch (Exception e) {
             log.error("Exception while calling API", e);
-            if (e instanceof HttpHostConnectException) {
-                log.debug("Waiting 1 minute before next calls...");
-                MINUTES.sleep(1L);
+            if (e instanceof SocketException) {
+                TimeUnit.MINUTES.sleep(1L);
             }
-            append("0,0,0");
+            append(ResponseWrapper.empty(), i);
         } finally {
             log.info("Call nr: {}", i);
         }
     }
 
     @SneakyThrows
-    private synchronized void append(String line) {
-        writer.append(line)
-                .append(LINE_SEPARATOR);
+    private synchronized void append(final ResponseWrapper responseWrapper, int row) {
+        insertRow(sheet, row,
+                responseWrapper.getRequestSize(),
+                responseWrapper.getResponseSize(),
+                responseWrapper.getExecutionTimeInMillis());
     }
 }
