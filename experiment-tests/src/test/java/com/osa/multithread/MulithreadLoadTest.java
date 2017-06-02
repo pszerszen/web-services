@@ -79,7 +79,7 @@ public abstract class MulithreadLoadTest {
             log.error("Exception while calling API", e);
             append("0,0,0");
         } finally {
-            System.out.println("Call nr: " + i);
+            log.info("Call nr: {}", i);
         }
     }
 

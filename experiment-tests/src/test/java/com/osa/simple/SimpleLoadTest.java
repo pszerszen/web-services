@@ -70,7 +70,7 @@ public abstract class SimpleLoadTest {
             writer.append("0,0,0");
         } finally {
             writer.append(LINE_SEPARATOR);
-            System.out.println("Call nr: " + i);
+            log.info("Call nr: {}", i);
         }
     }
 }
