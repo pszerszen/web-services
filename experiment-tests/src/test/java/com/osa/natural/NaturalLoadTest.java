@@ -64,7 +64,7 @@ public abstract class NaturalLoadTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        sheetName = String.format("natural-%s-%scalls-%sthreads-%s.csv",
+        sheetName = String.format("natural-%s-%scalls-%sthreads-%s.xlsx",
                 name,
                 properties.getCalls(),
                 properties.getThreads(),
