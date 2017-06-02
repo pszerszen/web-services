@@ -15,8 +15,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static com.osa.Constansts.FILE_SEPARATOR;
@@ -83,6 +85,9 @@ public abstract class MulithreadLoadTest {
             append(serviceCall.get(), i);
         } catch (Exception e) {
             log.error("Exception while calling API", e);
+            if (e instanceof SocketException) {
+                TimeUnit.MINUTES.sleep(1L);
+            }
             append(ResponseWrapper.empty(), i);
         } finally {
             log.info("Call nr: {}", i);

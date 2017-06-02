@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static com.osa.Constansts.FILE_SEPARATOR;
@@ -73,6 +75,9 @@ public abstract class SimpleLoadTest {
                     responseWrapper.getExecutionTimeInMillis());
         } catch (Exception e) {
             log.error("Exception while calling API", e);
+            if (e instanceof SocketException) {
+                TimeUnit.MINUTES.sleep(1L);
+            }
             insertRow(sheet, i, 0L, 0L, 0L);
         } finally {
             log.info("Call nr: {}", i);
