@@ -15,6 +15,14 @@ public class ResponseWrapper<T> {
     private long responseSize;
     private T response;
 
+    public static <T> ResponseWrapper<T> empty() {
+        ResponseWrapper<T> wrapper = new ResponseWrapper<>();
+        wrapper.setRequestSize(0L);
+        wrapper.setResponseSize(0L);
+        wrapper.setExecutionTimeInMillis(0L);
+        return wrapper;
+    }
+
     public Header getExecutionTimeInMillisHeader() {
         return new BasicHeader("executionTimeInMillis", Long.toString(executionTimeInMillis));
     }

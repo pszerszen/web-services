@@ -2,12 +2,11 @@ package com.osa.simple;
 
 import com.osa.ResponseWrapperSupplier;
 import com.osa.client.ResponseWrapper;
+import com.osa.utils.XlsxUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.AfterEach;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.stream.IntStream;
 
@@ -38,14 +36,7 @@ public abstract class SimpleLoadTest {
         sheetName = String.format("simple-%s-%scalls-%s.xlsx", name, numberOfCalls, System.currentTimeMillis());
         workbook = new XSSFWorkbook();
         sheet = workbook.createSheet(sheetName);
-        insertRow(sheet, 0,
-                "Rozmiar zapytania",
-                "Rozmiar odpowiedzi",
-                "Czas obsłużenia",
-                "",
-                "Średni rozmiar zapytania",
-                "Średni rozmiar odpowiedzi",
-                "Średni czas obsłużenia");
+        XlsxUtils.initSheet(sheet);
     }
 
     @SneakyThrows(IOException.class)
@@ -64,32 +55,7 @@ public abstract class SimpleLoadTest {
 
     @AfterEach
     void tearDown() throws IOException {
-        double averageRequestSize = IntStream.rangeClosed(1, numberOfCalls).boxed()
-                .map(sheet::getRow)
-                .map(cells -> cells.getCell(0))
-                .map(XSSFCell::getNumericCellValue)
-                .mapToLong(Double::longValue)
-                .average().getAsDouble();
-        double averageResponseSize = IntStream.rangeClosed(1, numberOfCalls).boxed()
-                .map(sheet::getRow)
-                .map(cells -> cells.getCell(1))
-                .map(XSSFCell::getNumericCellValue)
-                .mapToLong(Double::longValue)
-                .average().getAsDouble();
-        double averageResponseTime = IntStream.rangeClosed(1, numberOfCalls).boxed()
-                .map(sheet::getRow)
-                .map(cells -> cells.getCell(2))
-                .map(XSSFCell::getNumericCellValue)
-                .mapToLong(Double::longValue)
-                .average().getAsDouble();
-        XSSFRow row = sheet.getRow(1);
-        row.createCell(4).setCellValue(averageRequestSize);
-        row.createCell(5).setCellValue(averageResponseSize);
-        row.createCell(6).setCellValue(averageResponseTime);
-
-        try (FileOutputStream outputStream = new FileOutputStream(createOutputFile())) {
-            workbook.write(outputStream);
-        }
+        XlsxUtils.addAverageValuesAndExport(workbook, sheet, numberOfCalls, this::createOutputFile);
     }
 
     @Test
