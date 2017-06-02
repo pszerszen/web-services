@@ -41,7 +41,7 @@ public abstract class RestSimpleLoadTest {
     }
 
     private ResponseWrapper<Trip> tripCall() {
-        return serviceCaller.getTrip(TripRequest.builder()
+        ResponseWrapper<Trip> trip = serviceCaller.getTrip(TripRequest.builder()
                 .searchBy(SearchBy.STATIONS)
                 .fromStationId(random(10))
                 .toStationId(random(10))
@@ -50,6 +50,7 @@ public abstract class RestSimpleLoadTest {
                 .children(nextInt(0, 6))
                 .currency(Currency.getRandom())
                 .build());
+        return trip;
     }
 
     private ResponseWrapper<StationList> destinationsCall() {
