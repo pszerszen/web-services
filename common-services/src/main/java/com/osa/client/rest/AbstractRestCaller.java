@@ -68,7 +68,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
             responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
             responseWrapper.setResponse(Boolean.parseBoolean(content));
         } catch (IOException e) {
-            log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());
+            throw new RuntimeException(e);
         } finally {
             EntityUtils.consumeQuietly(entity);
             responseWrapper.setExecutionTimeInMillis(stopwatch.elapsed(MILLISECONDS));
@@ -129,7 +129,7 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
             responseWrapper.setResponseSize(MetricUtils.counterSizeOfResponse(response, content));
             responseWrapper.setResponse(parser.parseFromContent(content, responseType));
         } catch (IOException e) {
-            log.error("Error during executing request {}.\n Error: {}", request, e.getStackTrace());
+            throw new RuntimeException(e);
         } finally {
             EntityUtils.consumeQuietly(entity);
             responseWrapper.setExecutionTimeInMillis(stopwatch.elapsed(MILLISECONDS));
@@ -140,8 +140,8 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
 
     protected static HttpClient httpClient() {
         return HttpClientBuilder.create()
-                .setDefaultRequestConfig(getRequestConfig(3 * 1000))
-                .setDefaultSocketConfig(getSocketConfig(3 * 1000))
+                .setDefaultRequestConfig(getRequestConfig(5 * 1000))
+                .setDefaultSocketConfig(getSocketConfig(5 * 1000))
                 .build();
     }
 

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.http.conn.HttpHostConnectException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ import java.util.stream.IntStream;
 
 import static com.osa.Constansts.FILE_SEPARATOR;
 import static com.osa.Constansts.LINE_SEPARATOR;
+
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Slf4j
@@ -77,6 +79,10 @@ public abstract class MulithreadLoadTest {
             append(serviceCall.get().toCsvRow());
         } catch (Exception e) {
             log.error("Exception while calling API", e);
+            if (e instanceof HttpHostConnectException) {
+                log.debug("Waiting 1 minute before next calls...");
+                MINUTES.sleep(1L);
+            }
             append("0,0,0");
         } finally {
             log.info("Call nr: {}", i);
