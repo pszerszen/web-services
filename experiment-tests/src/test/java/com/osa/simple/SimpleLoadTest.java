@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
@@ -67,20 +68,21 @@ public abstract class SimpleLoadTest {
 
     @SneakyThrows
     private void callAndSaveMetrics(int i) {
+        ResponseWrapper responseWrapper = null;
         try {
-            ResponseWrapper responseWrapper = serviceCall.get();
+            responseWrapper = serviceCall.get();
+        } catch (Exception e) {
+            log.error("Exception while calling API", e);
+            if (e.getCause() instanceof SocketException || e.getCause() instanceof SocketTimeoutException) {
+                TimeUnit.MINUTES.sleep(1L);
+            }
+            responseWrapper = ResponseWrapper.empty();
+        } finally {
             insertRow(sheet, i,
                     responseWrapper.getRequestSize(),
                     responseWrapper.getResponseSize(),
                     responseWrapper.getExecutionTimeInMillis());
-        } catch (Exception e) {
-            log.error("Exception while calling API", e);
-            if (e instanceof SocketException) {
-                TimeUnit.MINUTES.sleep(1L);
-            }
-            insertRow(sheet, i, 0L, 0L, 0L);
-        } finally {
-            log.info("Call nr: {}", i);
+            log.info("Call nr: {} took {} ms", i, responseWrapper.getExecutionTimeInMillis());
         }
     }
 }

@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Slf4j
 @Component
@@ -138,10 +139,10 @@ public abstract class AbstractRestCaller implements RestServiceCaller {
         return responseWrapper;
     }
 
-    protected static HttpClient httpClient() {
+    protected HttpClient httpClient() {
         return HttpClientBuilder.create()
-                .setDefaultRequestConfig(getRequestConfig(5 * 1000))
-                .setDefaultSocketConfig(getSocketConfig(5 * 1000))
+                .setDefaultRequestConfig(getRequestConfig((int) MINUTES.toMillis(3)))
+                .setDefaultSocketConfig(getSocketConfig((int) MINUTES.toMillis(3)))
                 .build();
     }
 
