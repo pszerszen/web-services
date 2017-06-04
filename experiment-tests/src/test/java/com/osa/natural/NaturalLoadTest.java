@@ -21,11 +21,12 @@ import java.net.SocketException;
 import java.security.SecureRandom;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static com.osa.Constansts.FILE_SEPARATOR;
+import static com.osa.utils.XlsxUtils.emptyRow;
 import static com.osa.utils.XlsxUtils.insertRow;
+
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Slf4j
@@ -108,12 +109,13 @@ public abstract class NaturalLoadTest {
     private void callAndSaveMetrics(int i) {
         try {
             append(randomCall().get(), i);
+        } catch (SocketException e) {
+            log.error("Connection issues while calling API", e);
+            MINUTES.sleep(1L);
+            append(null, i);
         } catch (Exception e) {
             log.error("Exception while calling API", e);
-            if (e instanceof SocketException) {
-                TimeUnit.MINUTES.sleep(1L);
-            }
-            append(ResponseWrapper.empty(), i);
+            append(null, i);
         } finally {
             log.info("Call nr: {}", i);
         }
@@ -121,9 +123,13 @@ public abstract class NaturalLoadTest {
 
     @SneakyThrows
     private synchronized void append(final ResponseWrapper responseWrapper, int row) {
-        insertRow(sheet, row,
-                responseWrapper.getRequestSize(),
-                responseWrapper.getResponseSize(),
-                responseWrapper.getExecutionTimeInMillis());
+        if (responseWrapper == null) {
+            emptyRow(sheet, row);
+        } else {
+            insertRow(sheet, row,
+                    responseWrapper.getRequestSize(),
+                    responseWrapper.getResponseSize(),
+                    responseWrapper.getExecutionTimeInMillis());
+        }
     }
 }

@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static com.osa.Constansts.FILE_SEPARATOR;
+import static com.osa.utils.XlsxUtils.emptyRow;
 import static com.osa.utils.XlsxUtils.insertRow;
 
 @Slf4j
@@ -71,17 +72,17 @@ public abstract class SimpleLoadTest {
         ResponseWrapper responseWrapper = null;
         try {
             responseWrapper = serviceCall.get();
+            insertRow(sheet, i,
+                    responseWrapper.getRequestSize(),
+                    responseWrapper.getResponseSize(),
+                    responseWrapper.getExecutionTimeInMillis());
         } catch (Exception e) {
             log.error("Exception while calling API", e);
             if (e.getCause() instanceof SocketException || e.getCause() instanceof SocketTimeoutException) {
                 TimeUnit.MINUTES.sleep(1L);
             }
-            responseWrapper = ResponseWrapper.empty();
+            emptyRow(sheet, i);
         } finally {
-            insertRow(sheet, i,
-                    responseWrapper.getRequestSize(),
-                    responseWrapper.getResponseSize(),
-                    responseWrapper.getExecutionTimeInMillis());
             log.info("Call nr: {} took {} ms", i, responseWrapper.getExecutionTimeInMillis());
         }
     }

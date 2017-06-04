@@ -1,19 +1,19 @@
 {
   "simple": {
     "heartbeat": {
-      "calls": 2000
+      "calls": 300
     },
     "searchTrip": {
-      "calls": 2000
-    },
-    "getOrigins": {
       "calls": 200
     },
+    "getOrigins": {
+      "calls": 50
+    },
     "getDestinations": {
-      "calls": 2000
+      "calls": 200
     },
     "getNetwork": {
-      "calls": 100
+      "calls": 30
     }
   },
   "multithread": {
@@ -40,7 +40,7 @@
   },
   "natural": {
     "any": {
-      "calls": 10000,
+      "calls": 1000,
       "threads": 10
     }
   }
