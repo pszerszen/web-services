@@ -107,8 +107,10 @@ public abstract class NaturalLoadTest {
 
     @SneakyThrows
     private void callAndSaveMetrics(int i) {
+        ResponseWrapper responseWrapper = ResponseWrapper.empty();
         try {
-            append(randomCall().get(), i);
+            responseWrapper = randomCall().get();
+            append(responseWrapper, i);
         } catch (SocketException e) {
             log.error("Connection issues while calling API", e);
             MINUTES.sleep(1L);
@@ -117,7 +119,7 @@ public abstract class NaturalLoadTest {
             log.error("Exception while calling API", e);
             append(null, i);
         } finally {
-            log.info("Call nr: {}", i);
+            log.info("Call nr: {} took {} ms", i, responseWrapper.getExecutionTimeInMillis());
         }
     }
 
