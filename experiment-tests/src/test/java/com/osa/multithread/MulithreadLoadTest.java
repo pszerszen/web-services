@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
@@ -36,6 +37,7 @@ public abstract class MulithreadLoadTest {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
     private String sheetName;
+    int counter = 0;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -79,8 +81,10 @@ public abstract class MulithreadLoadTest {
 
     @SneakyThrows
     private void callAndSaveMetrics(int i) {
+        ResponseWrapper responseWrapper = null;
         try {
-            append(serviceCall.get(), i);
+            responseWrapper = serviceCall.get();
+            append(responseWrapper, i);
         } catch (SocketException e) {
             log.error("Connection issues while calling API", e);
             MINUTES.sleep(1L);
@@ -89,7 +93,12 @@ public abstract class MulithreadLoadTest {
             log.error("Exception while calling API", e);
             append(null, i);
         } finally {
-            log.info("Call nr: {}", i);
+            counter++;
+            log.info("Call nr: {} took {} ms. {}/{} done.", i,
+                    Optional.ofNullable(responseWrapper)
+                            .map(ResponseWrapper::getExecutionTimeInMillis)
+                            .orElse(-1L),
+                    counter, properties.getCalls());
         }
     }
 
