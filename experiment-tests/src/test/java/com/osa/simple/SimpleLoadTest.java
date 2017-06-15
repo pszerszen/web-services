@@ -16,13 +16,13 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
-import java.net.SocketTimeoutException;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static com.osa.Constansts.FILE_SEPARATOR;
 import static com.osa.utils.XlsxUtils.emptyRow;
 import static com.osa.utils.XlsxUtils.insertRow;
+
+import static java.util.concurrent.TimeUnit.MINUTES;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -69,21 +69,23 @@ public abstract class SimpleLoadTest {
 
     @SneakyThrows
     private void callAndSaveMetrics(int i) {
-        ResponseWrapper responseWrapper = null;
+        ResponseWrapper responseWrapper = ResponseWrapper.empty();
         try {
             responseWrapper = serviceCall.get();
             insertRow(sheet, i,
                     responseWrapper.getRequestSize(),
                     responseWrapper.getResponseSize(),
                     responseWrapper.getExecutionTimeInMillis());
+        } catch (SocketException e) {
+            log.error("Connection issues while calling API", e);
+            MINUTES.sleep(1L);
+            emptyRow(sheet, i);
         } catch (Exception e) {
             log.error("Exception while calling API", e);
-            if (e.getCause() instanceof SocketException || e.getCause() instanceof SocketTimeoutException) {
-                TimeUnit.MINUTES.sleep(1L);
-            }
             emptyRow(sheet, i);
         } finally {
             log.info("Call nr: {} took {} ms", i, responseWrapper.getExecutionTimeInMillis());
         }
     }
+
 }
