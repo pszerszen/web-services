@@ -1,5 +1,6 @@
 package com.osa.multithread;
 
+import com.google.common.collect.ImmutableMap;
 import com.osa.ResponseWrapperSupplier;
 import com.osa.client.ResponseWrapper;
 import com.osa.properties.TestMethodProperties;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
@@ -28,6 +30,14 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 @Slf4j
 @RequiredArgsConstructor
 public abstract class MulithreadLoadTest {
+
+    private static final Map<Integer, Integer> timeoutMap = ImmutableMap.of(
+            2000, 10,
+            300, 15,
+            200, 15,
+            100, 15,
+            30, 20
+    );
 
     private final ResponseWrapperSupplier serviceCall;
     private final String name;
@@ -75,7 +85,7 @@ public abstract class MulithreadLoadTest {
         ExecutorService executorService = Executors.newFixedThreadPool(properties.getThreads());
         IntStream.rangeClosed(1, properties.getCalls()).forEach(i -> executorService.submit(() -> callAndSaveMetrics(i)));
         executorService.shutdown();
-        executorService.awaitTermination(30, MINUTES);
+        executorService.awaitTermination(timeoutMap.getOrDefault(properties.getCalls(), 30), MINUTES);
     }
 
     @SneakyThrows

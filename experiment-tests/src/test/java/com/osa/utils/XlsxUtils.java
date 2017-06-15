@@ -54,6 +54,7 @@ public final class XlsxUtils {
     @SneakyThrows
     public static void addAverageValuesAndExport(XSSFWorkbook workbook, XSSFSheet sheet, int numberOfCalls, Supplier<File> file) {
         try {
+            IntStream.range(0, 8).forEach(sheet::autoSizeColumn);
             XSSFDataFormat format = workbook.createDataFormat();
             XSSFCellStyle byteStyle = workbook.createCellStyle();
             byteStyle.setDataFormat(format.getFormat("### ### ### ### ###"));
@@ -62,7 +63,7 @@ public final class XlsxUtils {
 
             int endrow = numberOfCalls + 1;
 
-            XSSFRow row = sheet.getRow(1);
+            XSSFRow row = Optional.ofNullable(sheet.getRow(1)).orElse(sheet.createRow(1));
             XSSFCell cell = row.createCell(4);
             cell.setCellType(CellType.FORMULA);
             cell.setCellFormula("AVERAGE(A2:A" + endrow + ")");
@@ -91,13 +92,14 @@ public final class XlsxUtils {
                                 rowCell.setCellFormula(String.format("C%s/1000", rowNr + 1));
                             }));
 
-            IntStream.range(0, 8).forEach(sheet::autoSizeColumn);
         } catch (Exception e) {
             log.error("Incident", e);
         }
 
-        try (FileOutputStream outputStream = new FileOutputStream(file.get())) {
-            workbook.write(outputStream);
+        if (numberOfCalls > 0) {
+            try (FileOutputStream outputStream = new FileOutputStream(file.get())) {
+                workbook.write(outputStream);
+            }
         }
     }
 }

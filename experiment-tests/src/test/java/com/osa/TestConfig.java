@@ -34,7 +34,7 @@ import java.util.Map;
 
 @Configuration
 @PropertySource("classpath:application-test.properties")
-@Import({ ApplicationConfiguration.class })
+@Import(ApplicationConfiguration.class)
 public class TestConfig {
 
     @Bean

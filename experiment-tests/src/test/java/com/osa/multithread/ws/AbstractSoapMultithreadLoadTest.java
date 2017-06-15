@@ -73,14 +73,6 @@ public abstract class AbstractSoapMultithreadLoadTest {
     }
 
     @Nested
-    class HeartbeatTest extends MulithreadLoadTest {
-
-        HeartbeatTest() {
-            super(AbstractSoapMultithreadLoadTest.this::heartBeat, type + "-getHeartBeat", properties.get(heartbeat));
-        }
-    }
-
-    @Nested
     class GetNetworkTest extends MulithreadLoadTest {
 
         GetNetworkTest() {
@@ -97,6 +89,14 @@ public abstract class AbstractSoapMultithreadLoadTest {
     }
 
     @Nested
+    class GetTripsTest extends MulithreadLoadTest {
+
+        GetTripsTest() {
+            super(AbstractSoapMultithreadLoadTest.this::trips, type + "-getTrip", properties.get(searchTrip));
+        }
+    }
+
+    @Nested
     class GetDestinationsStationsTest extends MulithreadLoadTest {
 
         GetDestinationsStationsTest() {
@@ -105,10 +105,10 @@ public abstract class AbstractSoapMultithreadLoadTest {
     }
 
     @Nested
-    class GetTripsTest extends MulithreadLoadTest {
+    class HeartbeatTest extends MulithreadLoadTest {
 
-        GetTripsTest() {
-            super(AbstractSoapMultithreadLoadTest.this::trips, type + "-getTrip", properties.get(searchTrip));
+        HeartbeatTest() {
+            super(AbstractSoapMultithreadLoadTest.this::heartBeat, type + "-getHeartBeat", properties.get(heartbeat));
         }
     }
 }

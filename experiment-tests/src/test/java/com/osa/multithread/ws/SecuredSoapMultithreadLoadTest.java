@@ -22,6 +22,6 @@ public class SecuredSoapMultithreadLoadTest extends AbstractSoapMultithreadLoadT
 
     @Autowired
     public SecuredSoapMultithreadLoadTest(@Qualifier("securedSoapClient") final SoapClient serviceCaller, Map<TestClass, Map<Method, TestMethodProperties>> testProperties) {
-        super(serviceCaller, "Soap", testProperties.get(multithread));
+        super(serviceCaller, "SecureSoap", testProperties.get(multithread));
     }
 }

@@ -60,14 +60,6 @@ public abstract class RestMultithreadLoadTest {
     }
 
     @Nested
-    class HeartbeatTest extends MulithreadLoadTest {
-
-        HeartbeatTest() {
-            super(serviceCaller::getHeartBeat, type + "-getHeartBeat", properties.get(heartbeat));
-        }
-    }
-
-    @Nested
     class GetNetworkTest extends MulithreadLoadTest {
 
         GetNetworkTest() {
@@ -84,6 +76,14 @@ public abstract class RestMultithreadLoadTest {
     }
 
     @Nested
+    class GetTripsTest extends MulithreadLoadTest {
+
+        GetTripsTest() {
+            super(RestMultithreadLoadTest.this::tripCall, type + "-getTrip", properties.get(searchTrip));
+        }
+    }
+
+    @Nested
     class GetDestinationsStationsTest extends MulithreadLoadTest {
 
         GetDestinationsStationsTest() {
@@ -92,10 +92,10 @@ public abstract class RestMultithreadLoadTest {
     }
 
     @Nested
-    class GetTripsTest extends MulithreadLoadTest {
+    class HeartbeatTest extends MulithreadLoadTest {
 
-        GetTripsTest() {
-            super(RestMultithreadLoadTest.this::tripCall, type + "-getTrip", properties.get(searchTrip));
+        HeartbeatTest() {
+            super(serviceCaller::getHeartBeat, type + "-getHeartBeat", properties.get(heartbeat));
         }
     }
 }
