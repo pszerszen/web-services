@@ -70,6 +70,7 @@ public abstract class AbstractSoapMultithreadLoadTest {
 
     @Test
     void ignore() {
+        serviceCaller.getHeartBeat(new HeartBeatRequest());
     }
 
     @Nested

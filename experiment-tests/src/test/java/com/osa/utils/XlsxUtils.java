@@ -63,7 +63,7 @@ public final class XlsxUtils {
 
             int endrow = numberOfCalls + 1;
 
-            XSSFRow row = Optional.ofNullable(sheet.getRow(1)).orElse(sheet.createRow(1));
+            XSSFRow row = Optional.ofNullable(sheet.getRow(1)).orElseGet(() -> sheet.createRow(1));
             XSSFCell cell = row.createCell(4);
             cell.setCellType(CellType.FORMULA);
             cell.setCellFormula("AVERAGE(A2:A" + endrow + ")");
