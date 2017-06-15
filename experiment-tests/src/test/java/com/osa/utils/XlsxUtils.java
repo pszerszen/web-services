@@ -12,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
@@ -82,11 +83,13 @@ public final class XlsxUtils {
             cell.setCellFormula("COUNTIF(A2:A" + endrow + ",\"\")");
             cell.setCellStyle(byteStyle);
 
-            IntStream.rangeClosed(1, endrow).forEach(rowNr -> {
-                XSSFCell rowCell = sheet.getRow(rowNr).createCell(3);
-                rowCell.setCellType(CellType.FORMULA);
-                rowCell.setCellFormula(String.format("C%s/1000", rowNr + 1));
-            });
+            IntStream.rangeClosed(1, endrow).forEach(rowNr ->
+                    Optional.ofNullable(sheet.getRow(rowNr))
+                            .map(cells -> cells.createCell(3))
+                            .ifPresent(rowCell -> {
+                                rowCell.setCellType(CellType.FORMULA);
+                                rowCell.setCellFormula(String.format("C%s/1000", rowNr + 1));
+                            }));
 
             IntStream.range(0, 8).forEach(sheet::autoSizeColumn);
         } catch (Exception e) {

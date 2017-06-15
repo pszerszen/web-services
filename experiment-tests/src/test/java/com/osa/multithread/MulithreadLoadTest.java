@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
-import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
@@ -81,7 +80,7 @@ public abstract class MulithreadLoadTest {
 
     @SneakyThrows
     private void callAndSaveMetrics(int i) {
-        ResponseWrapper responseWrapper = null;
+        ResponseWrapper responseWrapper = ResponseWrapper.empty();
         try {
             responseWrapper = serviceCall.get();
             append(responseWrapper, i);
@@ -93,17 +92,13 @@ public abstract class MulithreadLoadTest {
             log.error("Exception while calling API", e);
             append(null, i);
         } finally {
-            counter++;
-            log.info("Call nr: {} took {} ms. {}/{} done.", i,
-                    Optional.ofNullable(responseWrapper)
-                            .map(ResponseWrapper::getExecutionTimeInMillis)
-                            .orElse(-1L),
-                    counter, properties.getCalls());
+            log.info("Call nr: {} took {} ms. {}/{} done.", i, responseWrapper.getExecutionTimeInMillis(),
+                    counter++, properties.getCalls());
         }
     }
 
     @SneakyThrows
-    private synchronized void append(ResponseWrapper responseWrapper, int row) {
+    private synchronized void append(final ResponseWrapper responseWrapper, int row) {
         if (responseWrapper == null) {
             emptyRow(sheet, row);
         } else {
