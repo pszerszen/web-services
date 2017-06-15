@@ -22,6 +22,6 @@ public class SecuredSoapSimpleLoadTest extends AbstractSoapSimpleLoadTest {
 
     @Autowired
     public SecuredSoapSimpleLoadTest(@Qualifier("securedSoapClient") final SoapClient serviceCaller, Map<TestClass, Map<Method, TestMethodProperties>> testProperties) {
-        super(serviceCaller, "Soap", testProperties.get(simple));
+        super(serviceCaller, "SecureSoap", testProperties.get(simple));
     }
 }

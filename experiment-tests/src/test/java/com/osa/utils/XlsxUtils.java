@@ -4,6 +4,8 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFDataFormat;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -11,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -22,7 +25,7 @@ public final class XlsxUtils {
                 "Rozmiar zapytania [B]",
                 "Rozmiar odpowiedzi [B]",
                 "Czas obsłużenia [ms]",
-                "",
+                "Czas obsłużenia [s]",
                 "Średni rozmiar zapytania [B]",
                 "Średni rozmiar odpowiedzi [B]",
                 "Średni czas obsłużenia [ms]",
@@ -50,24 +53,42 @@ public final class XlsxUtils {
     @SneakyThrows
     public static void addAverageValuesAndExport(XSSFWorkbook workbook, XSSFSheet sheet, int numberOfCalls, Supplier<File> file) {
         try {
+            XSSFDataFormat format = workbook.createDataFormat();
+            XSSFCellStyle byteStyle = workbook.createCellStyle();
+            byteStyle.setDataFormat(format.getFormat("### ### ### ### ###"));
+            XSSFCellStyle timeStyle = workbook.createCellStyle();
+            timeStyle.setDataFormat(format.getFormat("### ### ### ### ###.##"));
+
             int endrow = numberOfCalls + 1;
 
             XSSFRow row = sheet.getRow(1);
             XSSFCell cell = row.createCell(4);
             cell.setCellType(CellType.FORMULA);
             cell.setCellFormula("AVERAGE(A2:A" + endrow + ")");
+            cell.setCellStyle(byteStyle);
 
             cell = row.createCell(5);
             cell.setCellType(CellType.FORMULA);
             cell.setCellFormula("AVERAGE(B2:B" + endrow + ")");
+            cell.setCellStyle(byteStyle);
 
             cell = row.createCell(6);
             cell.setCellType(CellType.FORMULA);
             cell.setCellFormula("AVERAGE(C2:C" + endrow + ")");
+            cell.setCellStyle(timeStyle);
 
             cell = row.createCell(8);
             cell.setCellType(CellType.FORMULA);
             cell.setCellFormula("COUNTIF(A2:A" + endrow + ",\"\")");
+            cell.setCellStyle(byteStyle);
+
+            IntStream.rangeClosed(1, endrow).forEach(rowNr -> {
+                XSSFCell rowCell = sheet.getRow(rowNr).createCell(3);
+                rowCell.setCellType(CellType.FORMULA);
+                rowCell.setCellFormula(String.format("C%s/1000", rowNr + 1));
+            });
+
+            IntStream.range(0, 8).forEach(sheet::autoSizeColumn);
         } catch (Exception e) {
             log.error("Incident", e);
         }
