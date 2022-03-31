@@ -22,7 +22,7 @@
         <junit.jupiter.version>LATEST</junit.jupiter.version>
         <junit.vintage.version>LATEST</junit.vintage.version>
         <junit.platform.version>LATEST</junit.platform.version>
-        <spring.boot.version>2.5.5</spring.boot.version>
+        <spring.boot.version>2.5.12</spring.boot.version>
     </properties>
 
     <parent>
